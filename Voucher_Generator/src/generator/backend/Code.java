@@ -5,6 +5,7 @@
  * May 8 16		Chris Rabe		overrided the toString() method
  * Aug 22 16	Chris Rabe		removed other .equals method 
  * Aug 22 16	Chris Rabe		overrided the hashcode method as well
+ * Aug 25 16	Chris Rabe		added a new constructor
  */
 package generator.backend;
 
@@ -31,6 +32,11 @@ public class Code {
 	public Code(String code, String description) {
 		this(code);
 		this.description = description;
+	}
+
+	public Code(String code, String description, boolean redeemed) {
+		this(code, description);
+		this.isRedeemed = redeemed;
 	}
 
 	// Getters and Setters

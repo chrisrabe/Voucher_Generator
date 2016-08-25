@@ -1,10 +1,13 @@
 /* File: Generator.java
  * Date				Author				Changes
- * Aug 22 16		Chris Rabe			create System.java
+ * Aug 22 16		Chris Rabe			create Generator.java
+ * Aug 25 16		Chris Rabe			added method 'load'
  */
 package generator.backend;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -101,6 +104,25 @@ public class Generator {
 	}
 
 	/**
+	 * Reads the file passed and loads all existing codes.
+	 * 
+	 * @param file
+	 * @throws InputException
+	 */
+	public void load(File file) throws InputException {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String s = null;
+			while ((s = br.readLine()) != null) {
+				codes.add(parseCode(s));
+			}
+			br.close();
+		} catch (IOException e) {
+			throw new InputException(e.getMessage());
+		}
+	}
+
+	/**
 	 * Generates 'n' number of unique codes which consists of 'c' characters.
 	 * Each code is guaranteed to be different from each other.
 	 * 
@@ -161,7 +183,39 @@ public class Generator {
 		}
 	}
 
+	/**
+	 * Adds the given description to the list of descriptions for the vouchers.
+	 * It checks that none of the descriptions are duplicates. It also converts
+	 * the string object passed into the method to lowercase.
+	 * 
+	 * @param description
+	 * @throws InputException
+	 */
+	public void addDescription(String description) throws InputException {
+		String item = description.toLowerCase();
+		for (String s : descriptions) {
+			if (s.equals(item)) {
+				throw new InputException("Description already exists.");
+			}
+		}
+		descriptions.add(item);
+	}
+
 	// Helper Methods
+
+	/**
+	 * Reads the line of string and converts it to a code object.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	private Code parseCode(String s) {
+		String[] vars = s.split(",");
+		String code = vars[0].split(":")[1];
+		String description = vars[1].split(":")[1];
+		boolean isRedeemed = Boolean.parseBoolean(vars[2].split(":")[1]);
+		return new Code(code, description, isRedeemed);
+	}
 
 	/**
 	 * Converts the list of codes generated to a list of string so that it can
