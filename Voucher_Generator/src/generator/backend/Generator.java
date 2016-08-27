@@ -208,12 +208,20 @@ public class Generator {
 	 * 
 	 * @param s
 	 * @return
+	 * @throws InputException
 	 */
-	private Code parseCode(String s) {
+	private Code parseCode(String s) throws InputException {
 		String[] vars = s.split(",");
-		String code = vars[0].split(":")[1];
-		String description = vars[1].split(":")[1];
-		boolean isRedeemed = Boolean.parseBoolean(vars[2].split(":")[1]);
+		String code = null;
+		String description = null;
+		boolean isRedeemed = false;
+		try {
+			code = vars[0].split(":")[1];
+			description = vars[1].split(":")[1];
+			isRedeemed = Boolean.parseBoolean(vars[2].split(":")[1]);
+		} catch (Exception e) {
+			throw new InputException("Wrong file passed.");
+		}
 		return new Code(code, description, isRedeemed);
 	}
 
