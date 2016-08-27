@@ -1,3 +1,9 @@
+/* File: Client.java
+ * Date				Author				Changes
+ * Aug 27 16		Chris Rabe			added some java documentation
+ * Aug 27 16		Chris Rabe			implemented some command methods
+ */
+
 package generator;
 
 import generator.backend.Generator;
@@ -54,6 +60,16 @@ public class Client {
 			handleException(e);
 		}
 	}
+
+	// Show - retrieves the code
+
+	// List - retrieves data (all descriptions or all codes)
+
+	// AddDescription - adds description to generator
+
+	// Save - Creates new file -- MUST be a new file name
+
+	// Load - open JFilechooser and loads all the code into the program
 
 	// Helper methods
 
