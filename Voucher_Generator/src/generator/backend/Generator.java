@@ -2,16 +2,19 @@
  * Date				Author				Changes
  * Aug 22 16		Chris Rabe			create Generator.java
  * Aug 25 16		Chris Rabe			added method 'load'
+ * Oct 12 16		Chris Rabe			fixed code generation bug
+ * Oct 12 16		Chris Rabe			rewritten save method
+ * Oct 12 16		Chris Rabe			fixed load bug
+ * Oct 12 16		Chris Rabe			extended functionality - can now reduce size
  */
 package generator.backend;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +30,6 @@ public class Generator {
 	private static final char[] UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	private static final char[] LOWERCASE = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 	private static final char[] NUMBERS = "0123456789".toCharArray();
-	private static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	/** stores all generated or loaded code */
 	private List<Code> codes;
@@ -61,6 +63,67 @@ public class Generator {
 	}
 
 	// Methods
+
+	/**
+	 * Adds the given description to the list of descriptions for the vouchers.
+	 * It checks that none of the descriptions are duplicates. It also converts
+	 * the string object passed into the method to lowercase.
+	 * 
+	 * @param description
+	 * @throws InputException
+	 */
+	public void addDescription(String description) throws InputException {
+		String item = description.toLowerCase();
+		if (descriptions.contains(description)) {
+			throw new InputException("Description already exists");
+		}
+		descriptions.add(item);
+	}
+
+	/**
+	 * Removes the given description from the list of codes and the list of
+	 * descriptions.
+	 * 
+	 * @param desc
+	 * @throws InputException
+	 */
+	public void removeDescription(String desc) throws InputException {
+		if (desc == null) {
+			throw new InputException("Description must not be null");
+		}
+		// Remove from list of description
+		descriptions.remove(desc);
+		// Remove codes which has the description
+		for (Code c : codes) {
+			if (c.getDescription().equals(desc)) {
+				c.setDescription("");
+			}
+		}
+	}
+
+	/**
+	 * Distributes the description as evenly as possible. The user must have
+	 * added a few descriptions in the generator first and have generated a
+	 * bunch of empty Code objects.
+	 * 
+	 * @throws InputException
+	 */
+	public void distributeDesc() throws InputException {
+		if (descriptions.isEmpty()) {
+			throw new InputException("Descriptions must be added first.");
+		}
+		if (codes.isEmpty()) {
+			throw new InputException("Code must be generated first.");
+		}
+		int index = 0; // description index
+		for (Code c : codes) {
+			if (index >= descriptions.size()) {
+				index = 0; // go back to start
+			}
+			c.setDescription(descriptions.get(index));
+			index++;
+		}
+	}
 
 	/**
 	 * Retrieves the Code object with the given code string. Throws an
@@ -108,8 +171,14 @@ public class Generator {
 			throw new InputException("Must generate code first before saving.");
 		}
 		List<String> lines = getCodeString();
+		BufferedWriter bw = null;
 		try {
-			Files.write(file.toPath(), lines, CHARSET);
+			bw = new BufferedWriter(new FileWriter(file));
+			bw.flush();
+			for (String line : lines) {
+				bw.write(line);
+			}
+			bw.close();
 		} catch (IOException e) {
 			throw new InputException(e.getMessage());
 		}
@@ -163,27 +232,6 @@ public class Generator {
 	}
 
 	/**
-	 * Removes the given description from the list of codes and the list of
-	 * descriptions.
-	 * 
-	 * @param desc
-	 * @throws InputException
-	 */
-	public void removeDescription(String desc) throws InputException {
-		if (desc == null) {
-			throw new InputException("Description must not be null");
-		}
-		// Remove from list of description
-		descriptions.remove(desc);
-		// Remove codes which has the description
-		for (Code c : codes) {
-			if (c.getDescription().equals(desc)) {
-				c.setDescription("");
-			}
-		}
-	}
-
-	/**
 	 * Reduces the list of codes generated to the a new size.
 	 * 
 	 * @param newSize
@@ -194,24 +242,6 @@ public class Generator {
 			tmp.add(codes.get(tmp.size()));
 		}
 		this.codes = tmp;
-	}
-
-	/**
-	 * Adds the given description to the list of descriptions for the vouchers.
-	 * It checks that none of the descriptions are duplicates. It also converts
-	 * the string object passed into the method to lowercase.
-	 * 
-	 * @param description
-	 * @throws InputException
-	 */
-	public void addDescription(String description) throws InputException {
-		String item = description.toLowerCase();
-		for (String s : descriptions) {
-			if (s.equals(item)) {
-				throw new InputException("Description already exists.");
-			}
-		}
-		descriptions.add(item);
 	}
 
 	// Helper Methods
@@ -230,10 +260,11 @@ public class Generator {
 		boolean isRedeemed = false;
 		try {
 			code = vars[0].split(":")[1];
-			description = vars[1].split(":")[1];
-			isRedeemed = Boolean.parseBoolean(vars[2].split(":")[1]);
+			description = vars[1].split(":").length > 1 ? vars[1].split(":")[1] : "";
+			String bool = vars[2].split(":")[1].trim();
+			isRedeemed = bool.equals("true") ? true : false;
 		} catch (Exception e) {
-			throw new InputException("Wrong file passed.");
+			throw new InputException("Got error");
 		}
 		return new Code(code, description, isRedeemed);
 	}
@@ -247,7 +278,7 @@ public class Generator {
 	private List<String> getCodeString() {
 		List<String> tmp = new ArrayList<String>();
 		for (Code c : codes) {
-			tmp.add(c.toString());
+			tmp.add(c.toString() + "\n");
 		}
 		return tmp;
 	}
@@ -282,13 +313,13 @@ public class Generator {
 			int field = (int) (Math.random() * 3);
 			switch (field) {
 			case 0: // select a random character from the uppercase field
-				sb.append(UPPERCASE[(int) Math.random() * UPPERCASE.length]);
+				sb.append(UPPERCASE[(int) (Math.random() * UPPERCASE.length)]);
 				break;
 			case 1: // select a random character from the lowercase field
-				sb.append(LOWERCASE[(int) Math.random() * LOWERCASE.length]);
+				sb.append(LOWERCASE[(int) (Math.random() * LOWERCASE.length)]);
 				break;
 			case 2: // select a random character from the numbers field
-				sb.append(NUMBERS[(int) Math.random() * NUMBERS.length]);
+				sb.append(NUMBERS[(int) (Math.random() * NUMBERS.length)]);
 				break;
 			}
 		}
