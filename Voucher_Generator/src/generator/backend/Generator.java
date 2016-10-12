@@ -63,6 +63,23 @@ public class Generator {
 	// Methods
 
 	/**
+	 * Retrieves the Code object with the given code string. Throws an
+	 * inputException if the code does not exist.
+	 * 
+	 * @param code
+	 * @return
+	 * @throws InputException
+	 */
+	public Code getCode(String code) throws InputException {
+		for (Code c : codes) {
+			if (c.equals(code)) {
+				return c;
+			}
+		}
+		throw new InputException("Code not found");
+	}
+
+	/**
 	 * Finds the Code object with the passed code string. If the Code object
 	 * exists, then it replaces the description inside the Code object with the
 	 * new description.
@@ -75,13 +92,8 @@ public class Generator {
 		if (code == null || description == null) {
 			throw new InputException("Must pass a code and a description string.");
 		}
-		for (Code c : codes) {
-			if (c.equals(code)) {
-				c.setDescription(description);
-				return;
-			}
-		}
-		throw new InputException("Code not found.");
+		Code c = getCode(code);
+		c.setDescription(description);
 	}
 
 	/**
@@ -181,6 +193,7 @@ public class Generator {
 		while (tmp.size() != newSize) {
 			tmp.add(codes.get(tmp.size()));
 		}
+		this.codes = tmp;
 	}
 
 	/**
