@@ -21,3 +21,10 @@
 - restructured saving algorithm 
 - increased efficiency of the generate method
 - can now generate code without the need of adding description first
+
+### Version 0.3
+
+### Additional Functionalities
+- addCode - adds a custom code to the generator
+- delCode - removes a specific code from the generator
+- clear - can clear code or description depending on the argument passed
