@@ -1,6 +1,7 @@
-package generator.frontend;
+package generator.gui.text.views;
 
-import generator.backend.Controller;
+import generator.backend.InputException;
+import generator.gui.text.Controller;
 
 /**
  * Provides a skeletal implementation of the Views used for this program.
@@ -24,8 +25,9 @@ public abstract class View {
 	 * @param cmd
 	 * @param instruction
 	 * @return
+	 * @throws InputException
 	 */
-	protected String[] getArgs(String cmd, String[] instruction) {
+	protected String[] getArgs(String cmd, String[] instruction) throws InputException {
 		if (validArgLength(cmd, instruction)) {
 			String[] tmp = getInstruction(cmd, instruction);
 			switch (tmp.length) {
@@ -37,8 +39,7 @@ public abstract class View {
 				return null;
 			}
 		} else {
-			System.out.println("Invalid argument length.");
-			return null;
+			throw new InputException("Invalid argument length.");
 		}
 	}
 
@@ -57,9 +58,10 @@ public abstract class View {
 		switch (tmp.length) {
 		case 2:
 			return cmd.equals("load") || cmd.equals("save") || cmd.equals("show") || cmd.equals("list")
-					|| cmd.equals("addDesc") || cmd.equals("reduce") || cmd.equals("delDesc");
+					|| cmd.equals("addDesc") || cmd.equals("reduce") || cmd.equals("delDesc") || cmd.equals("clear")
+					|| cmd.equals("delCode");
 		case 3:
-			return cmd.equals("edit") || cmd.equals("generate");
+			return cmd.equals("edit") || cmd.equals("generate") || cmd.equals("addCode");
 		default:
 			return false;
 		}
@@ -84,7 +86,7 @@ public abstract class View {
 				sb.append(tmp[i] + " ");
 			}
 			tmp = new String[] { instruction[0], sb.toString() };
-		} else if (cmd.equals("edit")) {
+		} else if (cmd.equals("edit") || cmd.equals("addCode")) {
 			if (tmp.length < 3) {
 				return null;
 			}

@@ -6,6 +6,8 @@
  * Oct 12 16		Chris Rabe			rewritten save method
  * Oct 12 16		Chris Rabe			fixed load bug
  * Oct 12 16		Chris Rabe			extended functionality - can now reduce size
+ * Oct 15 16		Chris Rabe			can now add custom codes
+ * Oct 15 16		Chris Rabe			can now clear all descriptions and codes in one command
  */
 package generator.backend;
 
@@ -24,6 +26,7 @@ import java.util.List;
  * pattern.
  * 
  * @author Chris Rabe
+ * @version 0.3
  */
 public class Generator {
 	// variables needed for code generation
@@ -63,6 +66,20 @@ public class Generator {
 	}
 
 	// Methods
+
+	/**
+	 * Removes all the codes generated.
+	 */
+	public void clearCodes() {
+		this.codes.clear();
+	}
+
+	/**
+	 * Removes all the description created.
+	 */
+	public void clearDesc() {
+		this.descriptions.clear();
+	}
 
 	/**
 	 * Adds the given description to the list of descriptions for the vouchers.
@@ -140,6 +157,40 @@ public class Generator {
 			}
 		}
 		throw new InputException("Code not found");
+	}
+
+	/**
+	 * Adds custom vouchers to the generator. The code added must not be
+	 * contained within the list of codes.
+	 * 
+	 * @param code
+	 * @param description
+	 * @throws InputException
+	 */
+	public void addCode(String code, String description) throws InputException {
+		Code tmp = new Code(code, description);
+		for (Code c : codes) {
+			if (c.getCode().equals(code)) {
+				throw new InputException("Code already exists.");
+			}
+		}
+		this.codes.add(tmp);
+	}
+
+	/**
+	 * Removes the code inside the generator. The code must exist.
+	 * 
+	 * @param code
+	 * @throws InputException
+	 */
+	public void removeCode(String code) throws InputException {
+		for (Code c : codes) {
+			if (c.getCode().equals(code)) {
+				codes.remove(c);
+				return;
+			}
+		}
+		throw new InputException("Code does not exist.");
 	}
 
 	/**

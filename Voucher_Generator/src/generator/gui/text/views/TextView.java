@@ -5,9 +5,11 @@
  * 	Date				Author				Changes
  * 	12 Oct 16			Chris Rabe			implemented some methods for prompting user
  * 	12 Oct 16			Chris Rabe			save and generate now available for user
+ * 	15 Oct 16			Chris Rabe			implemented clear command
+ * 	15 Oct 16			Chris Rabe			implemented addCode and clearCode commands
  */
 
-package generator.frontend;
+package generator.gui.text.views;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,14 +17,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 import generator.backend.Code;
-import generator.backend.Controller;
+import generator.backend.InputException;
+import generator.gui.text.Controller;
 
 /**
  * Prints out user messages. Can be extended and replaced as a GUI
  * implementation. This class takes user interactions and forwards them to the
  * controller.
  * 
- * Version 0.2 offers text based view.
+ * Version 0.3 offers text based view.
  * 
  * @author Chris Rabe
  */
@@ -56,8 +59,11 @@ public class TextView extends View {
 		String[] instruction = input.split(" ");
 		String cmd = instruction[0];
 		// get the arguments
-		String[] args = getArgs(cmd, instruction);
-		if (args == null) {
+		String[] args = null;
+		try {
+			args = getArgs(cmd, instruction);
+		} catch (InputException e) {
+			System.out.println(e.getMessage());
 			return;
 		}
 		if (cmd.equals("save")) {
@@ -80,6 +86,12 @@ public class TextView extends View {
 			controller.generate(args);
 		} else if (cmd.equals("edit")) {
 			controller.editCode(args);
+		} else if (cmd.equals("clear")) {
+			controller.clearAll(args[0]);
+		} else if (cmd.equals("delCode")) {
+			controller.delCode(args[0]);
+		} else if (cmd.equals("addCode")) {
+			controller.addCode(args);
 		}
 	}
 
@@ -158,7 +170,10 @@ public class TextView extends View {
 					"save <filename> \n\t saves all the codes and stores it into a file with the given filename");
 			functions.put("load", "load <filename> \n\t reads all the codes in the file.");
 			functions.put("reduce", "reduce <new_size> \n\t reduces the size of the code stored in the generator.");
-			functions.put("distribute", "distributes the descriptions to the codes generated.");
+			functions.put("distribute", "\n\tdistributes the descriptions to the codes generated.");
+			functions.put("clear", "clear <CODE | DESC> \n\t removes all the codes listed in the generator.");
+			functions.put("addCode", "addCode <code> <description> \n\t adds a custom code into the generator.");
+			functions.put("delCode", "delCode <code> \n\t removes the code specified within the generator.");
 		}
 	}
 

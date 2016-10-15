@@ -3,13 +3,18 @@
  * Aug 27 16		Chris Rabe			added some java documentation
  * Aug 27 16		Chris Rabe			implemented some command methods
  * Oct 12 16		Chris Rabe			implemented save and load methods
+ * Oct 15 16		Chris Rabe			implemented the clearAll function
  */
 
-package generator.backend;
+package generator.gui.text;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import generator.backend.Code;
+import generator.backend.Generator;
+import generator.backend.InputException;
 
 /**
  * This class reacts to user inputs and responds to them accordingly. It calls
@@ -24,12 +29,56 @@ public class Controller {
 	/**
 	 * Symbolises the version of the program
 	 */
-	public static final double VERSION = 0.2;
+	public static final double VERSION = 0.3;
 
 	private Generator generator;
 
 	public Controller() {
 		this.generator = new Generator();
+	}
+
+	/**
+	 * Removes all the objects based on the type given. If the type is "CODE",
+	 * then all codes are removed. If the type is "DESC", then all descriptions
+	 * are removed.
+	 */
+	public void clearAll(String type) {
+		switch (type) {
+		case "CODE":
+			generator.clearCodes();
+			break;
+		case "DESC":
+			generator.clearDesc();
+			break;
+		}
+	}
+
+	/**
+	 * This method is passed a two segment input which contains the code and
+	 * description. It adds a new code object into the generator.
+	 * 
+	 * @param input
+	 */
+	public void addCode(String[] input) {
+		try {
+			if (input.length != 2) {
+				throw new InputException("Invalid input -- must have two args");
+			}
+			generator.addCode(input[0], input[1]);
+		} catch (InputException e) {
+			handleException(e);
+		}
+	}
+
+	/**
+	 * This method deletes the code with the given name of the input.
+	 */
+	public void delCode(String input) {
+		try {
+			generator.removeCode(input);
+		} catch (InputException e) {
+			handleException(e);
+		}
 	}
 
 	/**
@@ -44,7 +93,7 @@ public class Controller {
 	public void editCode(String[] input) {
 		try {
 			if (input.length != 2) {
-				throw new InputException("Invalid code -- must have two args.");
+				throw new InputException("Invalid input -- must have two args.");
 			}
 			generator.editCode(input[0], input[1]);
 		} catch (InputException e) {
