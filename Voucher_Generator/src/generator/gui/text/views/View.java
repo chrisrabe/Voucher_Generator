@@ -1,3 +1,8 @@
+/*	File: View.java
+ * 	
+ * 	Date				Author					Changes
+ * 	15 Oct 16			Chris Rabe				implemented methods for getting arguments for clear and adding codes 
+ */
 package generator.gui.text.views;
 
 import generator.backend.InputException;

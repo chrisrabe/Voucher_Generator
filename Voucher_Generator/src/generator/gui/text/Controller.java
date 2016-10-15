@@ -1,4 +1,4 @@
-/* File: Client.java
+/* File: Controller.java
  * Date				Author				Changes
  * Aug 27 16		Chris Rabe			added some java documentation
  * Aug 27 16		Chris Rabe			implemented some command methods

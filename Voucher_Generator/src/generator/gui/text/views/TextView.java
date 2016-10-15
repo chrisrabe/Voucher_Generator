@@ -1,6 +1,4 @@
-/*	File: View.java
- * 	Author
- * 	Chris Rabe			300334207
+/*	File: TextView.java
  * 
  * 	Date				Author				Changes
  * 	12 Oct 16			Chris Rabe			implemented some methods for prompting user
