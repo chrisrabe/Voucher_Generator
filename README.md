@@ -10,3 +10,8 @@ Each voucher contains a code and a description and a flag which indicates whethe
 
 This project is completely open source. Feel free to put any improvements or create your own generator. 
 I've also provided executable jar files if you just want to use the tool.
+
+### Getting Started
+
+To use the program, simply download the executables available in this page, then run it by using ``` java -jar Voucher_Generator_vN ```.
+The 'N' is the version number of the jar file.
