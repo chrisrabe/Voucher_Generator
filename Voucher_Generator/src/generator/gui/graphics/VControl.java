@@ -393,12 +393,13 @@ public class VControl extends JFrame {
 		getContentPane().add(panel);
 		getContentPane().add(views[cur]);
 		pack();
+		setResizable(false);
 		setVisible(true);
 	}
 
 	private void initialiseVars() {
 		this.generator = new Generator();
-		this.views = ComponentFactory.createViews();
+		this.views = ComponentFactory.createViews(this);
 		this.cur = 0;
 		this.prev = 0;
 	}

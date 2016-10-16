@@ -7,6 +7,7 @@
 
 package generator.assets;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -21,12 +22,17 @@ import javax.imageio.ImageIO;
 public class Assets {
 	// Path names
 	private static final String IMAGE_PATH = "/generator/assets/img/";
+	// Variables
+	private static final int SIZE = 50;
 	// Images
 	private static BufferedImage addIcon;
 	private static BufferedImage delIcon;
 	private static BufferedImage genIcon;
 	private static BufferedImage edtIcon;
 	private static BufferedImage clrIcon;
+
+	private static BufferedImage vouchIcon;
+	private static BufferedImage descrIcon;
 
 	// Getters for Images
 	public static BufferedImage getAddIcon() {
@@ -82,6 +88,32 @@ public class Assets {
 			}
 		}
 		return clrIcon;
+	}
+
+	public static BufferedImage getVoucherIcon() {
+		if (vouchIcon == null) {
+			try {
+				vouchIcon = ImageIO.read(Assets.class.getResource(IMAGE_PATH + "voucher-icon.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return vouchIcon;
+	}
+
+	public static BufferedImage getDescriptionIcon() {
+		if (descrIcon == null) {
+			try {
+				descrIcon = ImageIO.read(Assets.class.getResource(IMAGE_PATH + "desc-icon.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return descrIcon;
+	}
+
+	public static Image scaleImage(BufferedImage img) {
+		return img.getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH);
 	}
 
 	private Assets() {

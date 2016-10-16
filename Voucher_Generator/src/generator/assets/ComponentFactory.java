@@ -17,7 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
+import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.View;
+import generator.gui.graphics.views.*;
 
 /**
  * This class contains methods which creates JComponents needed for the view as
@@ -56,9 +58,20 @@ public class ComponentFactory {
 		return fc;
 	}
 
-	public static View[] createViews() {
+	public static ImageIcon createVoucherIcon() {
+		ImageIcon icon = new ImageIcon(Assets.getVoucherIcon());
+		return icon;
+	}
+
+	public static ImageIcon createDescIcon() {
+		ImageIcon icon = new ImageIcon(Assets.getDescriptionIcon());
+		return icon;
+	}
+
+	public static View[] createViews(VControl control) {
 		int num = 1;
 		View[] tmp = new View[num];
+		tmp[0] = new GeneratorView(control);
 		return tmp;
 	}
 
