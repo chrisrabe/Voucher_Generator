@@ -8,6 +8,7 @@
  * Oct 12 16		Chris Rabe			extended functionality - can now reduce size
  * Oct 15 16		Chris Rabe			can now add custom codes
  * Oct 15 16		Chris Rabe			can now clear all descriptions and codes in one command
+ * Oct 16 16		Chris Rabe			fixed generate bug
  */
 package generator.backend;
 
@@ -26,7 +27,7 @@ import java.util.List;
  * pattern.
  * 
  * @author Chris Rabe
- * @version 0.3
+ * @version 0.4
  */
 public class Generator {
 	// variables needed for code generation
@@ -242,6 +243,9 @@ public class Generator {
 	 * @throws InputException
 	 */
 	public void load(File file) throws InputException {
+		if (!file.getName().endsWith(".txt")) {
+			throw new InputException("Must be a .txt file.");
+		}
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String s = null;
@@ -268,7 +272,8 @@ public class Generator {
 	public void generate(int n, int c) throws InputException {
 		final int MAX_RETRIES = 100; // it will be odd if it retried 100 times.
 		int retries = 0;
-		while (codes.size() != n) {
+		int generated = 0;
+		while (generated < n) {
 			retries = 0;
 			String code = generateCodeString(c);
 			while (isCreated(code)) {
@@ -279,6 +284,7 @@ public class Generator {
 				}
 			}
 			this.codes.add(new Code(code));
+			generated++;
 		}
 	}
 
@@ -315,7 +321,7 @@ public class Generator {
 			String bool = vars[2].split(":")[1].trim();
 			isRedeemed = bool.equals("true") ? true : false;
 		} catch (Exception e) {
-			throw new InputException("Got error");
+			throw new InputException("Parsing Error");
 		}
 		return new Code(code, description, isRedeemed);
 	}

@@ -5,7 +5,7 @@
  * 	15 Oct 16			Chris Rabe			added methods for getting image resources
  */
 
-package generator.storage;
+package generator.assets;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import javax.imageio.ImageIO;
  */
 public class Assets {
 	// Path names
-	private static final String IMAGE_PATH = "/generator/datastorage/img/";
+	private static final String IMAGE_PATH = "/generator/assets/img/";
 	// Images
 	private static BufferedImage addIcon;
 	private static BufferedImage delIcon;

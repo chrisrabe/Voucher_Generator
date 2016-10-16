@@ -7,16 +7,24 @@
  */
 package generator.gui.graphics;
 
+import static generator.assets.ComponentFactory.createChooser;
+
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.Main;
+import generator.assets.ComponentFactory;
 import generator.backend.Code;
 import generator.backend.Generator;
 import generator.backend.InputException;
@@ -73,7 +81,7 @@ public class VControl extends JFrame {
 
 	public VControl() {
 		super(String.format("Voucher Generator v%.2f", Main.VERSION));
-		this.generator = new Generator();
+		initialise();
 	}
 
 	// Getters for the View
@@ -321,5 +329,77 @@ public class VControl extends JFrame {
 	 */
 	private void handleException(InputException e) {
 		JOptionPane.showMessageDialog(this, e.getMessage(), "Input Exception", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void initialise() {
+		initialiseVars();
+		this.setJMenuBar(createMenuBar());
+		initialiseContent();
+	}
+
+	private JMenuBar createMenuBar() {
+		// Create Menu items
+		JMenuItem save = new JMenuItem("Save", KeyEvent.VK_S);
+		JMenuItem load = new JMenuItem("Load", KeyEvent.VK_L);
+		// Add Listeners
+		save.addActionListener(e -> {
+			JFileChooser fc = createChooser("Save file");
+			int val = fc.showSaveDialog(this);
+			if (val == JFileChooser.APPROVE_OPTION) {
+				String fname = fc.getSelectedFile().getAbsolutePath();
+				File file = new File(fname);
+				try {
+					file.createNewFile();
+					generator.save(file);
+				} catch (IOException | InputException e1) {
+					handleException(new InputException(e1.getMessage()));
+				}
+			}
+		});
+		load.addActionListener(e -> {
+			JFileChooser fc = createChooser("Load file");
+			int val = fc.showOpenDialog(this);
+			if (val == JFileChooser.APPROVE_OPTION) {
+				try {
+					generator.load(fc.getSelectedFile());
+				} catch (InputException e1) {
+					handleException(e1);
+				}
+			}
+		});
+		// Put save-load in menu
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.add(save);
+		fileMenu.add(load);
+		// Put everything together in menuBar
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.add(fileMenu);
+		return menuBar;
+	}
+
+	private void initialiseContent() {
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+			@Override
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Quit game",
+						JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
+		JPanel panel = new JPanel();
+		getContentPane().add(panel);
+		getContentPane().add(views[cur]);
+		pack();
+		setVisible(true);
+	}
+
+	private void initialiseVars() {
+		this.generator = new Generator();
+		this.views = ComponentFactory.createViews();
+		this.cur = 0;
+		this.prev = 0;
 	}
 }

@@ -8,6 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// create a new view with a controller
-		new TextView(new Controller());
+		 new TextView(new Controller());
+		//new VControl();
 	}
 }
