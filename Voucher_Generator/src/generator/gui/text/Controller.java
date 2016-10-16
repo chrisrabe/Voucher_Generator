@@ -26,11 +26,6 @@ import generator.backend.InputException;
  */
 public class Controller {
 
-	/**
-	 * Symbolises the version of the program
-	 */
-	public static final double VERSION = 0.3;
-
 	private Generator generator;
 
 	public Controller() {

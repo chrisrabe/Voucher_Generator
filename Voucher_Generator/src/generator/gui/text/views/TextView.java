@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import generator.Main;
 import generator.backend.Code;
 import generator.backend.InputException;
 import generator.gui.text.Controller;
@@ -139,7 +140,7 @@ public class TextView extends View {
 	 * Prints the opening message of the program.
 	 */
 	private void printOpeningMessage() {
-		System.out.println(String.format("VOUCHER GENERATOR : version %.2f", Controller.VERSION));
+		System.out.println(String.format("VOUCHER GENERATOR : version %.2f", Main.VERSION));
 		System.out.println("Type 'help' to see more options.");
 	}
 
