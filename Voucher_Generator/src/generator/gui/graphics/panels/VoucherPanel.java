@@ -7,7 +7,13 @@ package generator.gui.graphics.panels;
 
 import javax.swing.JPanel;
 
+import generator.gui.graphics.VControl.View;
+
 @SuppressWarnings("serial")
 public class VoucherPanel extends JPanel {
-
+	private View parent;
+	
+	public VoucherPanel(View parent) {
+		this.parent = parent;
+	}
 }

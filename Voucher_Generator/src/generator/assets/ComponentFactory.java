@@ -6,6 +6,8 @@
 
 package generator.assets;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.util.List;
@@ -16,6 +18,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.View;
@@ -39,8 +43,18 @@ public class ComponentFactory {
 		return btn;
 	}
 
+	public static JButton createButton(String text) {
+		JButton btn = new JButton(text);
+		btn.setFocusable(false);
+		return btn;
+	}
+
 	public static JLabel createLabel(String text) {
 		JLabel label = new JLabel(text);
+		label.setName(text);
+		label.setBorder(new EmptyBorder(0, 0, 25, 0));
+		label.setForeground(Color.BLACK);
+		label.setFocusable(false);
 		return label;
 	}
 
@@ -66,6 +80,17 @@ public class ComponentFactory {
 	public static ImageIcon createDescIcon() {
 		ImageIcon icon = new ImageIcon(Assets.getDescriptionIcon());
 		return icon;
+	}
+
+	public static JTextField createTextField() {
+		JTextField tf = new JTextField();
+		Dimension size = new Dimension(100, 25);
+		tf.setPreferredSize(size);
+		tf.setMaximumSize(size);
+		tf.setForeground(Color.BLACK);
+		tf.setHorizontalAlignment(JTextField.CENTER);
+		tf.setEditable(true);
+		return tf;
 	}
 
 	public static View[] createViews(VControl control) {
