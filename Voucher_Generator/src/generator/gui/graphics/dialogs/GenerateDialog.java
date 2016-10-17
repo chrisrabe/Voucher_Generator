@@ -153,6 +153,7 @@ public class GenerateDialog extends JDialog {
 			}
 			parent.generate(n, c);
 			showMessage(parent, String.format("Successfull created %d vouchers.", n));
+			this.setVisible(false);
 		});
 	}
 
