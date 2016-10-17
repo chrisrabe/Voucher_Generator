@@ -4,18 +4,14 @@
  */
 package generator.gui.graphics.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,6 +21,7 @@ import static generator.gui.graphics.VControl.View.*;
 
 import generator.assets.ComponentFactory;
 import generator.gui.graphics.VControl;
+import generator.gui.graphics.panels.Display;
 
 /**
  * This dialog component prompts the user to enter the 'n' and 'c' values for
@@ -33,44 +30,17 @@ import generator.gui.graphics.VControl;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class GenerateDialog extends JDialog {
-	private VControl parent;
+public class GenerateDialog extends FunctionDialog {
 
 	private JTextField numCodes;
 	private JTextField numChars;
 	private JButton generateBtn;
 
-	public GenerateDialog(VControl parent) {
-		this.parent = parent;
-		initialise();
+	public GenerateDialog(VControl controller, Display parent) {
+		super(controller, parent);
 	}
 
-	private void initialise() {
-		this.setLayout(new BorderLayout());
-		JPanel main = createMainPanel();
-		this.add(main, BorderLayout.CENTER);
-		this.setPreferredSize(new Dimension(240, 200));
-		addActionListeners();
-		pack();
-		setLocationRelativeTo(parent);
-		setResizable(false);
-		setVisible(true);
-	}
-
-	// Panel creation Methods
-
-	private JPanel createMainPanel() {
-		JComponent input = createInputPanel();
-		JPanel gen = createGeneratePanel();
-		// Put everything together
-		JPanel main = new JPanel();
-		main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
-		main.add(input);
-		main.add(gen);
-		return main;
-	}
-
-	private JPanel createGeneratePanel() {
+	protected JPanel createBtnPanel() {
 		generateBtn = ComponentFactory.createButton("Generate");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -78,7 +48,7 @@ public class GenerateDialog extends JDialog {
 		return panel;
 	}
 
-	private JComponent createInputPanel() {
+	protected JComponent createInputPanel() {
 		// Create components
 		JLabel codes = ComponentFactory.createLabel("Number of Codes");
 		JLabel chars = ComponentFactory.createLabel("Length of Codes");
@@ -99,12 +69,12 @@ public class GenerateDialog extends JDialog {
 		// Create a sequential group for vertical axis
 		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
 		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(codes).addComponent(numCodes));
-		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(chars).addComponent(numChars));
+		vGroup.addGroup(layout.createParallelGroup().addComponent(chars).addComponent(numChars));
 		layout.setVerticalGroup(vGroup);
 		return panel;
 	}
 
-	private void addActionListeners() {
+	protected void addActionListeners() {
 		numCodes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -143,17 +113,17 @@ public class GenerateDialog extends JDialog {
 			}
 			// Show error if at least one field failed.
 			if (!pass1 || !pass2) {
-				showError(parent, "Both fields must be numbers.");
+				showError(controller, "Both fields must be numbers.");
 				return;
 			}
 			// Show error if at least one field is less than or equal zero
 			if (n <= 0 || c <= 0) {
-				showError(parent, "Both fields must be greater than zero.");
+				showError(controller, "Both fields must be greater than zero.");
 				return;
 			}
-			parent.generate(n, c);
-			showMessage(parent, String.format("Successfull created %d vouchers.", n));
-			this.setVisible(false);
+			controller.generate(n, c);
+			parent.update();
+			showMessage(controller, String.format("Successfull created %d vouchers.", n));
 		});
 	}
 

@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -91,6 +92,15 @@ public class ComponentFactory {
 		tf.setHorizontalAlignment(JTextField.CENTER);
 		tf.setEditable(true);
 		return tf;
+	}
+
+	public static JComboBox<String> createStringCombo(String[] content) {
+		JComboBox<String> cb = new JComboBox<String>(content);
+		cb.setSelectedIndex(0);
+		Dimension size = new Dimension(100, 25);
+		cb.setPreferredSize(size);
+		cb.setMaximumSize(size);
+		return cb;
 	}
 
 	public static View[] createViews(VControl control) {

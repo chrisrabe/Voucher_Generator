@@ -10,10 +10,14 @@ import javax.swing.JPanel;
 import generator.gui.graphics.VControl.View;
 
 @SuppressWarnings("serial")
-public class VoucherPanel extends JPanel {
+public class VoucherPanel extends JPanel implements Display {
 	private View parent;
-	
+
 	public VoucherPanel(View parent) {
 		this.parent = parent;
+	}
+
+	@Override
+	public void update() {
 	}
 }

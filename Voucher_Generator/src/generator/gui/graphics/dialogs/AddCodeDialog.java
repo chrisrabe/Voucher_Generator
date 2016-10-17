@@ -5,18 +5,14 @@
  */
 package generator.gui.graphics.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -27,6 +23,7 @@ import static generator.gui.graphics.VControl.View.*;
 import generator.assets.ComponentFactory;
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.Command;
+import generator.gui.graphics.panels.Display;
 
 /**
  * This field prompts the user for a name and a description to add the code.
@@ -34,42 +31,17 @@ import generator.gui.graphics.VControl.Command;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class AddCodeDialog extends JDialog {
-	private VControl parent;
+public class AddCodeDialog extends FunctionDialog {
 
 	private JTextField nameField;
 	private JTextField descField;
 	private JButton addBtn;
 
-	public AddCodeDialog(VControl parent) {
-		this.parent = parent;
-		initialise();
+	public AddCodeDialog(VControl controller, Display parent) {
+		super(controller, parent);
 	}
 
-	private void initialise() {
-		this.setLayout(new BorderLayout());
-		JPanel main = createMainPanel();
-		this.add(main, BorderLayout.CENTER);
-		this.setPreferredSize(new Dimension(240, 200));
-		addActionListeners();
-		pack();
-		setLocationRelativeTo(parent);
-		setResizable(false);
-		setVisible(true);
-	}
-
-	private JPanel createMainPanel() {
-		JComponent input = createInputPanel();
-		JPanel gen = createAddPanel();
-		// Put everything together
-		JPanel main = new JPanel();
-		main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
-		main.add(input);
-		main.add(gen);
-		return main;
-	}
-
-	private JComponent createInputPanel() {
+	protected JComponent createInputPanel() {
 		// Create components
 		JLabel nameL = ComponentFactory.createLabel("Voucher Code");
 		JLabel descL = ComponentFactory.createLabel("Description");
@@ -95,7 +67,7 @@ public class AddCodeDialog extends JDialog {
 		return panel;
 	}
 
-	private JPanel createAddPanel() {
+	protected JPanel createBtnPanel() {
 		addBtn = ComponentFactory.createButton("Add Code");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -103,7 +75,7 @@ public class AddCodeDialog extends JDialog {
 		return panel;
 	}
 
-	private void addActionListeners() {
+	protected void addActionListeners() {
 		nameField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -135,11 +107,12 @@ public class AddCodeDialog extends JDialog {
 				pass2 = false;
 			}
 			if (!pass1 || !pass2) {
-				showError(parent, "Both fields must be filled in!");
+				showError(controller, "Both fields must be filled in!");
 				return;
 			}
-			parent.add(Command.CODE, name, desc);
-			showMessage(parent, "Successfully added new code.");
+			controller.add(Command.CODE, name, desc);
+			parent.update();
+			showMessage(controller, "Successfully added new code.");
 		});
 	}
 }
