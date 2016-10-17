@@ -68,9 +68,21 @@ public class VControl extends JFrame {
 		 */
 		public abstract void setFocus();
 
+		public VControl getController() {
+			return controller;
+		}
+
 		@Override
 		public Dimension getPreferredSize() {
 			return new Dimension(600, 600);
+		}
+
+		public static void showMessage(JFrame parent, String text) {
+			JOptionPane.showMessageDialog(parent, text);
+		}
+
+		public static void showError(JFrame parent, String text) {
+			JOptionPane.showMessageDialog(parent, text, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
