@@ -2,21 +2,22 @@
  * 
  * Date			Author			Changes
  * 17 Oct 16	Chris Rabe		created AddCodeDialog.java
+ * 20 Oct 16	Chris Rabe		updated the look of the dialog
  */
 package generator.gui.graphics.dialogs;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.GroupLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.TitledBorder;
 
 import static generator.gui.graphics.VControl.View.*;
 
@@ -42,28 +43,14 @@ public class AddCodeDialog extends FunctionDialog {
 	}
 
 	protected JComponent createInputPanel() {
-		// Create components
-		JLabel nameL = ComponentFactory.createLabel("Voucher Code");
-		JLabel descL = ComponentFactory.createLabel("Description");
-		nameField = ComponentFactory.createTextField();
-		descField = ComponentFactory.createTextField();
+		// Create sub panel
+		JPanel name = createNamePanel();
+		JPanel desc = createDescPanel();
 		// Setup panel
 		JComponent panel = new JPanel();
-		// Set up group layout
-		GroupLayout layout = new GroupLayout(panel);
-		// Turn on automatically adding gaps between components
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-		// Create a sequential group for horizontal axis
-		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-		hGroup.addGroup(layout.createParallelGroup().addComponent(nameL).addComponent(nameField));
-		hGroup.addGroup(layout.createParallelGroup().addComponent(descL).addComponent(descField));
-		layout.setHorizontalGroup(hGroup);
-		// Create a sequential group for vertical axis
-		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(nameL).addComponent(nameField));
-		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(descL).addComponent(descField));
-		layout.setVerticalGroup(vGroup);
+		panel.setLayout(new GridLayout(2, 0));
+		panel.add(name);
+		panel.add(desc);
 		return panel;
 	}
 
@@ -71,6 +58,8 @@ public class AddCodeDialog extends FunctionDialog {
 		addBtn = ComponentFactory.createButton("Add Code");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder title = BorderFactory.createTitledBorder("Control");
+		panel.setBorder(title);
 		panel.add(addBtn);
 		return panel;
 	}
@@ -113,6 +102,40 @@ public class AddCodeDialog extends FunctionDialog {
 			controller.add(Command.CODE, name, desc);
 			parent.update();
 			showMessage(controller, "Successfully added new code.");
+			this.dispose();
 		});
+	}
+
+	// Helper Methods
+
+	private JPanel createDescPanel() {
+		// Set up components
+		descField = ComponentFactory.createTextField();
+		// Set up panel
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder title = BorderFactory.createTitledBorder("Description");
+		panel.setBorder(title);
+		// Put everything together
+		panel.add(descField);
+		return panel;
+	}
+
+	private JPanel createNamePanel() {
+		// Set up components
+		nameField = ComponentFactory.createTextField();
+		// Set up panel
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder title = BorderFactory.createTitledBorder("Voucher Code");
+		panel.setBorder(title);
+		// Put everything together
+		panel.add(nameField);
+		return panel;
+	}
+
+	public static void main(String[] args) {
+		VControl control = new VControl();
+		new AddCodeDialog(control, null);
 	}
 }

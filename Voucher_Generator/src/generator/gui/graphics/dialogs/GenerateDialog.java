@@ -6,16 +6,16 @@ package generator.gui.graphics.dialogs;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.GroupLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.TitledBorder;
 
 import static generator.gui.graphics.VControl.View.*;
 
@@ -44,33 +44,47 @@ public class GenerateDialog extends FunctionDialog {
 		generateBtn = ComponentFactory.createButton("Generate");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder title = BorderFactory.createTitledBorder("Control");
+		panel.setBorder(title);
 		panel.add(generateBtn);
 		return panel;
 	}
 
 	protected JComponent createInputPanel() {
 		// Create components
-		JLabel codes = ComponentFactory.createLabel("Number of Codes");
-		JLabel chars = ComponentFactory.createLabel("Length of Codes");
-		numCodes = ComponentFactory.createTextField();
-		numChars = ComponentFactory.createTextField();
-		// Setup panel
+		JPanel codes = createCodesPanel();
+		JPanel chars = createCharsPanel();
+		// Put everything together
 		JComponent panel = new JPanel();
-		// Set up group layout
-		GroupLayout layout = new GroupLayout(panel);
-		// Turn on automatically adding gaps between components
-		layout.setAutoCreateGaps(true);
-		layout.setAutoCreateContainerGaps(true);
-		// Create a sequential group for horizontal axis
-		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-		hGroup.addGroup(layout.createParallelGroup().addComponent(codes).addComponent(numCodes));
-		hGroup.addGroup(layout.createParallelGroup().addComponent(chars).addComponent(numChars));
-		layout.setHorizontalGroup(hGroup);
-		// Create a sequential group for vertical axis
-		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-		vGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE).addComponent(codes).addComponent(numCodes));
-		vGroup.addGroup(layout.createParallelGroup().addComponent(chars).addComponent(numChars));
-		layout.setVerticalGroup(vGroup);
+		panel.setLayout(new GridLayout(2, 0));
+		panel.add(codes);
+		panel.add(chars);
+		return panel;
+	}
+
+	private JPanel createCharsPanel() {
+		// Create components
+		numChars = ComponentFactory.createTextField();
+		// Set up panel
+		JPanel panel = new JPanel();
+		TitledBorder title = BorderFactory.createTitledBorder("Length of Codes");
+		panel.setBorder(title);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// Put everything together
+		panel.add(numChars);
+		return panel;
+	}
+
+	private JPanel createCodesPanel() {
+		// Create components
+		numCodes = ComponentFactory.createTextField();
+		// Set up panel
+		JPanel panel = new JPanel();
+		TitledBorder title = BorderFactory.createTitledBorder("Number of Codes");
+		panel.setBorder(title);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// Put everything together
+		panel.add(numCodes);
 		return panel;
 	}
 
@@ -124,15 +138,12 @@ public class GenerateDialog extends FunctionDialog {
 			controller.generate(n, c);
 			parent.update();
 			showMessage(controller, String.format("Successfull created %d vouchers.", n));
+			this.dispose();
 		});
 	}
 
-	// Helper Methods
-
-	private boolean isNumeric(String s) {
-		if (s == null) {
-			return false;
-		}
-		return s.matches("[-+]?\\d*\\.?\\d+");
+	public static void main(String[] args) {
+		VControl control = new VControl();
+		new GenerateDialog(control, null);
 	}
 }

@@ -2,6 +2,7 @@
  * 	
  * 	Date				Author				Changes
  * 	17 Oct 16			Chris Rabe			created EditCodeDialog.java
+ * 	20 Oct 16			Chris Rabe			added a border around the sub panels
  */
 
 package generator.gui.graphics.dialogs;
@@ -11,19 +12,19 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import static generator.gui.graphics.VControl.View.showMessage;
 
 import generator.assets.ComponentFactory;
-import generator.backend.Code;
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.Command;
 import generator.gui.graphics.panels.Display;
@@ -57,47 +58,14 @@ public class EditCodeDialog extends FunctionDialog {
 		return panel;
 	}
 
-	private JPanel createDescPanel() {
-		JLabel desc = ComponentFactory.createLabel("Description");
-		newDescField = ComponentFactory.createTextField();
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		panel.add(desc);
-		panel.add(newDescField);
-		return panel;
-	}
-
-	private JPanel createCodePanel() {
-		JLabel code = ComponentFactory.createLabel("Code");
-		String[] codes = getCodes(controller.getList(Command.CODE));
-		codesBox = ComponentFactory.createStringCombo(codes);
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		panel.add(code);
-		panel.add(codesBox);
-		return panel;
-	}
-
-	private String[] getCodes(List<? extends Object> list) {
-		String[] codes = new String[list.size()];
-		for (int i = 0; i < codes.length; i++) {
-			Object o = list.get(i);
-			if (o instanceof Code) {
-				Code c = (Code) o;
-				codes[i] = c.getCode();
-			}
-		}
-		return codes;
-	}
-
 	@Override
 	protected JPanel createBtnPanel() {
 		editBtn = ComponentFactory.createButton("Edit");
-		JButton test = ComponentFactory.createButton("Test");
 		JPanel panel = new JPanel();
+		TitledBorder title = BorderFactory.createTitledBorder("Control");
+		panel.setBorder(title);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 		panel.add(editBtn);
-		panel.add(test);
 		return panel;
 	}
 
@@ -116,6 +84,34 @@ public class EditCodeDialog extends FunctionDialog {
 			controller.editCode(code, desc);
 			parent.update();
 			showMessage(controller, "Successfully changed code.");
+			this.dispose();
 		});
+	}
+
+	// Helper Methods
+
+	private JPanel createDescPanel() {
+		JLabel desc = ComponentFactory.createLabel("Description");
+		newDescField = ComponentFactory.createTextField();
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder title = BorderFactory.createTitledBorder("Description");
+		panel.setBorder(title);
+		panel.add(desc);
+		panel.add(newDescField);
+		return panel;
+	}
+
+	private JPanel createCodePanel() {
+		JLabel code = ComponentFactory.createLabel("Code");
+		String[] codes = getCodes(controller.getList(Command.CODE));
+		codesBox = ComponentFactory.createStringCombo(codes);
+		JPanel panel = new JPanel();
+		TitledBorder title = BorderFactory.createTitledBorder("Code");
+		panel.setBorder(title);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel.add(code);
+		panel.add(codesBox);
+		return panel;
 	}
 }

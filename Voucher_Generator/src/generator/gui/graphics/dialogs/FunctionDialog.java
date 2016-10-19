@@ -7,12 +7,14 @@ package generator.gui.graphics.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import generator.backend.Code;
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.panels.Display;
 
@@ -46,7 +48,7 @@ public abstract class FunctionDialog extends JDialog {
 		this.setLayout(new BorderLayout());
 		JPanel main = createMainPanel();
 		this.add(main, BorderLayout.CENTER);
-		this.setPreferredSize(new Dimension(240, 200));
+		this.setPreferredSize(new Dimension(250, 260));
 		addActionListeners();
 		pack();
 		setLocationRelativeTo(controller);
@@ -65,4 +67,24 @@ public abstract class FunctionDialog extends JDialog {
 		return main;
 	}
 
+	// Helper method
+
+	protected boolean isNumeric(String s) {
+		if (s == null) {
+			return false;
+		}
+		return s.matches("[-+]?\\d*\\.?\\d+");
+	}
+
+	protected String[] getCodes(List<? extends Object> list) {
+		String[] codes = new String[list.size()];
+		for (int i = 0; i < codes.length; i++) {
+			Object o = list.get(i);
+			if (o instanceof Code) {
+				Code c = (Code) o;
+				codes[i] = c.getCode();
+			}
+		}
+		return codes;
+	}
 }
