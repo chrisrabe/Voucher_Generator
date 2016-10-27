@@ -133,9 +133,4 @@ public class AddCodeDialog extends FunctionDialog {
 		panel.add(nameField);
 		return panel;
 	}
-
-	public static void main(String[] args) {
-		VControl control = new VControl();
-		new AddCodeDialog(control, null);
-	}
 }

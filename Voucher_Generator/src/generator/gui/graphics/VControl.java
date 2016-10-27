@@ -292,9 +292,12 @@ public class VControl extends JFrame {
 	 * @param filename
 	 */
 	public void save(String filename) {
-		String fname = determineFile(filename);
-		File file = new File(fname);
 		try {
+			if (getList(Command.CODE).isEmpty()) {
+				throw new InputException("There are no codes to save.");
+			}
+			String fname = determineFile(filename);
+			File file = new File(fname);
 			file.createNewFile();
 			generator.save(file);
 		} catch (IOException | InputException e) {

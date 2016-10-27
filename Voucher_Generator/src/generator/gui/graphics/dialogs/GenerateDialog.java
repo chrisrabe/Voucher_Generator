@@ -142,8 +142,4 @@ public class GenerateDialog extends FunctionDialog {
 		});
 	}
 
-	public static void main(String[] args) {
-		VControl control = new VControl();
-		new GenerateDialog(control, null);
-	}
 }

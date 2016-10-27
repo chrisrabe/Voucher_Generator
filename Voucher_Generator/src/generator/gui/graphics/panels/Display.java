@@ -5,6 +5,9 @@
  */
 package generator.gui.graphics.panels;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import generator.gui.graphics.VControl.View;
@@ -12,7 +15,9 @@ import generator.gui.graphics.VControl.View;
 /**
  * This interface provides a method which could be called by the dialog objects
  * so that its parent display can update its scrollpanes after function has been
- * executed.
+ * executed. Each display has two components, the control panel and the scroll
+ * panel. The control panel contains buttons and the scroll panel contains a
+ * list of objects or information which the user needs to know.
  * 
  * @author Chris
  */
@@ -45,7 +50,24 @@ public abstract class Display extends JPanel {
 	 */
 	public abstract JPanel createScrollPanel();
 
+	// Overrided Methods
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return parent.getPreferredSize();
+	}
+
+	// Helper Methods
+
+	/**
+	 * Adds two panels into the display. The control panel and the scroll panel.
+	 */
 	private void initialise() {
-		// TODO fill this in
+		JPanel controlPanel = createControlPanel();
+		JPanel scrollPanel = createScrollPanel();
+		this.setLayout(new BorderLayout());
+		this.add(controlPanel, BorderLayout.NORTH);
+		this.add(scrollPanel, BorderLayout.CENTER);
+		this.addActionListeners();
 	}
 }

@@ -60,10 +60,12 @@ public class ComponentFactory {
 	}
 
 	public static JScrollPane createScrollList(List<? extends Object> list) {
+		return new JScrollPane(createJList(list));
+	}
+
+	public static JList<String> createJList(List<? extends Object> list) {
 		String categories[] = toArray(list);
-		JList<String> jlist = new JList<String>(categories);
-		JScrollPane scroll = new JScrollPane(jlist);
-		return scroll;
+		return new JList<String>(categories);
 	}
 
 	public static JFileChooser createChooser(String title) {

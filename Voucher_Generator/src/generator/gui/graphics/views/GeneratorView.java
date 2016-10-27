@@ -10,6 +10,7 @@ package generator.gui.graphics.views;
 
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.View;
+import generator.gui.graphics.panels.VoucherPanel;
 
 /**
  * This view contains functionalities of the generator.
@@ -19,6 +20,8 @@ import generator.gui.graphics.VControl.View;
 @SuppressWarnings("serial")
 public class GeneratorView extends View {
 
+	private VoucherPanel vouchPanel;
+
 	public GeneratorView(VControl controller) {
 		super(controller);
 		initialise();
@@ -26,12 +29,12 @@ public class GeneratorView extends View {
 
 	@Override
 	public void initialise() {
-
+		vouchPanel = new VoucherPanel(this);
+		this.add(vouchPanel);
 	}
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
 
 	}
 

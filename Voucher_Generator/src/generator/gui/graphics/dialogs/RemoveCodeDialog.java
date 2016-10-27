@@ -86,7 +86,7 @@ public class RemoveCodeDialog extends FunctionDialog {
 		removeBtn.addActionListener(e -> {
 			String code = (String) codesBox.getSelectedItem();
 			controller.delete(Command.CODE, code, null);
-			// parent.update();
+			parent.update();
 			showMessage(controller, "Successfully removed code.");
 			this.dispose();
 		});
@@ -111,7 +111,7 @@ public class RemoveCodeDialog extends FunctionDialog {
 				return;
 			}
 			controller.reduce(amt);
-			// parent.update();
+			parent.update();
 			showMessage(controller, "Successfully reduced code generated.");
 			this.dispose();
 		});
@@ -148,11 +148,5 @@ public class RemoveCodeDialog extends FunctionDialog {
 		panel.add(label);
 		panel.add(newAmt);
 		return panel;
-	}
-
-	public static void main(String[] args) {
-		VControl control = new VControl();
-		control.generate(5, 5);
-		new RemoveCodeDialog(control, null);
 	}
 }
