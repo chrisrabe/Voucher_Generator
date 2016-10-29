@@ -9,12 +9,9 @@
 package generator.gui.graphics.panels;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -40,9 +37,6 @@ import generator.gui.graphics.dialogs.RemoveCodeDialog;
  */
 @SuppressWarnings("serial")
 public class VoucherPanel extends Display {
-
-	/** Changes the scale of the icons displayed */
-	private final double SCALE = 1.5;
 
 	private JScrollPane info;
 	private JButton addBtn; // Add
@@ -128,27 +122,11 @@ public class VoucherPanel extends Display {
 
 	// Helper Methods
 
-	private JPanel createButtonPane(JButton button, String text) {
-		// setup components
-		JLabel label = ComponentFactory.createLabel(text);
-		// setup panel
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		// put everything together
-		panel.add(label);
-		panel.add(button);
-		return panel;
-	}
-
 	private void initialiseButtons() {
 		addBtn = createButton(Assets.getAddIcon());
 		edtBtn = createButton(Assets.getEditIcon());
 		delBtn = createButton(Assets.getDelIcon());
 		genBtn = createButton(Assets.getGenIcon());
 		clrBtn = createButton(Assets.getClearIcon());
-	}
-
-	private JButton createButton(BufferedImage icon) {
-		return ComponentFactory.createButton(Assets.scaleImage(icon, SCALE));
 	}
 }

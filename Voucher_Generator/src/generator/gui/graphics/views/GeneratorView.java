@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import generator.assets.ComponentFactory;
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.View;
+import generator.gui.graphics.panels.DescPanel;
 import generator.gui.graphics.panels.VoucherPanel;
 
 /**
@@ -25,22 +26,30 @@ import generator.gui.graphics.panels.VoucherPanel;
 public class GeneratorView extends View {
 
 	private VoucherPanel vouchPanel;
+	private DescPanel descPanel;
 
 	public GeneratorView(VControl controller) {
 		super(controller);
 		initialise();
 	}
 
+	public void updateVouchPanel() {
+		vouchPanel.update();
+	}
+
 	@Override
 	public void initialise() {
 		// Initialise panels
 		vouchPanel = new VoucherPanel(this);
+		descPanel = new DescPanel(this);
 		// Initialise icons
-		ImageIcon icon = ComponentFactory.createVoucherIcon(1.5);
+		ImageIcon icon1 = ComponentFactory.createVoucherIcon(1.5);
+		ImageIcon icon2 = ComponentFactory.createDescIcon(1.5);
 		// Put everything together
 		JTabbedPane tPane = ComponentFactory.createTabbedPane();
 		tPane.setPreferredSize(this.getPreferredSize());
-		tPane.addTab("Voucher", icon, vouchPanel);
+		tPane.addTab("Voucher", icon1, vouchPanel);
+		tPane.addTab("Description", icon2, descPanel);
 		// Add it to the view
 		this.add(tPane);
 	}

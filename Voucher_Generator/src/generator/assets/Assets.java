@@ -3,6 +3,7 @@
  * 	Date				Author				Changes
  * 	15 Oct 16			Chris Rabe			created Assets.java
  * 	15 Oct 16			Chris Rabe			added methods for getting image resources
+ * 	30 Oct 16			Chris Rabe			added methods for retrieving description related icons
  */
 
 package generator.assets;
@@ -31,10 +32,48 @@ public class Assets {
 	private static BufferedImage edtIcon;
 	private static BufferedImage clrIcon;
 
+	private static BufferedImage addDescIcon;
+	private static BufferedImage delDescIcon;
+	private static BufferedImage disDescIcon;
+
 	private static BufferedImage vouchIcon;
 	private static BufferedImage descrIcon;
 
 	// Getters for Images
+
+	public static BufferedImage getDistributeIcon() {
+		if (disDescIcon == null) {
+			try {
+				disDescIcon = ImageIO.read(Assets.class.getResource(IMAGE_PATH + "distribute.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return disDescIcon;
+	}
+
+	public static BufferedImage getDelDescIcon() {
+		if (delDescIcon == null) {
+			try {
+				delDescIcon = ImageIO.read(Assets.class.getResource(IMAGE_PATH + "delete-desc.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return delDescIcon;
+	}
+
+	public static BufferedImage getAddDescIcon() {
+		if (addDescIcon == null) {
+			try {
+				addDescIcon = ImageIO.read(Assets.class.getResource(IMAGE_PATH + "add-desc.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return addDescIcon;
+	}
+
 	public static BufferedImage getAddIcon() {
 		if (addIcon == null) {
 			try {
@@ -117,7 +156,7 @@ public class Assets {
 	}
 
 	public static Image scaleImage(BufferedImage img, double scale) {
-		return img.getScaledInstance((int)(SIZE / scale), (int)(SIZE / scale), Image.SCALE_SMOOTH);
+		return img.getScaledInstance((int) (SIZE / scale), (int) (SIZE / scale), Image.SCALE_SMOOTH);
 	}
 
 	private Assets() {

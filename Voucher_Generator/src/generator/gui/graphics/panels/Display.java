@@ -7,9 +7,15 @@ package generator.gui.graphics.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import generator.assets.Assets;
+import generator.assets.ComponentFactory;
 import generator.gui.graphics.VControl.View;
 
 /**
@@ -23,6 +29,10 @@ import generator.gui.graphics.VControl.View;
  */
 @SuppressWarnings("serial")
 public abstract class Display extends JPanel {
+
+	/** Changes the scale of the icons displayed */
+	protected final double SCALE = 1.5;
+
 	protected View parent;
 
 	public Display(View parent) {
@@ -51,13 +61,29 @@ public abstract class Display extends JPanel {
 	public abstract JPanel createScrollPanel();
 
 	// Overrided Methods
-	
+
 	@Override
 	public Dimension getPreferredSize() {
 		return parent.getPreferredSize();
 	}
 
 	// Helper Methods
+
+	protected JButton createButton(BufferedImage icon) {
+		return ComponentFactory.createButton(Assets.scaleImage(icon, SCALE));
+	}
+
+	protected JPanel createButtonPane(JButton button, String text) {
+		// setup components
+		JLabel label = ComponentFactory.createLabel(text);
+		// setup panel
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// put everything together
+		panel.add(label);
+		panel.add(button);
+		return panel;
+	}
 
 	/**
 	 * Adds two panels into the display. The control panel and the scroll panel.

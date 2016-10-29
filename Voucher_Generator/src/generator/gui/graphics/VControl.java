@@ -397,7 +397,7 @@ public class VControl extends JFrame {
 		addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?", "Quit game",
+				int result = JOptionPane.showConfirmDialog(VControl.this, "Are you sure you want to quit?", "Quit game",
 						JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					System.exit(0);
