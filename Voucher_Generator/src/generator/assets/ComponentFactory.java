@@ -23,9 +23,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.VControl.View;
-import generator.gui.graphics.views.*;
+import generator.gui.VControl;
+import generator.gui.VControl.View;
+import generator.gui.views.*;
 
 /**
  * This class contains methods which creates JComponents needed for the view as

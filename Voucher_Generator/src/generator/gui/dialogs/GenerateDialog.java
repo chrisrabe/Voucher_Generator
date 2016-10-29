@@ -2,7 +2,9 @@
  * 	Date			Author					Changes
  * 	17 Oct 16		Chris Rabe				added some functionalities to the buttons
  */
-package generator.gui.graphics.dialogs;
+package generator.gui.dialogs;
+
+import static generator.gui.VControl.View.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -17,11 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import static generator.gui.graphics.VControl.View.*;
-
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.panels.Display;
+import generator.gui.VControl;
+import generator.gui.panels.Display;
 
 /**
  * This dialog component prompts the user to enter the 'n' and 'c' values for

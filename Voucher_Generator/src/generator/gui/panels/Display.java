@@ -3,7 +3,7 @@
  * 	Date			Author				Changes
  * 	21 Oct 16		Chris Rabe			changed this to an abstract class
  */
-package generator.gui.graphics.panels;
+package generator.gui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import generator.assets.Assets;
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl.View;
+import generator.gui.VControl.View;
 
 /**
  * This interface provides a method which could be called by the dialog objects

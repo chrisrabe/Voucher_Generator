@@ -3,7 +3,7 @@
  * 	Date				Author					Changes
  * 	17 Oct 16			Chris Rabe				created FunctionDialog.java
  */
-package generator.gui.graphics.dialogs;
+package generator.gui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,8 +15,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import generator.backend.Code;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.panels.Display;
+import generator.gui.VControl;
+import generator.gui.panels.Display;
 
 /**
  * This class provides a skeletal implementation of a JDialog for functions.

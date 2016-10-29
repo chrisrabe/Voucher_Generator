@@ -3,7 +3,9 @@
  * 	Date			Author			Changes
  * 	29 Oct 16		Chris Rabe		created RemoveDescDialog
  */
-package generator.gui.graphics.dialogs;
+package generator.gui.dialogs;
+
+import static generator.gui.VControl.View.showMessage;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -15,12 +17,10 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import static generator.gui.graphics.VControl.View.showMessage;
-
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.VControl.Command;
-import generator.gui.graphics.panels.Display;
+import generator.gui.VControl;
+import generator.gui.VControl.Command;
+import generator.gui.panels.Display;
 
 /**
  * This dialog box is used for removing any existing descriptions inside the

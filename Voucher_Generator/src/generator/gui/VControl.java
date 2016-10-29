@@ -5,7 +5,7 @@
  * 	16 Oct 16				Chris Rabe				merged addCode and addDesc to a single add method
  * 	16 Oct 16				Chris Rabe				moved all methods from the text controller to the gui controller
  */
-package generator.gui.graphics;
+package generator.gui;
 
 import static generator.assets.ComponentFactory.createChooser;
 

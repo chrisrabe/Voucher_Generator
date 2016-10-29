@@ -5,7 +5,9 @@
  * 	20 Oct 16			Chris Rabe			added a border around the sub panels
  */
 
-package generator.gui.graphics.dialogs;
+package generator.gui.dialogs;
+
+import static generator.gui.VControl.View.showMessage;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -22,12 +24,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import static generator.gui.graphics.VControl.View.showMessage;
-
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.VControl.Command;
-import generator.gui.graphics.panels.Display;
+import generator.gui.VControl;
+import generator.gui.VControl.Command;
+import generator.gui.panels.Display;
 
 /**
  * Retrieves all the codes from the VControl and displays them in a JComboBox.

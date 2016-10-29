@@ -6,16 +6,16 @@
  * 	16 Oct 16			Chris Rabe				created GenerateView.java
  */
 
-package generator.gui.graphics.views;
+package generator.gui.views;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
 
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.VControl.View;
-import generator.gui.graphics.panels.DescPanel;
-import generator.gui.graphics.panels.VoucherPanel;
+import generator.gui.VControl;
+import generator.gui.VControl.View;
+import generator.gui.panels.DescPanel;
+import generator.gui.panels.VoucherPanel;
 
 /**
  * This view contains functionalities of the generator.

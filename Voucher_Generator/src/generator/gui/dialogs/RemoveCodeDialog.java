@@ -2,7 +2,9 @@
  * 	Date			Author				Change
  * 	20 Oct 16		Chris Rabe			created RemoveCodeDialog.java
  */
-package generator.gui.graphics.dialogs;
+package generator.gui.dialogs;
+
+import static generator.gui.VControl.View.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -19,12 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import static generator.gui.graphics.VControl.View.*;
-
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl;
-import generator.gui.graphics.VControl.Command;
-import generator.gui.graphics.panels.Display;
+import generator.gui.VControl;
+import generator.gui.VControl.Command;
+import generator.gui.panels.Display;
 
 /**
  * This dialog box contains panels for removing a specific code from the

@@ -6,7 +6,9 @@
  * 	27 Oct 16		Chris Rabe			fixed update method
  * 	29 Oct 16		Chris Rabe			can now scale icons
  */
-package generator.gui.graphics.panels;
+package generator.gui.panels;
+
+import static generator.gui.VControl.View.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -17,16 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import static generator.gui.graphics.VControl.View.*;
-
 import generator.assets.Assets;
 import generator.assets.ComponentFactory;
-import generator.gui.graphics.VControl.Command;
-import generator.gui.graphics.VControl.View;
-import generator.gui.graphics.dialogs.AddCodeDialog;
-import generator.gui.graphics.dialogs.EditCodeDialog;
-import generator.gui.graphics.dialogs.GenerateDialog;
-import generator.gui.graphics.dialogs.RemoveCodeDialog;
+import generator.gui.VControl.Command;
+import generator.gui.VControl.View;
+import generator.gui.dialogs.AddCodeDialog;
+import generator.gui.dialogs.EditCodeDialog;
+import generator.gui.dialogs.GenerateDialog;
+import generator.gui.dialogs.RemoveCodeDialog;
 
 /**
  * This panel contains a scroll list which displays all the code inside the
