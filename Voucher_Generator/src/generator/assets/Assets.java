@@ -116,6 +116,10 @@ public class Assets {
 		return img.getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH);
 	}
 
+	public static Image scaleImage(BufferedImage img, double scale) {
+		return img.getScaledInstance((int)(SIZE / scale), (int)(SIZE / scale), Image.SCALE_SMOOTH);
+	}
+
 	private Assets() {
 	}
 }

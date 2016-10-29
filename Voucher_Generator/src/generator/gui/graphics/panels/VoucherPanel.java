@@ -4,6 +4,7 @@
  * 	16 Oct 16		Chris Rabe			created VoucherPanel.java
  * 	27 Oct 16		Chris Rabe			added a bunch of buttons and labels onto the display
  * 	27 Oct 16		Chris Rabe			fixed update method
+ * 	29 Oct 16		Chris Rabe			can now scale icons
  */
 package generator.gui.graphics.panels;
 
@@ -39,6 +40,9 @@ import generator.gui.graphics.dialogs.RemoveCodeDialog;
  */
 @SuppressWarnings("serial")
 public class VoucherPanel extends Display {
+
+	/** Changes the scale of the icons displayed */
+	private final double SCALE = 1.5;
 
 	private JScrollPane info;
 	private JButton addBtn; // Add
@@ -145,6 +149,6 @@ public class VoucherPanel extends Display {
 	}
 
 	private JButton createButton(BufferedImage icon) {
-		return ComponentFactory.createButton(Assets.scaleImage(icon));
+		return ComponentFactory.createButton(Assets.scaleImage(icon, SCALE));
 	}
 }

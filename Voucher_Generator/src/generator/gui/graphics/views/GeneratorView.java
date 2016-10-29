@@ -8,6 +8,10 @@
 
 package generator.gui.graphics.views;
 
+import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+
+import generator.assets.ComponentFactory;
 import generator.gui.graphics.VControl;
 import generator.gui.graphics.VControl.View;
 import generator.gui.graphics.panels.VoucherPanel;
@@ -29,8 +33,16 @@ public class GeneratorView extends View {
 
 	@Override
 	public void initialise() {
+		// Initialise panels
 		vouchPanel = new VoucherPanel(this);
-		this.add(vouchPanel);
+		// Initialise icons
+		ImageIcon icon = ComponentFactory.createVoucherIcon(1.5);
+		// Put everything together
+		JTabbedPane tPane = ComponentFactory.createTabbedPane();
+		tPane.setPreferredSize(this.getPreferredSize());
+		tPane.addTab("Voucher", icon, vouchPanel);
+		// Add it to the view
+		this.add(tPane);
 	}
 
 	@Override

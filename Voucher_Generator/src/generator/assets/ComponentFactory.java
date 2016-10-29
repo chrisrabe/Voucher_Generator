@@ -19,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -75,13 +76,13 @@ public class ComponentFactory {
 		return fc;
 	}
 
-	public static ImageIcon createVoucherIcon() {
-		ImageIcon icon = new ImageIcon(Assets.getVoucherIcon());
+	public static ImageIcon createVoucherIcon(double scale) {
+		ImageIcon icon = new ImageIcon(Assets.scaleImage(Assets.getVoucherIcon(), scale));
 		return icon;
 	}
 
-	public static ImageIcon createDescIcon() {
-		ImageIcon icon = new ImageIcon(Assets.getDescriptionIcon());
+	public static ImageIcon createDescIcon(double scale) {
+		ImageIcon icon = new ImageIcon(Assets.scaleImage(Assets.getDescriptionIcon(), scale));
 		return icon;
 	}
 
@@ -103,6 +104,11 @@ public class ComponentFactory {
 		cb.setPreferredSize(size);
 		cb.setMaximumSize(size);
 		return cb;
+	}
+
+	public static JTabbedPane createTabbedPane() {
+		JTabbedPane tPane = new JTabbedPane();
+		return tPane;
 	}
 
 	public static View[] createViews(VControl control) {
