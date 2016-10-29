@@ -76,15 +76,17 @@ public abstract class FunctionDialog extends JDialog {
 		return s.matches("[-+]?\\d*\\.?\\d+");
 	}
 
-	protected String[] getCodes(List<? extends Object> list) {
-		String[] codes = new String[list.size()];
-		for (int i = 0; i < codes.length; i++) {
+	protected String[] toArray(List<? extends Object> list) {
+		String[] tmp = new String[list.size()];
+		for (int i = 0; i < tmp.length; i++) {
 			Object o = list.get(i);
 			if (o instanceof Code) {
 				Code c = (Code) o;
-				codes[i] = c.getCode();
+				tmp[i] = c.getCode();
+			} else if (o instanceof String) {
+				tmp[i] = (String) o;
 			}
 		}
-		return codes;
+		return tmp;
 	}
 }

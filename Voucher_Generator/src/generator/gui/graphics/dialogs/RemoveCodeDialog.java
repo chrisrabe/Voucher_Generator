@@ -122,7 +122,7 @@ public class RemoveCodeDialog extends FunctionDialog {
 	private JPanel createRemovePanel() {
 		// Set up the components
 		JLabel label = ComponentFactory.createLabel("Code");
-		String[] codes = getCodes(controller.getList(Command.CODE));
+		String[] codes = toArray(controller.getList(Command.CODE));
 		codesBox = ComponentFactory.createStringCombo(codes);
 		// Set up the panel
 		JPanel panel = new JPanel();

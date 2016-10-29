@@ -294,8 +294,11 @@ public class Generator {
 	 * @param newSize
 	 */
 	public void reduceCodeSize(int newSize) {
+		if (newSize > codes.size()) {
+			return;
+		}
 		List<Code> tmp = new ArrayList<Code>();
-		while (tmp.size() != newSize) {
+		while (tmp.size() < newSize) {
 			tmp.add(codes.get(tmp.size()));
 		}
 		this.codes = tmp;

@@ -104,7 +104,7 @@ public class EditCodeDialog extends FunctionDialog {
 
 	private JPanel createCodePanel() {
 		JLabel code = ComponentFactory.createLabel("Code");
-		String[] codes = getCodes(controller.getList(Command.CODE));
+		String[] codes = toArray(controller.getList(Command.CODE));
 		codesBox = ComponentFactory.createStringCombo(codes);
 		JPanel panel = new JPanel();
 		TitledBorder title = BorderFactory.createTitledBorder("Code");
