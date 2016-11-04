@@ -4,6 +4,7 @@
  * 	15 Oct 16				Chris Rabe				created VControl.java
  * 	16 Oct 16				Chris Rabe				merged addCode and addDesc to a single add method
  * 	16 Oct 16				Chris Rabe				moved all methods from the text controller to the gui controller
+ * 	4 Nov 16				Chris Rabe				fixed save method not adding file extensions automatically
  */
 package generator.gui;
 
@@ -67,6 +68,8 @@ public class VControl extends JFrame {
 		 * Gives the focus of the key listener to the appropriate component.
 		 */
 		public abstract void setFocus();
+
+		public abstract void update();
 
 		public VControl getController() {
 			return controller;
@@ -318,6 +321,7 @@ public class VControl extends JFrame {
 			}
 			File file = new File(filename);
 			generator.load(file);
+			views[cur].update();
 		} catch (InputException e) {
 			handleException(e);
 		}
@@ -346,6 +350,40 @@ public class VControl extends JFrame {
 		JOptionPane.showMessageDialog(this, e.getMessage(), "Input Exception", JOptionPane.ERROR_MESSAGE);
 	}
 
+	private void promptSave() {
+		int n = JOptionPane.showConfirmDialog(this, "Would you like to save before loading?", "Prompt Save",
+				JOptionPane.YES_NO_OPTION);
+		if (n == JOptionPane.YES_OPTION) {
+			save();
+		}
+	}
+
+	/**
+	 * Prompts the user for a file name and then saves the codes to the file.
+	 */
+	private void save() {
+		JFileChooser fc = createChooser("Save file");
+		int val = fc.showSaveDialog(this);
+		if (val == JFileChooser.APPROVE_OPTION) {
+			save(fc.getSelectedFile().getAbsolutePath());
+		}
+	}
+
+	/**
+	 * Loads a selected file. If there are codes generated, it needs to prompt
+	 * the user if they want to save first before loading.
+	 */
+	private void load() {
+		if (!generator.getCodes().isEmpty()) {
+			promptSave();
+		}
+		JFileChooser fc = createChooser("Load file");
+		int val = fc.showOpenDialog(this);
+		if (val == JFileChooser.APPROVE_OPTION) {
+			load(fc.getSelectedFile().getAbsolutePath());
+		}
+	}
+
 	private void initialise() {
 		initialiseVars();
 		this.setJMenuBar(createMenuBar());
@@ -358,29 +396,10 @@ public class VControl extends JFrame {
 		JMenuItem load = new JMenuItem("Load", KeyEvent.VK_L);
 		// Add Listeners
 		save.addActionListener(e -> {
-			JFileChooser fc = createChooser("Save file");
-			int val = fc.showSaveDialog(this);
-			if (val == JFileChooser.APPROVE_OPTION) {
-				String fname = fc.getSelectedFile().getAbsolutePath();
-				File file = new File(fname);
-				try {
-					file.createNewFile();
-					generator.save(file);
-				} catch (IOException | InputException e1) {
-					handleException(new InputException(e1.getMessage()));
-				}
-			}
+			save();
 		});
 		load.addActionListener(e -> {
-			JFileChooser fc = createChooser("Load file");
-			int val = fc.showOpenDialog(this);
-			if (val == JFileChooser.APPROVE_OPTION) {
-				try {
-					generator.load(fc.getSelectedFile());
-				} catch (InputException e1) {
-					handleException(e1);
-				}
-			}
+			load();
 		});
 		// Put save-load in menu
 		JMenu fileMenu = new JMenu("File");

@@ -246,6 +246,9 @@ public class Generator {
 		if (!file.getName().endsWith(".txt")) {
 			throw new InputException("Must be a .txt file.");
 		}
+		// Clear previously made codes and description
+		codes.clear();
+		descriptions.clear();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String s = null;
