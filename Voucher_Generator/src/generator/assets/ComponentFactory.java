@@ -8,6 +8,7 @@ package generator.assets;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.io.File;
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -34,6 +37,18 @@ import generator.gui.views.*;
  * @author Chris
  */
 public class ComponentFactory {
+
+	public static JPanel createComponentLabelPanel(JComponent component, String labelName) {
+		// set up the component
+		JLabel label = createLabel(labelName);
+		// set up panel
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// put everything together
+		panel.add(label);
+		panel.add(component);
+		return panel;
+	}
 
 	public static JButton createButton(Image img) {
 		JButton btn = new JButton();

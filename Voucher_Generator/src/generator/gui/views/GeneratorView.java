@@ -55,8 +55,13 @@ public class GeneratorView extends View {
 	}
 
 	@Override
+	public void update() {
+		vouchPanel.update();
+		descPanel.update();
+	}
+
+	@Override
 	public void setFocus() {
 
 	}
-
 }
