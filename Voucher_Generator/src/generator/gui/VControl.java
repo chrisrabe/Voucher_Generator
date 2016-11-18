@@ -29,6 +29,7 @@ import generator.assets.ComponentFactory;
 import generator.backend.Code;
 import generator.backend.Generator;
 import generator.backend.InputException;
+import generator.gui.dialogs.SettingsDialog;
 
 /**
  * Controls all the different views of the program and calls methods from the
@@ -69,6 +70,9 @@ public class VControl extends JFrame {
 		 */
 		public abstract void setFocus();
 
+		/**
+		 * Updates any components inside the View
+		 */
 		public abstract void update();
 
 		public VControl getController() {
@@ -350,12 +354,47 @@ public class VControl extends JFrame {
 		JOptionPane.showMessageDialog(this, e.getMessage(), "Input Exception", JOptionPane.ERROR_MESSAGE);
 	}
 
-	private void promptSave() {
-		int n = JOptionPane.showConfirmDialog(this, "Would you like to save before loading?", "Prompt Save",
-				JOptionPane.YES_NO_OPTION);
-		if (n == JOptionPane.YES_OPTION) {
+	// GUI Initialisation Below
+
+	private JMenuItem save;
+	private JMenuItem load;
+	private JMenuItem encoding;
+
+	private void initialise() {
+		initialiseVars();
+		this.setJMenuBar(createMenuBar());
+		initialiseContent();
+		addActionListeners();
+	}
+
+	private JMenuBar createMenuBar() {
+		// Create Menu items
+		save = new JMenuItem("Save", KeyEvent.VK_S);
+		load = new JMenuItem("Load", KeyEvent.VK_L);
+		encoding = new JMenuItem("Encoding Settings");
+		// Put save-load in menu
+		JMenu fileMenu = new JMenu("File");
+		JMenu settings = new JMenu("Settings");
+		fileMenu.add(save);
+		fileMenu.add(load);
+		settings.add(encoding);
+		// Put everything together in menuBar
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.add(fileMenu);
+		menuBar.add(settings);
+		return menuBar;
+	}
+
+	private void addActionListeners() {
+		save.addActionListener(e -> {
 			save();
-		}
+		});
+		load.addActionListener(e -> {
+			load();
+		});
+		encoding.addActionListener(e -> {
+			new SettingsDialog(this);
+		});
 	}
 
 	/**
@@ -384,33 +423,6 @@ public class VControl extends JFrame {
 		}
 	}
 
-	private void initialise() {
-		initialiseVars();
-		this.setJMenuBar(createMenuBar());
-		initialiseContent();
-	}
-
-	private JMenuBar createMenuBar() {
-		// Create Menu items
-		JMenuItem save = new JMenuItem("Save", KeyEvent.VK_S);
-		JMenuItem load = new JMenuItem("Load", KeyEvent.VK_L);
-		// Add Listeners
-		save.addActionListener(e -> {
-			save();
-		});
-		load.addActionListener(e -> {
-			load();
-		});
-		// Put save-load in menu
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.add(save);
-		fileMenu.add(load);
-		// Put everything together in menuBar
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.add(fileMenu);
-		return menuBar;
-	}
-
 	private void initialiseContent() {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -436,5 +448,13 @@ public class VControl extends JFrame {
 		this.views = ComponentFactory.createViews(this);
 		this.cur = 0;
 		this.prev = 0;
+	}
+
+	private void promptSave() {
+		int n = JOptionPane.showConfirmDialog(this, "Would you like to save before loading?", "Prompt Save",
+				JOptionPane.YES_NO_OPTION);
+		if (n == JOptionPane.YES_OPTION) {
+			save();
+		}
 	}
 }
