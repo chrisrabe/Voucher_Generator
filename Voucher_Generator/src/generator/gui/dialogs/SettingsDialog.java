@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import generator.assets.ComponentFactory;
+import generator.config.Configuration;
 import generator.gui.VControl;
 
 /**
@@ -32,8 +33,10 @@ public class SettingsDialog extends JDialog {
 	private JComboBox<String> toggleNumbers;
 	private JButton confirmBtn;
 
+	private VControl controller;
+
 	public SettingsDialog(VControl controller) {
-		super(controller, true);
+		this.controller = controller;
 		initialise();
 	}
 
@@ -42,8 +45,9 @@ public class SettingsDialog extends JDialog {
 		initialiseBody();
 		addActionListeners();
 		// pack everything in and set it visible and non resizable
-		this.setResizable(false);
 		this.pack();
+		this.setLocationRelativeTo(controller);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -72,7 +76,16 @@ public class SettingsDialog extends JDialog {
 		toggleUpperCase = createOnOffBox();
 		toggleLowerCase = createOnOffBox();
 		toggleNumbers = createOnOffBox();
+		// switch to the appropriate index based on configuration
+		toggleUpperCase.setSelectedIndex(getSelectedIndex(Configuration.UPPER_CASE));
+		toggleLowerCase.setSelectedIndex(getSelectedIndex(Configuration.LOWER_CASE));
+		toggleNumbers.setSelectedIndex(getSelectedIndex(Configuration.NUMBERS));
+		// create button
 		confirmBtn = ComponentFactory.createButton("Confirm");
+	}
+
+	private int getSelectedIndex(boolean condition) {
+		return condition ? 0 : 1;
 	}
 
 	private JComboBox<String> createOnOffBox() {
@@ -87,7 +100,16 @@ public class SettingsDialog extends JDialog {
 	}
 
 	private void addActionListeners() {
-		// TODO Auto-generated method stub
+		confirmBtn.addActionListener(e -> {
+			Configuration.UPPER_CASE = checkBoxCondition(toggleUpperCase);
+			Configuration.LOWER_CASE = checkBoxCondition(toggleLowerCase);
+			Configuration.NUMBERS = checkBoxCondition(toggleNumbers);
+			this.dispose();
+		});
+	}
 
+	private boolean checkBoxCondition(JComboBox<String> box) {
+		String s = (String) box.getSelectedItem();
+		return s.equals("On") ? true : false;
 	}
 }

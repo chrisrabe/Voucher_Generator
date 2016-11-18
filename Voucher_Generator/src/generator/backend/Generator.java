@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import generator.config.Configuration;
+
 /**
  * This class stores all information about the generator. It contains all the
  * generation logic and file creation logic. This is the Model in the MVC Design
@@ -376,14 +378,26 @@ public class Generator {
 			int field = (int) (Math.random() * 3);
 			switch (field) {
 			case 0: // select a random character from the uppercase field
-				sb.append(UPPERCASE[(int) (Math.random() * UPPERCASE.length)]);
-				break;
+				if (!Configuration.UPPER_CASE) {
+					continue;
+				} else {
+					sb.append(UPPERCASE[(int) (Math.random() * UPPERCASE.length)]);
+					break;
+				}
 			case 1: // select a random character from the lowercase field
-				sb.append(LOWERCASE[(int) (Math.random() * LOWERCASE.length)]);
-				break;
+				if (!Configuration.LOWER_CASE) {
+					continue;
+				} else {
+					sb.append(LOWERCASE[(int) (Math.random() * LOWERCASE.length)]);
+					break;
+				}
 			case 2: // select a random character from the numbers field
-				sb.append(NUMBERS[(int) (Math.random() * NUMBERS.length)]);
-				break;
+				if (!Configuration.NUMBERS) {
+					continue;
+				} else {
+					sb.append(NUMBERS[(int) (Math.random() * NUMBERS.length)]);
+					break;
+				}
 			}
 		}
 		return sb.toString();
