@@ -49,3 +49,14 @@ A graphical user interface is now implemented!!!
 - new controller is installed for the program
 - removed some functionalities relating to text based controller (no more list and show functions)
 - deleted "Controller" class - now using VControl (View Control) as the controller
+
+### Version 0.41
+
+#### Additional Functionalities
+- can now change the values used for creating the voucher codes
+- the tool now prompts the user to save their code first before loading another file
+
+#### Bug Fixes
+- fixed not updating view when file is loaded
+- fixed generator not clearing previously created code. Can potentially create duplicates
+- fixed tool not automatically putting an extension to the files saved
