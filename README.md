@@ -13,5 +13,5 @@ I've also provided executable jar files if you just want to use the tool.
 
 ### Getting Started
 
-To use the program, simply download the executables available in this page, then run it by using ``` java -jar Voucher_Generator_vN ```.
+To use the program, simply download the [executables](https://github.com/chrisrabe/Voucher_Generator/tree/master/executables/generator) available in this page, then run it by using ``` java -jar Voucher_Generator_vN ```.
 The 'N' is the version number of the jar file.
