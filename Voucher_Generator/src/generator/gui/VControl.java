@@ -11,6 +11,7 @@ package generator.gui;
 import static generator.assets.ComponentFactory.createChooser;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -99,7 +100,7 @@ public class VControl extends JFrame {
 	private int prev;
 
 	public VControl() {
-		super(String.format("Voucher Generator v%.2f", Main.VERSION));
+		super(String.format("Voucher Generator v%s", Main.VERSION));
 		initialise();
 	}
 
@@ -435,10 +436,14 @@ public class VControl extends JFrame {
 				}
 			}
 		});
+		// Add the contents
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		getContentPane().add(views[cur]);
 		pack();
+		// Set the location to the middle of the screen
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation((dim.width/2)-(this.getSize().width/2), (dim.height/2)-(this.getSize().height/2));
 		setResizable(false);
 		setVisible(true);
 	}
