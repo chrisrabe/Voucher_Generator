@@ -2,6 +2,7 @@ package generator.models.code.storage;
 
 import java.util.Collection;
 
+import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
 import generator.models.code.Code;
 
@@ -39,8 +40,9 @@ public interface ICodeStorage {
 	 * 
 	 * @param id
 	 * @throws InvalidInputException
+	 * @throws EmptyCollectionException
 	 */
-	public void remove(String id) throws InvalidInputException;
+	public void remove(String id) throws InvalidInputException, EmptyCollectionException;
 
 	/**
 	 * Retrieves the code that is related the the string id. If it doesn't
@@ -48,8 +50,9 @@ public interface ICodeStorage {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws EmptyCollectionException
 	 */
-	public Code get(String id);
+	public Code get(String id) throws EmptyCollectionException;
 
 	/**
 	 * Sets the code related to the string id. If the string id doesn't exist,
@@ -57,8 +60,9 @@ public interface ICodeStorage {
 	 * 
 	 * @param id
 	 * @param newCode
+	 * @throws EmptyCollectionException
 	 */
-	public void set(String id, Code newCode) throws InvalidInputException;
+	public void set(String id, Code newCode) throws InvalidInputException, EmptyCollectionException;
 
 	/**
 	 * Returns true if the given id exists in the storage.

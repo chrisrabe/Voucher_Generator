@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
 import generator.models.code.Code;
 
@@ -42,8 +43,10 @@ public class MapCodeStorage implements ICodeStorage {
 	}
 
 	@Override
-	public void remove(String id) throws InvalidInputException {
-		if (_codes.containsKey(id)) {
+	public void remove(String id) throws InvalidInputException, EmptyCollectionException {
+		if (_codes.isEmpty()) {
+			throw new EmptyCollectionException("There are currently no vouchers to remove.");
+		} else if (_codes.containsKey(id)) {
 			_codes.remove(id);
 		} else {
 			throw new InvalidInputException(String.format("%s doesn't exist.", id));
@@ -51,13 +54,18 @@ public class MapCodeStorage implements ICodeStorage {
 	}
 
 	@Override
-	public Code get(String id) {
+	public Code get(String id) throws EmptyCollectionException {
+		if (_codes.isEmpty()) {
+			throw new EmptyCollectionException("There are currently no vouchers.");
+		}
 		return _codes.get(id);
 	}
 
 	@Override
-	public void set(String id, Code newCode) throws InvalidInputException {
-		if (_codes.containsKey(id)) {
+	public void set(String id, Code newCode) throws InvalidInputException, EmptyCollectionException {
+		if (_codes.isEmpty()) {
+			throw new EmptyCollectionException("There are currently no vouchers to edit.");
+		} else if (_codes.containsKey(id)) {
 			_codes.replace(id, newCode);
 		} else {
 			throw new InvalidInputException(String.format("%s doesn't exist.", id));

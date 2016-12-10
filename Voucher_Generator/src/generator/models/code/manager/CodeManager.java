@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 
 import generator.helper.exception.InvalidInputException;
-import generator.helper.exception.TimeoutException;
 import generator.helper.groups.character.CharacterGroup;
 import generator.models.code.Code;
 import generator.models.code.manager.configuration.ManagerConfiguration;
@@ -29,12 +28,6 @@ public abstract class CodeManager implements ICodeManager {
 		_config = config;
 	}
 
-	@Override
-	public abstract void generateCode(int chars, int size) throws InvalidInputException, TimeoutException;
-
-	@Override
-	public abstract void reduce(int newSize);
-
 	// Getters and Setters
 
 	public ManagerConfiguration getConfigurations() {
@@ -43,6 +36,10 @@ public abstract class CodeManager implements ICodeManager {
 
 	public void setConfigurations(ManagerConfiguration config) {
 		_config = config;
+	}
+
+	public ICodeStorage getStorage() {
+		return _storage;
 	}
 
 	// ICodeManager Methods
