@@ -43,7 +43,7 @@ public class MapCodeManager extends CodeManager {
 
 	@Override
 	public void generateCode(int chars, int size) throws InvalidInputException, TimeoutException {
-		List<CharacterGroup> groups = _config.getCharacterGroups();
+		List<CharacterGroup> groups = config.getCharacterGroups();
 		final int MAX_RETRIES = 100; // after 100 tries, it times out.
 		int retries = 0; // keeps track of retrials.
 		int generated = 0; // number of codes generated.
@@ -51,33 +51,33 @@ public class MapCodeManager extends CodeManager {
 		while (generated < size) {
 			retries = 0;
 			String id = generateCodeID(chars, groups);
-			while (_storage.contains(id)) {
+			while (storage.contains(id)) {
 				retries++;
 				id = generateCodeID(chars, groups);
 				if (retries == MAX_RETRIES) {
 					throw new TimeoutException("Generate operation took too long.");
 				}
 			}
-			_storage.add(new Code(id));
+			storage.add(new Code(id));
 			generated++;
 		}
 	}
 
 	@Override
 	public void reduce(int newSize) {
-		if (newSize >= _storage.size()) {
+		if (newSize >= storage.size()) {
 			return;
 		}
 
 		List<Code> tmp = new ArrayList<Code>();
-		for (Code code : _storage.getCodes()) {
+		for (Code code : storage.getCodes()) {
 			tmp.add(code);
 			if (tmp.size() == newSize) {
 				break;
 			}
 		}
 
-		_storage.setCodes(tmp);
+		storage.setCodes(tmp);
 	}
 
 }

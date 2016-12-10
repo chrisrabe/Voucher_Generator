@@ -10,8 +10,8 @@ public class CharacterGroup {
 
 	// Fields
 
-	private char[] _characters;
-	private boolean _active;
+	private char[] characters;
+	private boolean active;
 
 	// Constructors
 
@@ -31,25 +31,25 @@ public class CharacterGroup {
 	 * @param active
 	 */
 	public CharacterGroup(char[] characters, boolean active) {
-		_characters = characters;
-		_active = active;
+		this.characters = characters;
+		this.active = active;
 	}
 
 	// Getters and Setters
 
 	public char[] getCharacters() {
-		return _characters;
+		return characters;
 	}
 
 	public void setCharacters(char[] characters) {
-		_characters = characters;
+		this.characters = characters;
 	}
 
 	public boolean isActive() {
-		return _active;
+		return active;
 	}
 
 	public void setActive(boolean active) {
-		_active = active;
+		this.active = active;
 	}
 }

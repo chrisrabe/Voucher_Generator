@@ -12,7 +12,7 @@ import generator.helper.groups.character.CharacterGroup;
  */
 public class ManagerConfiguration {
 
-	private List<CharacterGroup> _characterGroups = new ArrayList<CharacterGroup>();;
+	private List<CharacterGroup> characterGroups = new ArrayList<CharacterGroup>();;
 
 	// Constructors
 
@@ -33,27 +33,27 @@ public class ManagerConfiguration {
 	 */
 	public ManagerConfiguration(CharacterGroup... characterGroups) {
 		for (CharacterGroup group : characterGroups) {
-			_characterGroups.add(group);
+			this.characterGroups.add(group);
 		}
 	}
 
 	// Getter and Setters
 
 	public List<CharacterGroup> getCharacterGroups() {
-		return _characterGroups;
+		return characterGroups;
 	}
 
 	public void setCharacterGroups(List<CharacterGroup> characterGroups) {
-		_characterGroups = characterGroups;
+		this.characterGroups = characterGroups;
 	}
 
 	// Methods
 
 	public CharacterGroup getCharacterGroup(int index) {
-		return _characterGroups.get(index);
+		return characterGroups.get(index);
 	}
 
 	public void removeCharacterGroup(int index) {
-		_characterGroups.remove(index);
+		characterGroups.remove(index);
 	}
 }

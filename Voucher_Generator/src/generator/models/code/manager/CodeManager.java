@@ -20,26 +20,26 @@ public abstract class CodeManager implements ICodeManager {
 
 	// Fields
 
-	protected ICodeStorage _storage;
-	protected ManagerConfiguration _config;
+	protected ICodeStorage storage;
+	protected ManagerConfiguration config;
 
 	public CodeManager(ICodeStorage storage, ManagerConfiguration config) {
-		_storage = storage;
-		_config = config;
+		this.storage = storage;
+		this.config = config;
 	}
 
 	// Getters and Setters
 
 	public ManagerConfiguration getConfigurations() {
-		return _config;
+		return config;
 	}
 
 	public void setConfigurations(ManagerConfiguration config) {
-		_config = config;
+		this.config = config;
 	}
 
 	public ICodeStorage getStorage() {
-		return _storage;
+		return storage;
 	}
 
 	// ICodeManager Methods
@@ -47,18 +47,18 @@ public abstract class CodeManager implements ICodeManager {
 	@Override
 	public void storeAll(List<Code> codes) {
 		for (Code code : codes) {
-			_storage.add(code);
+			storage.add(code);
 		}
 	}
 
 	@Override
 	public Collection<Code> getCodes() {
-		return _storage.getCodes();
+		return storage.getCodes();
 	}
 
 	@Override
 	public void clear() {
-		_storage.clear();
+		storage.clear();
 	}
 
 	// Helper Methods

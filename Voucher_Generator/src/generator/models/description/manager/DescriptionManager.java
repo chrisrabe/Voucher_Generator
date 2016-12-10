@@ -9,15 +9,15 @@ import generator.models.description.storage.IDescriptionStorage;
  */
 public abstract class DescriptionManager implements IDescriptionManager {
 
-	protected IDescriptionStorage _storage;
+	protected IDescriptionStorage storage;
 
 	public DescriptionManager(IDescriptionStorage storage) {
-		_storage = storage;
+		this.storage = storage;
 	}
 
 	// Getters
 
 	public IDescriptionStorage getStorage() {
-		return _storage;
+		return storage;
 	}
 }

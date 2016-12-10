@@ -14,33 +14,33 @@ import generator.helper.exception.InvalidInputException;
  */
 public class ListDescriptionStorage implements IDescriptionStorage {
 
-	private List<String> _descriptions;
+	private List<String> descriptions;
 
 	public ListDescriptionStorage() {
-		_descriptions = new ArrayList<String>();
+		descriptions = new ArrayList<String>();
 	}
 
 	@Override
 	public Collection<String> getDescriptions() {
-		return _descriptions;
+		return descriptions;
 	}
 
 	@Override
 	public void setDescriptions(Collection<String> descriptions) {
-		_descriptions = new ArrayList<String>(descriptions);
+		this.descriptions = new ArrayList<String>(descriptions);
 	}
 
 	@Override
 	public void add(String description) {
-		_descriptions.add(description);
+		descriptions.add(description);
 	}
 
 	@Override
 	public void remove(String description) throws EmptyCollectionException {
-		if (_descriptions.isEmpty()) {
+		if (descriptions.isEmpty()) {
 			throw new EmptyCollectionException("There are no descriptions to remove.");
 		}
-		_descriptions.remove(description);
+		descriptions.remove(description);
 	}
 
 	/**
@@ -54,28 +54,28 @@ public class ListDescriptionStorage implements IDescriptionStorage {
 	 */
 	@Override
 	public String get(int index) throws InvalidInputException, EmptyCollectionException {
-		if (_descriptions.isEmpty()) {
+		if (descriptions.isEmpty()) {
 			throw new EmptyCollectionException("There are no descriptions stored.");
 		}
-		if (0 <= index && index < _descriptions.size()) {
-			return _descriptions.get(index);
+		if (0 <= index && index < descriptions.size()) {
+			return descriptions.get(index);
 		}
 		throw new InvalidInputException(String.format("Index %d is out of bounds", index));
 	}
 
 	@Override
 	public boolean contains(String description) {
-		return _descriptions.contains(description);
+		return descriptions.contains(description);
 	}
 
 	@Override
 	public void clear() {
-		_descriptions.clear();
+		descriptions.clear();
 	}
 
 	@Override
 	public int size() {
-		return _descriptions.size();
+		return descriptions.size();
 	}
 
 }

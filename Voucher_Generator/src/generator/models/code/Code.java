@@ -9,51 +9,56 @@ package generator.models.code;
 public class Code {
 
 	// Fields
-	private String _id;
-	private String _description;
-	private boolean _redeemed;
+	private String id;
+	private String description;
+	private boolean redeemed;
 
 	// Constructors
 
 	public Code(String id) {
-		_id = id;
+		this.id = id;
 	}
 
 	public Code(String id, String description) {
 		this(id);
-		_description = description;
+		this.description = description;
+	}
+
+	public Code(String id, String description, boolean redeemed) {
+		this(id, description);
+		this.redeemed = redeemed;
 	}
 
 	// Getters and Setters
 
 	public String getID() {
-		return _id;
+		return id;
 	}
 
 	public void setID(String id) {
-		_id = id;
+		this.id = id;
 	}
 
 	public String getDescription() {
-		return _description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
-		_description = description;
+		this.description = description;
 	}
 
 	public boolean isRedeemed() {
-		return _redeemed;
+		return this.redeemed;
 	}
 
 	public void setRedeemed(boolean redeemed) {
-		_redeemed = redeemed;
+		this.redeemed = redeemed;
 	}
 
 	// Object Methods
 
 	@Override
 	public String toString() {
-		return "id=" + _id + ", description=" + _description + ", redeemed=" + _redeemed;
+		return "id=" + id + ", description=" + description + ", redeemed=" + redeemed;
 	}
 }

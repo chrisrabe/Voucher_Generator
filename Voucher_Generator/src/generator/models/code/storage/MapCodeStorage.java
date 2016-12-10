@@ -18,36 +18,36 @@ import generator.models.code.Code;
  */
 public class MapCodeStorage implements ICodeStorage {
 
-	private Map<String, Code> _codes;
+	private Map<String, Code> codes;
 
 	public MapCodeStorage() {
-		_codes = new HashMap<String, Code>();
+		codes = new HashMap<String, Code>();
 	}
 
 	@Override
 	public List<Code> getCodes() {
-		return new ArrayList<Code>(_codes.values());
+		return new ArrayList<Code>(codes.values());
 	}
 
 	@Override
 	public void setCodes(Collection<Code> codes) {
-		_codes.clear();
+		this.codes.clear();
 		for (Code code : codes) {
-			_codes.put(code.getID(), code);
+			this.codes.put(code.getID(), code);
 		}
 	}
 
 	@Override
 	public void add(Code code) {
-		_codes.put(code.getID(), code);
+		codes.put(code.getID(), code);
 	}
 
 	@Override
 	public void remove(String id) throws InvalidInputException, EmptyCollectionException {
-		if (_codes.isEmpty()) {
+		if (codes.isEmpty()) {
 			throw new EmptyCollectionException("There are currently no vouchers to remove.");
-		} else if (_codes.containsKey(id)) {
-			_codes.remove(id);
+		} else if (codes.containsKey(id)) {
+			codes.remove(id);
 		} else {
 			throw new InvalidInputException(String.format("%s doesn't exist.", id));
 		}
@@ -55,18 +55,18 @@ public class MapCodeStorage implements ICodeStorage {
 
 	@Override
 	public Code get(String id) throws EmptyCollectionException {
-		if (_codes.isEmpty()) {
+		if (codes.isEmpty()) {
 			throw new EmptyCollectionException("There are currently no vouchers.");
 		}
-		return _codes.get(id);
+		return codes.get(id);
 	}
 
 	@Override
 	public void set(String id, Code newCode) throws InvalidInputException, EmptyCollectionException {
-		if (_codes.isEmpty()) {
+		if (codes.isEmpty()) {
 			throw new EmptyCollectionException("There are currently no vouchers to edit.");
-		} else if (_codes.containsKey(id)) {
-			_codes.replace(id, newCode);
+		} else if (codes.containsKey(id)) {
+			codes.replace(id, newCode);
 		} else {
 			throw new InvalidInputException(String.format("%s doesn't exist.", id));
 		}
@@ -74,17 +74,17 @@ public class MapCodeStorage implements ICodeStorage {
 
 	@Override
 	public boolean contains(String id) {
-		return _codes.containsKey(id);
+		return codes.containsKey(id);
 	}
 
 	@Override
 	public int size() {
-		return _codes.size();
+		return codes.size();
 	}
 
 	@Override
 	public void clear() {
-		_codes.clear();
+		codes.clear();
 	}
 
 }

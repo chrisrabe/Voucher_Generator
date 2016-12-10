@@ -21,9 +21,9 @@ public class ListDescriptionManager extends DescriptionManager {
 
 	@Override
 	public void addDescription(String description) throws InvalidInputException {
-		if (_storage.contains(description))
+		if (storage.contains(description))
 			throw new InvalidInputException("The description already exists.");
-		_storage.add(description);
+		storage.add(description);
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class ListDescriptionManager extends DescriptionManager {
 		int index = 0; // description index
 
 		for (Code c : codes) {
-			if (index >= _storage.size()) {
+			if (index >= storage.size()) {
 				index = 0; // go back to start
 			}
 			try {
-				c.setDescription(_storage.get(index));
+				c.setDescription(storage.get(index));
 			} catch (InvalidInputException e) {
 				break; // exit out the method if this happens
 			}
