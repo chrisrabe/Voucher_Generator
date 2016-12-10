@@ -73,9 +73,9 @@ public abstract class CodeManager implements ICodeManager {
 	protected String generateCodeID(int chars, List<CharacterGroup> groups) throws InvalidInputException {
 		// First grab all the active groups
 		List<CharacterGroup> activeGroups = getActiveGroups(groups);
-		if (activeGroups.isEmpty()) {
+		if (activeGroups.isEmpty())
 			throw new InvalidInputException("There are no active character groups.");
-		}
+
 		// Start generating the code string.
 		StringBuilder sb = new StringBuilder();
 		while (sb.length() != chars) {
@@ -96,9 +96,8 @@ public abstract class CodeManager implements ICodeManager {
 	private List<CharacterGroup> getActiveGroups(List<CharacterGroup> groups) {
 		List<CharacterGroup> tmp = new ArrayList<CharacterGroup>();
 		for (CharacterGroup group : groups) {
-			if (group.isActive()) {
+			if (group.isActive())
 				tmp.add(group);
-			}
 		}
 		return tmp;
 	}

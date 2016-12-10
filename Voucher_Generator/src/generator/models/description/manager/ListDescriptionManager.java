@@ -20,13 +20,6 @@ public class ListDescriptionManager extends DescriptionManager {
 	}
 
 	@Override
-	public void addDescription(String description) throws InvalidInputException {
-		if (storage.contains(description))
-			throw new InvalidInputException("The description already exists.");
-		storage.add(description);
-	}
-
-	@Override
 	public void distribute(List<Code> codes) throws EmptyCollectionException {
 		// First check if the given list is not empty
 		if (codes.isEmpty())
