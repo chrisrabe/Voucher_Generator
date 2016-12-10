@@ -26,27 +26,34 @@ public class Code {
 
 	// Getters and Setters
 
-	public String get_id() {
+	public String getID() {
 		return _id;
 	}
 
-	public void set_id(String id) {
+	public void setID(String id) {
 		_id = id;
 	}
 
-	public String get_description() {
+	public String getDescription() {
 		return _description;
 	}
 
-	public void set_description(String description) {
+	public void setDescription(String description) {
 		_description = description;
 	}
 
-	public boolean is_redeemed() {
+	public boolean isRedeemed() {
 		return _redeemed;
 	}
 
-	public void set_redeemed(boolean redeemed) {
+	public void setRedeemed(boolean redeemed) {
 		_redeemed = redeemed;
+	}
+
+	// Object Methods
+
+	@Override
+	public String toString() {
+		return "id=" + _id + ", description=" + _description + ", redeemed=" + _redeemed;
 	}
 }

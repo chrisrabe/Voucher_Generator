@@ -1,5 +1,7 @@
 package generator.models.code.storage;
 
+import java.util.Collection;
+
 import generator.helper.exception.InvalidInputException;
 import generator.models.code.Code;
 
@@ -9,6 +11,20 @@ import generator.models.code.Code;
  * @author Chris
  */
 public interface ICodeStorage {
+
+	/**
+	 * Gets all the codes in the storage.
+	 * 
+	 * @return
+	 */
+	public Collection<Code> getCodes();
+
+	/**
+	 * Replaces the collection of codes.
+	 * 
+	 * @param codes
+	 */
+	public void setCodes(Collection<Code> codes);
 
 	/**
 	 * Adds the new code into the storage.
@@ -45,7 +61,22 @@ public interface ICodeStorage {
 	public void set(String id, Code newCode) throws InvalidInputException;
 
 	/**
-	 * Clears all the codes inside the storage.
+	 * Returns true if the given id exists in the storage.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean contains(String id);
+
+	/**
+	 * Returns the total number of codes in the storage.
+	 * 
+	 * @return
+	 */
+	public int size();
+
+	/**
+	 * Removes all the codes stored.
 	 */
 	public void clear();
 }
