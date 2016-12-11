@@ -1,5 +1,6 @@
 package generator.helper.eventhandler.save;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,8 +43,12 @@ public abstract class SaveEventHandler implements ISaveEventHandler {
 	// Helper Methods
 
 	private String attachFileExtension(String filePath) {
-		String[] tmp = filePath.split("[.]");
-		return String.format("%s.%s", tmp[0], extension);
+		File file = new File(filePath);
+		String absolutePath = file.getAbsolutePath();
+		String path = absolutePath.substring(0, absolutePath.length() - file.getName().length());
+		String[] names = file.getName().split("[.]");
+		String newName = String.format("%s.%s", names[0], extension);
+		return String.format("%s%s", path, newName);
 	}
 
 }

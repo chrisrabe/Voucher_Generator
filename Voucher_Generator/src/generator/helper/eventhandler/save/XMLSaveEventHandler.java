@@ -50,6 +50,7 @@ public class XMLSaveEventHandler extends SaveEventHandler {
 		for (Code code : codes) {
 			root.appendChild(toCodeElement(doc, code));
 		}
+		doc.appendChild(root);
 		return new DOMSource(doc);
 	}
 
