@@ -8,4 +8,7 @@ package generator.tests.xml.save;
  */
 public class TestXMLSaveEventHandler {
 
+	public static void test_01_WriteToFile() {
+
+	}
 }
