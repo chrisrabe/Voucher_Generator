@@ -1,5 +1,6 @@
 package generator.helper.eventhandler.load;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -42,13 +43,19 @@ public abstract class LoadEventHandler implements ILoadEventHandler {
 	public List<Code> load(String filepath) throws InvalidInputException {
 		if (!filepath.endsWith(extension))
 			throw new InvalidInputException(String.format("Must be a .%s file", extension));
-
 		try {
+			if (!fileExists(filepath))
+				throw new FileNotFoundException();
 			return parseFile(filepath);
 		} catch (FileNotFoundException e) {
 			throw new InvalidInputException("File not found.");
 		} catch (IOException e) {
 			throw new InvalidInputException("Failed to load contents of the file.");
 		}
+	}
+
+	private boolean fileExists(String filepath) {
+		File file = new File(filepath);
+		return file.exists();
 	}
 }
