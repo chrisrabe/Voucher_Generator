@@ -3,8 +3,11 @@ package generator.view.window;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.Main;
@@ -50,8 +53,31 @@ public abstract class Window extends JFrame {
 		this.getContentPane().add(content);
 		this.pack();
 		this.setLocationRelativeToScreen();
+		this.setPromptOnClose(true);
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+
+	/**
+	 * If this is true, then upon closing, the JFrame will ask the user if they
+	 * wanted to quit or not.
+	 * 
+	 * @param prompt
+	 */
+	private void setPromptOnClose(boolean prompt) {
+		if (prompt) {
+			this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			this.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent windowEvent) {
+					int result = JOptionPane.showConfirmDialog(Window.this, "Are you sure you want to quit?", "",
+							JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION) {
+						System.exit(0);
+					}
+				}
+			});
+		}
 	}
 
 	/**
