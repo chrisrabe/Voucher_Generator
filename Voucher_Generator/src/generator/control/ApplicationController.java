@@ -1,5 +1,9 @@
 package generator.control;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import generator.control.page.PageController;
 import generator.models.code.manager.CodeManager;
 import generator.models.code.manager.MapCodeManager;
 import generator.models.description.manager.DescriptionManager;
@@ -16,15 +20,17 @@ public class ApplicationController {
 
 	// Fields
 
-	private ApplicationWindow application;
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
+	private ApplicationWindow application;
+	private Map<String, PageController> pageControllers;
 
 	// Constructor
 
 	public ApplicationController() {
 		codeManager = new MapCodeManager();
 		descriptionManager = new ListDescriptionManager();
+		pageControllers = createControllers();
 	}
 
 	// Getters
@@ -44,5 +50,29 @@ public class ApplicationController {
 	 */
 	public void startApplication() {
 		application = new ApplicationWindow();
+		// set to home view
+	}
+
+	/**
+	 * Changes the application content to the indicated page.
+	 * 
+	 * @param page
+	 */
+	public void navigateTo(String page) {
+		PageController controller = pageControllers.get(page);
+		application.setContent(controller.getView());
+	}
+
+	// Helper Methods
+
+	/**
+	 * Initialises the controllers.
+	 * 
+	 * @return
+	 */
+	public Map<String, PageController> createControllers() {
+		Map<String, PageController> tmp = new HashMap<String, PageController>();
+		// Add controllers here
+		return tmp;
 	}
 }

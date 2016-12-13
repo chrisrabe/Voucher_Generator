@@ -1,26 +1,42 @@
 package generator.control.page;
 
+import generator.control.ApplicationController;
+import generator.view.page.PageView;
+
 /**
  * Provides a skeleton implementation of a page controller.
  * 
  * @author Chris
  */
 public abstract class PageController implements IPageController {
-	
-	private String navigationIcon;
+
+	// Need this to be able to navigate around the application.
+	protected ApplicationController mainController;
+
 	private String name;
-	
+	private String navigationIcon;
+	private PageView view;
+
 	/**
 	 * Stores the navigationIcon and name fields.
 	 * 
 	 * @param navigationIcon
 	 * @param name
 	 */
-	public PageController(String navigationIcon, String name){
+	public PageController(String navigationIcon, String name) {
 		this.navigationIcon = navigationIcon;
 		this.name = name;
 	}
-	
+
+	// Abstract Methods
+
+	/**
+	 * Creates the binded view to this controller.
+	 * 
+	 * @return
+	 */
+	public abstract PageView createView();
+
 	// IPageController Methods
 
 	@Override
@@ -32,7 +48,14 @@ public abstract class PageController implements IPageController {
 	public String getPageName() {
 		return name;
 	}
-	
+
+	@Override
+	public PageView getView() {
+		if (view == null)
+			createView();
+		return view;
+	}
+
 	// Object Methods
 
 	@Override
@@ -57,5 +80,5 @@ public abstract class PageController implements IPageController {
 			return false;
 		return true;
 	}
-	
+
 }

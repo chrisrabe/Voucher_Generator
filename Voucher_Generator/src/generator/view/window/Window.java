@@ -20,9 +20,9 @@ import generator.Main;
 @SuppressWarnings("serial")
 public abstract class Window extends JFrame {
 
-	// Fields
-	public static final Color BG_COLOUR = new Color(40, 40, 40);
-	public static final Dimension APP_RESOLUTION = new Dimension(1024, 768);
+	// Fields -- Could be replaced with some type of configuration class
+	protected final Color BG_COLOUR = new Color(40, 40, 40);
+	protected final Dimension APP_RESOLUTION = new Dimension(1024, 768);
 
 	protected JPanel content;
 
