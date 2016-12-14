@@ -10,6 +10,11 @@ import vgcomponents.buttons.ImageButton;
  */
 public abstract class VGButtonFactory {
 
+	// Fields
+	private static final int FONT_SIZE = 6;
+
+	// Navigation Button creator methods
+
 	/**
 	 * Creates an image button with the given filename as the icon.
 	 * 
@@ -32,10 +37,25 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createNavigationButton(String filename, String toolTip) {
 		ImageButton btn = createNavigationButton(filename);
-		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
 		btn.setToolTipText(tip);
 		return btn;
 	}
+
+	public static ImageButton createNavigationButton(String filename, int size) {
+		String icon = Resources.getNavigationImagePath(filename);
+		String ro = Resources.getNavigationRollOverImage(filename);
+		return new ImageButton(icon, ro, size);
+	}
+
+	public static ImageButton createNavigationButton(String filename, String toolTip, int size) {
+		ImageButton btn = createNavigationButton(filename, size);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
+	// Voucher Button creator methods
 
 	/**
 	 * Creates an image button with the given filename as the icon.
@@ -59,10 +79,25 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createVoucherButton(String filename, String toolTip) {
 		ImageButton btn = createVoucherButton(filename);
-		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
 		btn.setToolTipText(tip);
 		return btn;
 	}
+
+	public static ImageButton createVoucherButton(String filename, int size) {
+		String icon = Resources.getVoucherImagePath(filename);
+		String ro = Resources.getVoucherRollOverImage(filename);
+		return new ImageButton(icon, ro, size);
+	}
+
+	public static ImageButton createVoucherButton(String filename, String toolTip, int size) {
+		ImageButton btn = createVoucherButton(filename, size);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
+	// Description Button creation methods
 
 	/**
 	 * Creates an image button with the given filename as the icon.
@@ -86,10 +121,25 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createDescriptionButton(String filename, String toolTip) {
 		ImageButton btn = createDescriptionButton(filename);
-		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
 		btn.setToolTipText(tip);
 		return btn;
 	}
+
+	public static ImageButton createDescriptionButton(String filename, int size) {
+		String icon = Resources.getDescriptionImagePath(filename);
+		String ro = Resources.getDescriptionRollOverImage(filename);
+		return new ImageButton(icon, ro, size);
+	}
+
+	public static ImageButton createDescriptionButton(String filename, String toolTip, int size) {
+		ImageButton btn = createDescriptionButton(filename, size);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
+	// IO Button creation methods
 
 	/**
 	 * Creates an image button with the given filename as the icon.
@@ -113,7 +163,20 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createIOButton(String filename, String toolTip) {
 		ImageButton btn = createIOButton(filename);
-		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
+	public static ImageButton createIOButton(String filename, int size) {
+		String icon = Resources.getIOImagePath(filename);
+		String ro = Resources.getIORollOverImage(filename);
+		return new ImageButton(icon, ro, size);
+	}
+
+	public static ImageButton createIOButton(String filename, String toolTip, int size) {
+		ImageButton btn = createIOButton(filename, size);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
 		btn.setToolTipText(tip);
 		return btn;
 	}
