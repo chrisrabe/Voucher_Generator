@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.Main;
+import generator.resources.Resources;
 
 /**
  * Contains all the components initialisation methods.
@@ -50,12 +51,17 @@ public abstract class Window extends JFrame {
 
 	protected void initialiseComponents() {
 		this.setTitle(String.format("Voucher Generator v%s", Main.VERSION));
+		this.setAppLogo("app_logo");
 		this.getContentPane().add(content);
 		this.pack();
 		this.setLocationRelativeToScreen();
 		this.setPromptOnClose(true);
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+
+	private void setAppLogo(String filename) {
+		this.setIconImage(Resources.getCachedImage(Resources.getWindowImagePath(filename)));
 	}
 
 	/**

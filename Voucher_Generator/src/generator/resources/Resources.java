@@ -20,8 +20,13 @@ public abstract class Resources {
 	private static final String VOUCHER_PATH = "/generator/resources/image/voucher/";
 	private static final String DESCRIPTION_PATH = "/generator/resources/image/description/";
 	private static final String IO_PATH = "/generator/resources/image/io/";
+	private static final String WINDOW_PATH = "/generator/resources/image/window/";
 
 	// Image Path accessors
+
+	public static String getWindowImagePath(String filename) {
+		return String.format("%s%s.png", WINDOW_PATH, filename);
+	}
 
 	public static String getNavigationImagePath(String filename) {
 		return String.format("%s%s.png", NAVIGATION_PATH, filename);

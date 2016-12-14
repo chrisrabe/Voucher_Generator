@@ -1,4 +1,4 @@
-package uicomponents.buttons;
+package vgcomponents.buttons;
 
 import java.awt.Cursor;
 import java.awt.Dimension;

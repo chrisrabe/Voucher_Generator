@@ -1,4 +1,4 @@
-package uicomponents.panels;
+package vgcomponents.panels;
 
 import java.awt.FlowLayout;
 

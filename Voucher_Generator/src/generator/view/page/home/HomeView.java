@@ -7,11 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import generator.view.page.PageView;
-import uicomponents.factories.VGButtonFactory;
-import uicomponents.labels.VGLabel;
-import uicomponents.panels.CenteredPanel;
-import uicomponents.panels.GridButtonPanel;
-import uicomponents.panels.WrapperPanel;
+import vgcomponents.factories.VGButtonFactory;
+import vgcomponents.labels.VGLabel;
+import vgcomponents.panels.CenteredPanel;
+import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.WrapperPanel;
 
 /**
  * This class initialises the components of the home page.

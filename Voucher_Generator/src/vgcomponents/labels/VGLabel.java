@@ -1,4 +1,4 @@
-package uicomponents.labels;
+package vgcomponents.labels;
 
 import java.awt.Color;
 import java.awt.Font;

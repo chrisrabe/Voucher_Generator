@@ -1,4 +1,4 @@
-package uicomponents.panels;
+package vgcomponents.panels;
 
 import javax.swing.JPanel;
 

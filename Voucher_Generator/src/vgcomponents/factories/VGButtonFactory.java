@@ -1,7 +1,7 @@
-package uicomponents.factories;
+package vgcomponents.factories;
 
 import generator.resources.Resources;
-import uicomponents.buttons.ImageButton;
+import vgcomponents.buttons.ImageButton;
 
 /**
  * This class is responsible for creating voucher generator button components.
