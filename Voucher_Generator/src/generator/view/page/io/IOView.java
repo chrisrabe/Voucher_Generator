@@ -15,18 +15,20 @@ import vgcomponents.factories.VGButtonFactory;
 @SuppressWarnings("serial")
 public class IOView extends PageView {
 	// Navigation Buttons
-	
-	protected JButton homeBtn = VGButtonFactory.createNavigationButton("home");
-	protected JButton configBtn = VGButtonFactory.createNavigationButton("config");
-	protected JButton descBtn = VGButtonFactory.createNavigationButton("descriptions");
-	protected JButton vouchBtn = VGButtonFactory.createNavigationButton("vouchers");
-	
+
+	protected JButton homeBtn = VGButtonFactory.createNavigationButton("home", 50);
+	protected JButton configBtn = VGButtonFactory.createNavigationButton("config", 50);
+	protected JButton descBtn = VGButtonFactory.createNavigationButton("descriptions", 50);
+	protected JButton vouchBtn = VGButtonFactory.createNavigationButton("vouchers", 50);
+
 	// IO Buttons
+
+	protected JButton loadBtn = VGButtonFactory.createIOButton("load", "Load");
+	protected JButton saveBtn = VGButtonFactory.createIOButton("save", "Save");
 
 	@Override
 	protected void initialiseComponents() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
