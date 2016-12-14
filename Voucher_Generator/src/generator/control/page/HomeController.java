@@ -1,7 +1,6 @@
 package generator.control.page;
 
 import generator.control.ApplicationController;
-import generator.resources.Resources;
 import generator.view.page.PageView;
 import generator.view.page.home.Home;
 
@@ -11,13 +10,17 @@ import generator.view.page.home.Home;
  * @author Chris
  */
 public class HomeController extends PageController {
+	private Home homeView; // This controller is binded to home view.
 
 	public HomeController(ApplicationController main) {
-		super(main, Resources.getNavigationImagePath("home.png"), "Home");
+		super(main, "home", "Home");
 	}
 
 	@Override
 	public PageView createView() {
-		return new Home();
+		if (homeView == null)
+			homeView = new Home();
+
+		return homeView;
 	}
 }
