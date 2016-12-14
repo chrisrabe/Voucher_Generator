@@ -11,7 +11,7 @@ import generator.view.page.PageView;
 public abstract class PageController implements IPageController {
 
 	// Need this to be able to navigate around the application.
-	protected ApplicationController mainController;
+	protected ApplicationController main;
 
 	private String name;
 	private String navigationIcon;
@@ -23,9 +23,10 @@ public abstract class PageController implements IPageController {
 	 * @param navigationIcon
 	 * @param name
 	 */
-	public PageController(String navigationIcon, String name) {
+	public PageController(ApplicationController main, String navigationIcon, String name) {
 		this.navigationIcon = navigationIcon;
 		this.name = name;
+		this.main = main;
 	}
 
 	// Abstract Methods
@@ -52,7 +53,7 @@ public abstract class PageController implements IPageController {
 	@Override
 	public PageView getView() {
 		if (view == null)
-			createView();
+			view = createView();
 		return view;
 	}
 

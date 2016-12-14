@@ -1,5 +1,6 @@
 package generator.view.page;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -16,6 +17,7 @@ public abstract class PageView extends JPanel {
 	// Fields -- Could be replaced with a configuration class
 
 	protected final Dimension PAGE_RESOLUTION = new Dimension(1024, 768);
+	protected final Color BG_COLOUR = new Color(40, 40, 40);
 
 	// Abstract Methods
 

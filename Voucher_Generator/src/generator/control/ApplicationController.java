@@ -3,6 +3,7 @@ package generator.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import generator.control.page.HomeController;
 import generator.control.page.PageController;
 import generator.models.code.manager.CodeManager;
 import generator.models.code.manager.MapCodeManager;
@@ -50,7 +51,7 @@ public class ApplicationController {
 	 */
 	public void startApplication() {
 		application = new ApplicationWindow();
-		// set to home view
+		navigateTo("home");
 	}
 
 	/**
@@ -70,9 +71,10 @@ public class ApplicationController {
 	 * 
 	 * @return
 	 */
-	public Map<String, PageController> createControllers() {
+	private Map<String, PageController> createControllers() {
 		Map<String, PageController> tmp = new HashMap<String, PageController>();
 		// Add controllers here
+		tmp.put("home", new HomeController(this));
 		return tmp;
 	}
 }
