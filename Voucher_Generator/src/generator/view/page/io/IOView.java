@@ -1,11 +1,17 @@
 package generator.view.page.io;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import generator.view.page.PageView;
 import vgcomponents.factories.VGButtonFactory;
+import vgcomponents.panels.CenteredPanel;
+import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.HorizontalPanel;
 
 /**
  * This class is responsible for providing GUI initialisation methods
@@ -28,7 +34,14 @@ public class IOView extends PageView {
 
 	@Override
 	protected void initialiseComponents() {
-		
+		// Initialise components
+		JPanel navigation = new HorizontalPanel(FlowLayout.LEFT, 50,
+				new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
+		JPanel io = new CenteredPanel(new GridButtonPanel(500, 200, loadBtn, saveBtn));
+		// Set up panel
+		this.setLayout(new BorderLayout());
+		this.add(navigation, BorderLayout.NORTH);
+		this.add(io, BorderLayout.CENTER);
 	}
 
 	@Override

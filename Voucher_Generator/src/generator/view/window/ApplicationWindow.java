@@ -25,6 +25,7 @@ public class ApplicationWindow extends Window {
 		this.content.setPreferredSize(APP_RESOLUTION);
 		this.getContentPane().removeAll();
 		this.getContentPane().add(content);
+		this.content.repaint();
 		super.revalidate();
 	}
 

@@ -17,10 +17,25 @@ public class HomeController extends PageController {
 	}
 
 	@Override
-	public PageView createView() {
+	protected PageView createView() {
 		if (homeView == null)
-			homeView = new Home();
+			homeView = createHomeView();
 
 		return homeView;
+	}
+
+	// Helper Methods
+
+	/**
+	 * Creates the home view and adds action listeners to the view.
+	 * 
+	 * @return
+	 */
+	private Home createHomeView() {
+		Home tmp = new Home();
+		tmp.addIOBtnListener(e -> {
+			main.navigateTo("io");
+		});
+		return tmp;
 	}
 }

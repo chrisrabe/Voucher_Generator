@@ -32,7 +32,7 @@ public abstract class PageController implements IPageController {
 	 * 
 	 * @return
 	 */
-	public abstract PageView createView();
+	protected abstract PageView createView();
 
 	// IPageController Methods
 

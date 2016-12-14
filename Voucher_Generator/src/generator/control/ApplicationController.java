@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import generator.control.page.HomeController;
+import generator.control.page.IOController;
 import generator.control.page.PageController;
 import generator.models.code.manager.CodeManager;
 import generator.models.code.manager.MapCodeManager;
@@ -75,6 +76,7 @@ public class ApplicationController {
 		Map<String, PageController> tmp = new HashMap<String, PageController>();
 		// Add controllers here
 		tmp.put("home", new HomeController(this));
+		tmp.put("io", new IOController(this));
 		return tmp;
 	}
 }
