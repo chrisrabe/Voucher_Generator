@@ -13,8 +13,6 @@ public abstract class PageController implements IPageController {
 	// Need this to be able to navigate around the application.
 	protected ApplicationController main;
 
-	private String name;
-	private String navigationIcon;
 	private PageView view;
 
 	/**
@@ -23,9 +21,7 @@ public abstract class PageController implements IPageController {
 	 * @param navigationIcon
 	 * @param name
 	 */
-	public PageController(ApplicationController main, String navigationIcon, String name) {
-		this.navigationIcon = navigationIcon;
-		this.name = name;
+	public PageController(ApplicationController main) {
 		this.main = main;
 	}
 
@@ -41,45 +37,10 @@ public abstract class PageController implements IPageController {
 	// IPageController Methods
 
 	@Override
-	public String getNavigationIconPath() {
-		return navigationIcon;
-	}
-
-	@Override
-	public String getPageName() {
-		return name;
-	}
-
-	@Override
 	public PageView getView() {
 		if (view == null)
 			view = createView();
 		return view;
-	}
-
-	// Object Methods
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PageController other = (PageController) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
 	}
 
 }

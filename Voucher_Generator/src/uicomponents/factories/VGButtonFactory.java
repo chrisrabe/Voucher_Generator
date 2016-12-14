@@ -32,7 +32,8 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createNavigationButton(String filename, String toolTip) {
 		ImageButton btn = createNavigationButton(filename);
-		btn.setToolTipText(toolTip);
+		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		btn.setToolTipText(tip);
 		return btn;
 	}
 
@@ -58,7 +59,8 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createVoucherButton(String filename, String toolTip) {
 		ImageButton btn = createVoucherButton(filename);
-		btn.setToolTipText(toolTip);
+		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		btn.setToolTipText(tip);
 		return btn;
 	}
 
@@ -84,7 +86,8 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createDescriptionButton(String filename, String toolTip) {
 		ImageButton btn = createDescriptionButton(filename);
-		btn.setToolTipText(toolTip);
+		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		btn.setToolTipText(tip);
 		return btn;
 	}
 
@@ -110,7 +113,8 @@ public abstract class VGButtonFactory {
 	 */
 	public static ImageButton createIOButton(String filename, String toolTip) {
 		ImageButton btn = createIOButton(filename);
-		btn.setToolTipText(toolTip);
+		String tip = VGToolTipFactory.createToolTip(toolTip, 6);
+		btn.setToolTipText(tip);
 		return btn;
 	}
 }

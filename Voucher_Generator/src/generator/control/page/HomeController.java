@@ -5,7 +5,7 @@ import generator.view.page.PageView;
 import generator.view.page.home.Home;
 
 /**
- * This class is responsible for navigating to other views.
+ * This class is responsible for adding action listeners to the home view.
  * 
  * @author Chris
  */
@@ -13,7 +13,7 @@ public class HomeController extends PageController {
 	private Home homeView; // This controller is binded to home view.
 
 	public HomeController(ApplicationController main) {
-		super(main, "home", "Home");
+		super(main);
 	}
 
 	@Override
