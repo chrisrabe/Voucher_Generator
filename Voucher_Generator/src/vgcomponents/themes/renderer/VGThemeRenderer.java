@@ -15,11 +15,9 @@ import vgcomponents.themes.IVGTheme;
  * cell based on the theme object passed.
  * 
  * @author Chris
- *
- * @param <E>
  */
 @SuppressWarnings("serial")
-public class VGThemeRenderer<E> extends JLabel implements ListCellRenderer<E> {
+public class VGThemeRenderer extends JLabel implements ListCellRenderer<String> {
 	// Fields
 	private IVGTheme theme;
 	private int fontSize;
@@ -35,8 +33,8 @@ public class VGThemeRenderer<E> extends JLabel implements ListCellRenderer<E> {
 	}
 
 	@Override
-	public Component getListCellRendererComponent(JList<? extends E> list, E value, int index, boolean isSelected,
-			boolean cellHasFocus) {
+	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index,
+			boolean isSelected, boolean cellHasFocus) {
 		this.setFont(new Font("Cooper Black", Font.PLAIN, fontSize));
 		if (isSelected) {
 			this.setForeground(theme.getSelectedFGColour());
