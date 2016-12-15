@@ -19,7 +19,7 @@ import vgcomponents.panels.AlignedPanel;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class IOView extends PageView {
+public abstract class IOView extends PageView {
 	// Navigation Buttons
 
 	protected JButton homeBtn = VGButtonFactory.createNavigationButton("home", 50);

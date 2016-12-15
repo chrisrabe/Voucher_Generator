@@ -21,9 +21,9 @@ public class ManagerConfiguration {
 	 * character groups.
 	 */
 	public ManagerConfiguration() {
-		this(new CharacterGroup("ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()),
-				new CharacterGroup("abcdefghijklmnopqrstuvwxyz".toCharArray()),
-				new CharacterGroup("0123456789".toCharArray()));
+		this(new CharacterGroup("Upper Case Letters", "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()),
+				new CharacterGroup("Lower Case Letters", "abcdefghijklmnopqrstuvwxyz".toCharArray()),
+				new CharacterGroup("Numbers", "0123456789".toCharArray()));
 	}
 
 	/**

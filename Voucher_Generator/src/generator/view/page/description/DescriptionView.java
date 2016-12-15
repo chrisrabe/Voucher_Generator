@@ -25,7 +25,7 @@ import vgcomponents.panels.WrapperPanel;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class DescriptionView extends PageView {
+public abstract class DescriptionView extends PageView {
 	// Navigation Buttons
 
 	protected JButton homeBtn = VGButtonFactory.createNavigationButton("home", 50);

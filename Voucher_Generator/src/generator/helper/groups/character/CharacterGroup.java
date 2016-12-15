@@ -10,6 +10,7 @@ public class CharacterGroup {
 
 	// Fields
 
+	private String name;
 	private char[] characters;
 	private boolean active;
 
@@ -20,8 +21,8 @@ public class CharacterGroup {
 	 * 
 	 * @param characters
 	 */
-	public CharacterGroup(char[] characters) {
-		this(characters, true);
+	public CharacterGroup(String name, char[] characters) {
+		this(name, characters, true);
 	}
 
 	/**
@@ -30,12 +31,21 @@ public class CharacterGroup {
 	 * @param characters
 	 * @param active
 	 */
-	public CharacterGroup(char[] characters, boolean active) {
+	public CharacterGroup(String name, char[] characters, boolean active) {
+		this.name = name;
 		this.characters = characters;
 		this.active = active;
 	}
 
 	// Getters and Setters
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public char[] getCharacters() {
 		return characters;

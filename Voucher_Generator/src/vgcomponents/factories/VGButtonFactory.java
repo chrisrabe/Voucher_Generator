@@ -13,6 +13,33 @@ public abstract class VGButtonFactory {
 	// Fields
 	private static final int FONT_SIZE = 6;
 
+	// Configuration Button creator methods
+
+	/**
+	 * Creates an image button with the given file name as the icon.
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public static ImageButton createConfigButton(String filename) {
+		String icon = Resources.getConfigImagePath(filename);
+		String ro = Resources.getConfigRollOverImage(filename);
+		return new ImageButton(icon, ro);
+	}
+
+	public static ImageButton createConfigButton(String filename, String toolTip) {
+		ImageButton btn = createConfigButton(filename);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
+	public static ImageButton createConfigButton(String filename, int size) {
+		String icon = Resources.getConfigImagePath(filename);
+		String ro = Resources.getConfigRollOverImage(filename);
+		return new ImageButton(icon, ro, size);
+	}
+
 	// Navigation Button creator methods
 
 	/**
