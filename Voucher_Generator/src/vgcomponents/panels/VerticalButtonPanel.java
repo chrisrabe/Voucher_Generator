@@ -7,24 +7,24 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * This creates a JPanel which creates a grid with equal row and columns by
- * default.
+ * This creates a JPanel which aligns the buttons vertically. All rows are equal
+ * sized.
  * 
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class GridButtonPanel extends JPanel {
+public class VerticalButtonPanel extends JPanel {
 
-	public GridButtonPanel(JButton... buttons) {
-		int edges = (int) Math.ceil(buttons.length / 2);
-		this.setLayout(new GridLayout(edges == 0 ? 1 : edges, edges == 0 ? 1 : edges));
+	public VerticalButtonPanel(JButton... buttons) {
+		int rows = buttons.length;
+		this.setLayout(new GridLayout(rows, 0));
 		this.setOpaque(false);
 		for (JButton button : buttons) {
 			this.add(button);
 		}
 	}
 
-	public GridButtonPanel(int width, int height, JButton... buttons) {
+	public VerticalButtonPanel(int width, int height, JButton... buttons) {
 		this(buttons);
 		this.setPreferredSize(new Dimension(width, height));
 	}

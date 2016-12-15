@@ -1,6 +1,7 @@
 package vgcomponents.panels;
 
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 /**
  * A custom panel which serves to wrap components around it so that the overall
@@ -16,5 +17,10 @@ public class WrapperPanel extends JPanel {
 		for (JPanel panel : panels) {
 			this.add(panel);
 		}
+	}
+
+	public WrapperPanel(int borderThickness, JPanel... panels) {
+		this(panels);
+		this.setBorder(new EmptyBorder(borderThickness, borderThickness, borderThickness, borderThickness));
 	}
 }
