@@ -83,6 +83,8 @@ public abstract class Window extends JFrame {
 					}
 				}
 			});
+		} else {
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 	}
 

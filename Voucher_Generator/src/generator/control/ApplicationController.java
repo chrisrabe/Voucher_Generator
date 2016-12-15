@@ -6,6 +6,7 @@ import java.util.Map;
 import generator.control.page.HomeController;
 import generator.control.page.IOController;
 import generator.control.page.PageController;
+import generator.control.page.VoucherController;
 import generator.models.code.manager.CodeManager;
 import generator.models.code.manager.MapCodeManager;
 import generator.models.description.manager.DescriptionManager;
@@ -77,6 +78,7 @@ public class ApplicationController {
 		// Add controllers here
 		tmp.put("home", new HomeController(this));
 		tmp.put("io", new IOController(this));
+		tmp.put("voucher", new VoucherController(this));
 		return tmp;
 	}
 }

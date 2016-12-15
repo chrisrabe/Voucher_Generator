@@ -37,6 +37,9 @@ public class IOController extends PageController {
 		tmp.addHomeBtnListener(e -> {
 			main.navigateTo("home");
 		});
+		tmp.addVouchBtnListener(e -> {
+			main.navigateTo("voucher");
+		});
 		return tmp;
 	}
 
