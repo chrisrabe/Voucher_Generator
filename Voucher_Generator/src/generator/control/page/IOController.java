@@ -40,6 +40,9 @@ public class IOController extends PageController {
 		tmp.addVouchBtnListener(e -> {
 			main.navigateTo("voucher");
 		});
+		tmp.addDescBtnListener(e -> {
+			main.navigateTo("description");
+		});
 		return tmp;
 	}
 

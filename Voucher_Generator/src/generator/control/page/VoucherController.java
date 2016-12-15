@@ -30,6 +30,9 @@ public class VoucherController extends PageController {
 		tmp.addIoBtnListener(e -> {
 			main.navigateTo("io");
 		});
+		tmp.addDescBtnListener(e -> {
+			main.navigateTo("description");
+		});
 		return tmp;
 	}
 

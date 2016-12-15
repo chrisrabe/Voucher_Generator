@@ -3,7 +3,7 @@ package vgcomponents.panels;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -15,17 +15,17 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class HorizontalButtonPanel extends JPanel {
 
-	public HorizontalButtonPanel(JButton... buttons) {
-		int columns = buttons.length;
+	public HorizontalButtonPanel(JComponent... components) {
+		int columns = components.length;
 		this.setLayout(new GridLayout(0, columns));
 		this.setOpaque(false);
-		for (JButton button : buttons) {
-			this.add(button);
+		for (JComponent component : components) {
+			this.add(component);
 		}
 	}
 
-	public HorizontalButtonPanel(int width, int height, JButton... buttons) {
-		this(buttons);
+	public HorizontalButtonPanel(int width, int height, JComponent... components) {
+		this(components);
 		this.setPreferredSize(new Dimension(width, height));
 	}
 }

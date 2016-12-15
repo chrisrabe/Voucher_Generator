@@ -48,6 +48,6 @@ public class Home extends HomeView {
 	 * @param listener
 	 */
 	public void addDescriptionBtnListener(ActionListener listener) {
-		this.addDescriptionBtnListener(listener);
+		this.descBtn.addActionListener(listener);
 	}
 }
