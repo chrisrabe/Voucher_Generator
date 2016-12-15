@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -41,7 +42,8 @@ public class DescriptionView extends PageView {
 
 	// Scroll Panel
 
-	protected JScrollPane display = new VGScrollList(825, 600, new VGList(new String[] {}));
+	protected JList<String> content = new VGList(new String[] {});
+	protected JScrollPane display = new VGScrollList(825, 600, content);
 
 	@Override
 	protected void initialiseComponents() {

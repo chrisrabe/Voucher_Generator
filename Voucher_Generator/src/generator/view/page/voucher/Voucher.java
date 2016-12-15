@@ -2,6 +2,8 @@ package generator.view.page.voucher;
 
 import java.awt.event.ActionListener;
 
+import vgcomponents.lists.VGList;
+
 /**
  * Contains methods which adds action listeners to the view and gets or sets
  * data from any components.
@@ -53,5 +55,16 @@ public class Voucher extends VoucherView {
 
 	public void addClrBtnListener(ActionListener listener) {
 		clrBtn.addActionListener(listener);
+	}
+
+	// Content Getters and Setters
+
+	public String getSelectedItem() {
+		return content.getSelectedValue();
+	}
+
+	public void setContent(String[] data) {
+		content = new VGList(data);
+		display.setViewportView(content);
 	}
 }

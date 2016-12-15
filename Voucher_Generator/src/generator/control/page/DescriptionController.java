@@ -26,6 +26,15 @@ public class DescriptionController extends PageController {
 
 	private Description createDescriptionView() {
 		Description tmp = new Description();
+		tmp.addHomeBtnListener(e -> {
+			main.navigateTo("home");
+		});
+		tmp.addVoucherBtnListener(e -> {
+			main.navigateTo("voucher");
+		});
+		tmp.addIoBtnListener(e -> {
+			main.navigateTo("io");
+		});
 		return tmp;
 	}
 
