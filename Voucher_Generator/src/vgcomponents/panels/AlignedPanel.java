@@ -13,32 +13,32 @@ import javax.swing.border.EmptyBorder;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class HorizontalPanel extends JPanel {
+public class AlignedPanel extends JPanel {
 
 	/**
-	 * The justification parameter should just the FlowLayout static variables.
+	 * The alignment parameter should just the FlowLayout static variables.
 	 * 
-	 * @param justification
+	 * @param alignment
 	 * @param components
 	 */
-	public HorizontalPanel(int justification, JComponent... components) {
+	public AlignedPanel(int alignment, JComponent... components) {
 		this.setOpaque(false);
-		this.setLayout(new FlowLayout(justification));
+		this.setLayout(new FlowLayout(alignment));
 		for (JComponent component : components) {
 			this.add(component);
 		}
 	}
 
 	/**
-	 * Creates a horizontal panel with an empty border around it. The thickness
+	 * Creates an aligned panel with an empty border around it. The thickness
 	 * is indicated by borderThickness.
 	 * 
-	 * @param justification
+	 * @param alignment
 	 * @param borderThickness
 	 * @param components
 	 */
-	public HorizontalPanel(int justification, int borderThickness, JComponent... components) {
-		this(justification, components);
+	public AlignedPanel(int alignment, int borderThickness, JComponent... components) {
+		this(alignment, components);
 		this.setBorder(new EmptyBorder(borderThickness, borderThickness, borderThickness, borderThickness));
 	}
 }

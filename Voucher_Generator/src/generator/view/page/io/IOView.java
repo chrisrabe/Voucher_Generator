@@ -11,7 +11,7 @@ import generator.view.page.PageView;
 import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.panels.CenteredPanel;
 import vgcomponents.panels.GridButtonPanel;
-import vgcomponents.panels.HorizontalPanel;
+import vgcomponents.panels.AlignedPanel;
 
 /**
  * This class is responsible for providing GUI initialisation methods
@@ -35,7 +35,7 @@ public class IOView extends PageView {
 	@Override
 	protected void initialiseComponents() {
 		// Initialise components
-		JPanel navigation = new HorizontalPanel(FlowLayout.LEFT, 50,
+		JPanel navigation = new AlignedPanel(FlowLayout.LEFT, 50,
 				new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
 		JPanel io = new CenteredPanel(new GridButtonPanel(500, 200, loadBtn, saveBtn));
 		// Set up panel
