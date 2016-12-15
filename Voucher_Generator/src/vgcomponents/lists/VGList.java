@@ -27,17 +27,39 @@ public class VGList extends JList<String> {
 		this(width, height, data, new VGThemeRenderer(new VGTheme()));
 	}
 
+	public VGList(int width, int height, String[] data, ListCellRenderer<String> renderer) {
+		this(data, renderer);
+		this.setPreferredSize(new Dimension(width, height));
+	}
+
+	public VGList(String[] data) {
+		this(data, new VGThemeRenderer(new VGTheme()));
+	}
+
 	/**
 	 * Creates a voucher generator list with a custom theme.
 	 * 
-	 * @param width
-	 * @param height
 	 * @param data
 	 * @param renderer
 	 */
-	public VGList(int width, int height, String[] data, ListCellRenderer<String> renderer) {
-		super(data);
+	public VGList(String[] data, ListCellRenderer<String> renderer) {
+		super(filledData(data));
 		this.setCellRenderer(renderer);
-		this.setPreferredSize(new Dimension(width, height));
+	}
+
+	private static String[] filledData(String[] data) {
+		int size = 23;
+		if (data.length < size) {
+			String[] tmp = new String[size];
+			for (int i = 0; i < tmp.length; i++) {
+				if (i >= data.length) {
+					tmp[i] = "  ";
+				} else {
+					tmp[i] = data[i];
+				}
+			}
+			return tmp;
+		}
+		return data;
 	}
 }

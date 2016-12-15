@@ -1,5 +1,6 @@
 package vgcomponents.panels;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -12,15 +13,15 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class WrapperPanel extends JPanel {
 
-	public WrapperPanel(JPanel... panels) {
+	public WrapperPanel(JComponent... components) {
 		this.setOpaque(false);
-		for (JPanel panel : panels) {
-			this.add(panel);
+		for (JComponent component : components) {
+			this.add(component);
 		}
 	}
 
-	public WrapperPanel(int borderThickness, JPanel... panels) {
-		this(panels);
+	public WrapperPanel(int borderThickness, JComponent... components) {
+		this(components);
 		this.setBorder(new EmptyBorder(borderThickness, borderThickness, borderThickness, borderThickness));
 	}
 }

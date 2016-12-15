@@ -5,15 +5,19 @@ import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import generator.view.page.PageView;
 import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.labels.VGLabel;
+import vgcomponents.lists.VGList;
 import vgcomponents.panels.CenteredPanel;
 import vgcomponents.panels.DockedPanel;
 import vgcomponents.panels.GridButtonPanel;
 import vgcomponents.panels.HorizontalButtonPanel;
+import vgcomponents.panels.VGScrollList;
 import vgcomponents.panels.VerticalButtonPanel;
+import vgcomponents.panels.WrapperPanel;
 
 /**
  * This class is responsible for drawing and placing components into this page
@@ -38,13 +42,18 @@ public abstract class VoucherView extends PageView {
 	protected JButton genBtn = VGButtonFactory.createVoucherButton("generate", "Generate", 100);
 	protected JButton clrBtn = VGButtonFactory.createVoucherButton("clear", "Clear", 100);
 
+	// The voucher display
+
+	protected JScrollPane display = new VGScrollList(850, 600, new VGList(new String[] {}));
+
 	@Override
 	protected void initialiseComponents() {
 		JPanel topPanel = new DockedPanel(25, null, null, new GridButtonPanel(200, 1),
 				new HorizontalButtonPanel(225, 50, homeBtn, ioBtn, configBtn, descBtn),
 				new CenteredPanel(new VGLabel("Vouchers", 40)));
-		JPanel toolBar = new CenteredPanel(20,
-				new VerticalButtonPanel(100, 550, addBtn, delBtn, edtBtn, genBtn, clrBtn));
+		JPanel toolBar = new DockedPanel(null, null, null,
+				new CenteredPanel(20, new VerticalButtonPanel(100, 550, addBtn, delBtn, edtBtn, genBtn, clrBtn)),
+				new WrapperPanel(display));
 		this.setLayout(new BorderLayout());
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(toolBar, BorderLayout.WEST);

@@ -23,7 +23,7 @@ public class VGThemeRenderer extends JLabel implements ListCellRenderer<String> 
 	private int fontSize;
 
 	public VGThemeRenderer(IVGTheme theme) {
-		this(theme, 10);
+		this(theme, 20);
 	}
 
 	public VGThemeRenderer(IVGTheme theme, int fontSize) {
@@ -35,16 +35,17 @@ public class VGThemeRenderer extends JLabel implements ListCellRenderer<String> 
 	@Override
 	public Component getListCellRendererComponent(JList<? extends String> list, String value, int index,
 			boolean isSelected, boolean cellHasFocus) {
+		this.setText(value);
 		this.setFont(new Font("Cooper Black", Font.PLAIN, fontSize));
 		if (isSelected) {
 			this.setForeground(theme.getSelectedFGColour());
 			this.setBackground(index % 2 == 0 ? theme.getSelectedBGColour2() : theme.getSelectedBGColour1());
-			if (theme.getBorderColour() != null)
-				this.setBorder(new LineBorder(theme.getBorderColour()));
 		} else {
 			this.setForeground(theme.getForegroundColour());
 			this.setBackground(index % 2 == 0 ? theme.getMainColour2() : theme.getMainColour1());
 		}
+		if (theme.getBorderColour() != null)
+			this.setBorder(new LineBorder(theme.getBorderColour()));
 		return this;
 	}
 
