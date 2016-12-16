@@ -1,8 +1,8 @@
-package generator.view.page.config.display.encoding;
+package generator.view.display.config.encoding;
 
 import java.awt.Graphics;
 
-import generator.view.page.config.display.ConfigDisplay;
+import generator.view.display.config.ConfigDisplay;
 
 /**
  * This class is responsible for displaying items in the encoding display.

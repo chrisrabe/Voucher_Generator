@@ -1,4 +1,4 @@
-package generator.view.page.config.display;
+package generator.view.display.config;
 
 import java.awt.Color;
 import java.awt.Graphics;
