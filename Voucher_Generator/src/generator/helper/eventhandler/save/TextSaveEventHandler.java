@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import generator.models.code.Code;
@@ -23,7 +24,7 @@ public class TextSaveEventHandler extends SaveEventHandler {
 	// Save Handler methods
 
 	@Override
-	protected void writeToFile(String filepath, List<Code> codes) throws IOException {
+	protected void writeToFile(String filepath, Collection<Code> codes) throws IOException {
 		File file = new File(filepath);
 		file.createNewFile();
 		List<String> lines = toString(codes);
@@ -37,7 +38,7 @@ public class TextSaveEventHandler extends SaveEventHandler {
 
 	// Helper Methods
 
-	private List<String> toString(List<Code> codes) {
+	private List<String> toString(Collection<Code> codes) {
 		List<String> tmp = new ArrayList<String>();
 		for (Code c : codes) {
 			tmp.add(c.toString() + "\n");

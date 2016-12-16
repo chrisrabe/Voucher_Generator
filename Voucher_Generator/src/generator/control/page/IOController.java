@@ -3,10 +3,19 @@ package generator.control.page;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.control.ApplicationController;
 import generator.control.display.IDisplayController;
+import generator.helper.eventhandler.load.LoadEventHandler;
+import generator.helper.eventhandler.load.TextLoadEventHandler;
+import generator.helper.eventhandler.load.XMLLoadEventHandler;
+import generator.helper.eventhandler.save.SaveEventHandler;
+import generator.helper.eventhandler.save.TextSaveEventHandler;
+import generator.helper.eventhandler.save.XMLSaveEventHandler;
+import generator.helper.exception.InvalidInputException;
 import generator.view.display.io.load.Load;
 import generator.view.display.io.save.Save;
 import generator.view.page.PageView;
@@ -20,6 +29,8 @@ import generator.view.page.io.IO;
  */
 public class IOController extends PageController {
 	private IO ioView;
+	private SaveEventHandler saveHandler;
+	private LoadEventHandler loadHandler;
 	private Map<String, IDisplayController> displayControllers;
 
 	public IOController(ApplicationController main) {
@@ -33,6 +44,66 @@ public class IOController extends PageController {
 			ioView = createIOView();
 
 		return ioView;
+	}
+
+	// Methods
+
+	protected void doTXTSave() {
+		JFileChooser fc = getFileChooser();
+		int val = fc.showSaveDialog(ApplicationController.getWindow());
+		if (val == JFileChooser.APPROVE_OPTION) {
+			if (!(saveHandler instanceof TextSaveEventHandler))
+				saveHandler = new TextSaveEventHandler();
+			try {
+				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), main.getCodeManager().getCodes());
+			} catch (InvalidInputException e) {
+				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	protected void doXMLSave() {
+		JFileChooser fc = getFileChooser();
+		int val = fc.showSaveDialog(ApplicationController.getWindow());
+		if (val == JFileChooser.APPROVE_OPTION) {
+			if (!(saveHandler instanceof XMLSaveEventHandler))
+				saveHandler = new XMLSaveEventHandler();
+			try {
+				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), main.getCodeManager().getCodes());
+			} catch (InvalidInputException e) {
+				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	protected void doTXTLoad() {
+		JFileChooser fc = getFileChooser();
+		main.getCodeManager().clear();
+		int val = fc.showOpenDialog(ApplicationController.getWindow());
+		if (val == JFileChooser.APPROVE_OPTION) {
+			if (!(loadHandler instanceof TextLoadEventHandler))
+				loadHandler = new TextLoadEventHandler();
+			try {
+				loadHandler.load(fc.getSelectedFile().getAbsolutePath());
+			} catch (InvalidInputException e) {
+				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	protected void doXMLLoad() {
+		JFileChooser fc = getFileChooser();
+		main.getCodeManager().clear();
+		int val = fc.showOpenDialog(ApplicationController.getWindow());
+		if (val == JFileChooser.APPROVE_OPTION) {
+			if (!(loadHandler instanceof XMLLoadEventHandler))
+				loadHandler = new XMLLoadEventHandler();
+			try {
+				loadHandler.load(fc.getSelectedFile().getAbsolutePath());
+			} catch (InvalidInputException e) {
+				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+			}
+		}
 	}
 
 	// Helper Methods
@@ -83,10 +154,10 @@ public class IOController extends PageController {
 				if (saveDisplay == null) {
 					saveDisplay = new Save();
 					saveDisplay.addXmlBtnListener(e -> {
-						// XML Save Event Handler
+						doXMLSave();
 					});
 					saveDisplay.addTxtBtnListener(e -> {
-						// TXT Save Event Handler
+						doTXTSave();
 					});
 					saveDisplay.addPngBtnListener(e -> {
 						show("Feature is coming soon");
@@ -106,10 +177,10 @@ public class IOController extends PageController {
 				if (loadDisplay == null) {
 					loadDisplay = new Load();
 					loadDisplay.addXmlBtnListener(e -> {
-						// XML Load Event Handler
+						doXMLLoad();
 					});
 					loadDisplay.addTxtBtnListener(e -> {
-						// TXT Load Event Handler
+						doTXTLoad();
 					});
 				}
 				return loadDisplay;

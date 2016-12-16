@@ -57,5 +57,7 @@ public class Config extends ConfigView {
 		body.remove(content);
 		content = newContent;
 		body.add(new WrapperPanel(content), BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
 	}
 }

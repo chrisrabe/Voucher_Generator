@@ -1,5 +1,9 @@
 package generator.control.page;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import generator.control.ApplicationController;
 import generator.view.page.PageView;
 import vgcomponents.factories.VGMessage;
@@ -52,5 +56,19 @@ public abstract class PageController implements IPageController {
 
 	protected void show(String message, int type) {
 		VGMessage.show(message, type);
+	}
+
+	protected JFileChooser getFileChooser() {
+		JFileChooser fc = new JFileChooser("");
+		fc.setCurrentDirectory(new File("."));
+		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		return fc;
+	}
+
+	protected JFileChooser getFolderChooser() {
+		JFileChooser fc = new JFileChooser("");
+		fc.setCurrentDirectory(new File("."));
+		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		return fc;
 	}
 }

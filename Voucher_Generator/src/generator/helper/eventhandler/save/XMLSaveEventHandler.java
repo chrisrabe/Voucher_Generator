@@ -2,7 +2,7 @@ package generator.helper.eventhandler.save;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,7 +29,7 @@ public class XMLSaveEventHandler extends SaveEventHandler {
 	}
 
 	@Override
-	protected void writeToFile(String filepath, List<Code> codes) throws IOException {
+	protected void writeToFile(String filepath, Collection<Code> codes) throws IOException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder builder = dbFactory.newDocumentBuilder();
@@ -45,7 +45,7 @@ public class XMLSaveEventHandler extends SaveEventHandler {
 		}
 	}
 
-	private DOMSource toXMLDocument(Document doc, List<Code> codes) {
+	private DOMSource toXMLDocument(Document doc, Collection<Code> codes) {
 		Element root = doc.createElement("codes");
 		for (Code code : codes) {
 			root.appendChild(toCodeElement(doc, code));

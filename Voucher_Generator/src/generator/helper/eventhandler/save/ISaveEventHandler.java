@@ -1,6 +1,6 @@
 package generator.helper.eventhandler.save;
 
-import java.util.List;
+import java.util.Collection;
 
 import generator.helper.exception.InvalidInputException;
 import generator.models.code.Code;
@@ -17,5 +17,5 @@ public interface ISaveEventHandler {
 	 * 
 	 * @param filePath
 	 */
-	public void save(String filePath, List<Code> codes) throws InvalidInputException;
+	public void save(String filePath, Collection<Code> codes) throws InvalidInputException;
 }

@@ -2,7 +2,7 @@ package generator.helper.eventhandler.save;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
 import generator.helper.exception.InvalidInputException;
 import generator.models.code.Code;
@@ -26,12 +26,12 @@ public abstract class SaveEventHandler implements ISaveEventHandler {
 	 * @param code
 	 * @throws IOException
 	 */
-	protected abstract void writeToFile(String filepath, List<Code> codes) throws IOException;
+	protected abstract void writeToFile(String filepath, Collection<Code> codes) throws IOException;
 
 	// Methods
 
 	@Override
-	public void save(String filepath, List<Code> codes) throws InvalidInputException {
+	public void save(String filepath, Collection<Code> codes) throws InvalidInputException {
 		String validPath = attachFileExtension(filepath);
 		try {
 			writeToFile(validPath, codes);
