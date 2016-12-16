@@ -3,6 +3,7 @@ package generator.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import generator.control.page.ConfigController;
 import generator.control.page.DescriptionController;
 import generator.control.page.HomeController;
 import generator.control.page.IOController;
@@ -81,6 +82,7 @@ public class ApplicationController {
 		tmp.put("io", new IOController(this));
 		tmp.put("voucher", new VoucherController(this));
 		tmp.put("description", new DescriptionController(this));
+		tmp.put("config", new ConfigController(this));
 		return tmp;
 	}
 }

@@ -43,6 +43,9 @@ public class IOController extends PageController {
 		tmp.addDescBtnListener(e -> {
 			main.navigateTo("description");
 		});
+		tmp.addConfigBtnListener(e -> {
+			main.navigateTo("config");
+		});
 		return tmp;
 	}
 

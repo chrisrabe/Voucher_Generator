@@ -40,6 +40,13 @@ public abstract class VGButtonFactory {
 		return new ImageButton(icon, ro, size);
 	}
 
+	public static ImageButton createConfigButton(String filename, String toolTip, int size) {
+		ImageButton btn = createConfigButton(filename, size);
+		String tip = VGToolTipFactory.createToolTip(toolTip, FONT_SIZE);
+		btn.setToolTipText(tip);
+		return btn;
+	}
+
 	// Navigation Button creator methods
 
 	/**

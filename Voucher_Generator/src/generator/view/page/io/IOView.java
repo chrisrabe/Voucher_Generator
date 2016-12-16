@@ -35,7 +35,7 @@ public abstract class IOView extends PageView {
 	@Override
 	protected void initialiseComponents() {
 		// Initialise components
-		JPanel navigation = new AlignedPanel(FlowLayout.LEFT, 50,
+		JPanel navigation = new AlignedPanel(FlowLayout.LEFT, 40,
 				new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
 		JPanel io = new CenteredPanel(new GridButtonPanel(550, 200, loadBtn, saveBtn));
 		// Set up panel

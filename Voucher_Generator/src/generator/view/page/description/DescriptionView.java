@@ -13,6 +13,7 @@ import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.lists.VGList;
 import vgcomponents.panels.CenteredPanel;
+import vgcomponents.panels.DockedPanel;
 import vgcomponents.panels.GridButtonPanel;
 import vgcomponents.panels.VGScrollList;
 import vgcomponents.panels.VerticalButtonPanel;
@@ -43,19 +44,19 @@ public abstract class DescriptionView extends PageView {
 	// Scroll Panel
 
 	protected JList<String> content = new VGList(new String[] {});
-	protected JScrollPane display = new VGScrollList(825, 600, content);
+	protected JScrollPane display = new VGScrollList(750, 600, content);
 
 	@Override
 	protected void initialiseComponents() {
-		JPanel title = new CenteredPanel(25, new VGLabel("Voucher Descriptions", 40));
-		JPanel navigation = new GridButtonPanel(100, 100, homeBtn, ioBtn, configBtn, voucherBtn);
-		JPanel toolBar = new WrapperPanel(20,
-				new VerticalButtonPanel(110, 550, addBtn, delBtn, clrBtn, disBtn, navigation));
+		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, ioBtn, configBtn, voucherBtn));
+		JPanel toolBar = new VerticalButtonPanel(100, 440, addBtn, delBtn, clrBtn, disBtn);
+		JPanel title = new CenteredPanel(20, new VGLabel("Voucher Descriptions", 40));
+		JPanel dock = new DockedPanel(20, navigation, null, null, null, new WrapperPanel(toolBar));
+		JPanel body = new DockedPanel(title, null, null, null, new WrapperPanel(display));
 		// Set up panel
 		this.setLayout(new BorderLayout());
-		this.add(title, BorderLayout.NORTH);
-		this.add(toolBar, BorderLayout.WEST);
-		this.add(new WrapperPanel(display), BorderLayout.CENTER);
+		this.add(dock, BorderLayout.WEST);
+		this.add(body, BorderLayout.CENTER);
 	}
 
 	@Override

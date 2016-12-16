@@ -42,6 +42,9 @@ public class HomeController extends PageController {
 		tmp.addDescriptionBtnListener(e -> {
 			main.navigateTo("description");
 		});
+		tmp.addConfigBtnListener(e -> {
+			main.navigateTo("config");
+		});
 		return tmp;
 	}
 }
