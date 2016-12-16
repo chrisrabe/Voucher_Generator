@@ -1,16 +1,17 @@
-package generator.view.display.io.load;
+package generator.view.display.io.save;
 
 import java.awt.event.ActionListener;
 
 /**
- * This class provides methods which add listeners to the components.
+ * This class is responsible for adding action listener methods to the save
+ * display.
  * 
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class Load extends LoadDisplay {
+public class Save extends SaveDisplay {
 
-	public Load() {
+	public Save() {
 		this.initialiseComponents();
 	}
 
@@ -20,5 +21,9 @@ public class Load extends LoadDisplay {
 
 	public void addTxtBtnListener(ActionListener listener) {
 		txtBtn.addActionListener(listener);
+	}
+
+	public void addPngBtnListener(ActionListener listener) {
+		pngBtn.addActionListener(listener);
 	}
 }
