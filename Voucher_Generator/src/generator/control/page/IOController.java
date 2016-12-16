@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.control.ApplicationController;
-import generator.control.display.IDisplayController;
+import generator.control.helper.IDisplayController;
 import generator.helper.eventhandler.load.LoadEventHandler;
 import generator.helper.eventhandler.load.TextLoadEventHandler;
 import generator.helper.eventhandler.load.XMLLoadEventHandler;
@@ -76,6 +76,10 @@ public class IOController extends PageController {
 		}
 	}
 
+	protected void doPNGSave() {
+		show("Feature is coming soon");
+	}
+
 	protected void doTXTLoad() {
 		JFileChooser fc = getFileChooser();
 		main.getCodeManager().clear();
@@ -84,11 +88,13 @@ public class IOController extends PageController {
 			if (!(loadHandler instanceof TextLoadEventHandler))
 				loadHandler = new TextLoadEventHandler();
 			try {
-				loadHandler.load(fc.getSelectedFile().getAbsolutePath());
+				main.getCodeManager().getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		// Tell the voucher controller that changes have been made to its model
+		main.updateMainModel();
 	}
 
 	protected void doXMLLoad() {
@@ -99,11 +105,13 @@ public class IOController extends PageController {
 			if (!(loadHandler instanceof XMLLoadEventHandler))
 				loadHandler = new XMLLoadEventHandler();
 			try {
-				loadHandler.load(fc.getSelectedFile().getAbsolutePath());
+				main.getCodeManager().getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		// Tell voucher controller that changes have been made to its model
+		main.updateMainModel();
 	}
 
 	// Helper Methods
@@ -160,7 +168,7 @@ public class IOController extends PageController {
 						doTXTSave();
 					});
 					saveDisplay.addPngBtnListener(e -> {
-						show("Feature is coming soon");
+						doPNGSave();
 					});
 				}
 				return saveDisplay;

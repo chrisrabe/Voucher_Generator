@@ -37,10 +37,10 @@ public class TestXMLSaveEventHandler {
 
 	private static List<Code> createTestCodes() {
 		List<Code> tmp = new ArrayList<Code>();
-		tmp.add(new Code("a", "b", false));
-		tmp.add(new Code("c", "d", false));
-		tmp.add(new Code("e", "f", true));
-		tmp.add(new Code("g", "h", false));
+		tmp.add(new Code("a", null, false));
+		tmp.add(new Code("c", null, false));
+		tmp.add(new Code("e", null, true));
+		tmp.add(new Code("g", null, false));
 		return tmp;
 	}
 }

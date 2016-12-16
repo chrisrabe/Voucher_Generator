@@ -40,6 +40,14 @@ public class ApplicationController {
 
 	// Getters
 
+	/**
+	 * Updates the voucher controller's view.
+	 */
+	public void updateMainModel() {
+		VoucherController control = (VoucherController) pageControllers.get("voucher");
+		control.update();
+	}
+
 	public CodeManager getCodeManager() {
 		return codeManager;
 	}

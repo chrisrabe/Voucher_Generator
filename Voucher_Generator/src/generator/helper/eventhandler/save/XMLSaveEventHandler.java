@@ -61,7 +61,7 @@ public class XMLSaveEventHandler extends SaveEventHandler {
 		idAttr.setValue(code.getID());
 		// Create description node
 		Element description = doc.createElement("description");
-		description.appendChild(doc.createTextNode(code.getDescription()));
+		description.appendChild(doc.createTextNode(code.getDescription() == null ? " " : code.getDescription()));
 		// Create redeemed attribute
 		Attr redeemedAttr = doc.createAttribute("redeemed");
 		redeemedAttr.setValue(String.valueOf(code.isRedeemed()));

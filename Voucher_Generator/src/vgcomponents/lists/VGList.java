@@ -53,7 +53,7 @@ public class VGList extends JList<String> {
 			String[] tmp = new String[size];
 			for (int i = 0; i < tmp.length; i++) {
 				if (i >= data.length) {
-					tmp[i] = "   ";
+					tmp[i] = " ";
 				} else {
 					tmp[i] = data[i];
 				}

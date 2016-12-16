@@ -66,5 +66,7 @@ public class Voucher extends VoucherView {
 	public void setContent(String[] data) {
 		content = new VGList(data);
 		display.setViewportView(content);
+		this.revalidate();
+		this.repaint();
 	}
 }

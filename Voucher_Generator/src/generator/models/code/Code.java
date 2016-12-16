@@ -10,7 +10,7 @@ public class Code {
 
 	// Fields
 	private String id;
-	private String description;
+	private String description = " ";
 	private boolean redeemed;
 
 	// Constructors

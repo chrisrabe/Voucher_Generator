@@ -1,4 +1,4 @@
-package generator.control.display;
+package generator.control.helper;
 
 import javax.swing.JPanel;
 
