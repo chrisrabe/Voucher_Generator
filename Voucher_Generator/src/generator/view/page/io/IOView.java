@@ -1,17 +1,20 @@
 package generator.view.page.io;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import generator.view.display.io.DefaultDisplay;
 import generator.view.page.PageView;
 import vgcomponents.factories.VGButtonFactory;
+import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.CenteredPanel;
+import vgcomponents.panels.DockedPanel;
 import vgcomponents.panels.GridButtonPanel;
-import vgcomponents.panels.AlignedPanel;
+import vgcomponents.panels.HorizontalButtonPanel;
+import vgcomponents.panels.WrapperPanel;
 
 /**
  * This class is responsible for providing GUI initialisation methods
@@ -32,16 +35,26 @@ public abstract class IOView extends PageView {
 	protected JButton loadBtn = VGButtonFactory.createIOButton("load", "Load");
 	protected JButton saveBtn = VGButtonFactory.createIOButton("save", "Save");
 
+	// Display content
+
+	protected JPanel content = new WrapperPanel(new DefaultDisplay());
+	protected JPanel display = null;
+
 	@Override
 	protected void initialiseComponents() {
 		// Initialise components
-		JPanel navigation = new AlignedPanel(FlowLayout.LEFT, 40,
-				new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
-		JPanel io = new CenteredPanel(new GridButtonPanel(550, 200, loadBtn, saveBtn));
+		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
+		JPanel toolBar = new DockedPanel(null, new WrapperPanel(new HorizontalButtonPanel(550, 200, loadBtn, saveBtn)),
+				null, null, null);
+		JPanel display = new CenteredPanel(content);
+		JPanel toolDisp = new DockedPanel(null, display, null, null, toolBar);
+		JPanel title = new CenteredPanel(20, new VGLabel("Load or Save", 40));
+		JPanel dock = new DockedPanel(20, navigation, null, null, null, null);
+		JPanel body = new DockedPanel(title, null, null, null, toolDisp);
 		// Set up panel
 		this.setLayout(new BorderLayout());
-		this.add(navigation, BorderLayout.NORTH);
-		this.add(io, BorderLayout.CENTER);
+		this.add(dock, BorderLayout.WEST);
+		this.add(body, BorderLayout.CENTER);
 	}
 
 	@Override
