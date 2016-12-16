@@ -56,6 +56,12 @@ public class IOController extends PageController {
 		tmp.addConfigBtnListener(e -> {
 			main.navigateTo("config");
 		});
+		tmp.addLoadBtnListener(e -> {
+			ioView.setDisplayContent(displayControllers.get("load").getDisplay());
+		});
+		tmp.addSaveBtnListener(e -> {
+			ioView.setDisplayContent(displayControllers.get("save").getDisplay());
+		});
 		return tmp;
 	}
 
@@ -68,7 +74,7 @@ public class IOController extends PageController {
 
 	// Display Controllers
 
-	private IDisplayController createLoadController() {
+	private IDisplayController createSaveController() {
 		return new IDisplayController() {
 			private Save saveDisplay;
 
@@ -83,7 +89,7 @@ public class IOController extends PageController {
 						// TXT Save Event Handler
 					});
 					saveDisplay.addPngBtnListener(e -> {
-						// PNG Save Event Handler
+						show("Feature is coming soon");
 					});
 				}
 				return saveDisplay;
@@ -91,7 +97,7 @@ public class IOController extends PageController {
 		};
 	}
 
-	private IDisplayController createSaveController() {
+	private IDisplayController createLoadController() {
 		return new IDisplayController() {
 			private Load loadDisplay;
 

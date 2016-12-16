@@ -2,6 +2,7 @@ package generator.control.page;
 
 import generator.control.ApplicationController;
 import generator.view.page.PageView;
+import vgcomponents.factories.VGMessage;
 
 /**
  * Provides a skeleton implementation of a page controller.
@@ -43,4 +44,13 @@ public abstract class PageController implements IPageController {
 		return view;
 	}
 
+	// Helper Methods
+
+	protected void show(String message) {
+		VGMessage.show(message);
+	}
+
+	protected void show(String message, int type) {
+		VGMessage.show(message, type);
+	}
 }

@@ -59,6 +59,6 @@ public class Code {
 
 	@Override
 	public String toString() {
-		return "id=" + id + ", description=" + description + ", redeemed=" + redeemed;
+		return "id:" + id + ", description:" + description + ", redeemed:" + redeemed;
 	}
 }

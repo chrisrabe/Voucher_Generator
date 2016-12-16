@@ -46,7 +46,7 @@ public abstract class IOView extends PageView {
 		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
 		JPanel toolBar = new DockedPanel(null, new WrapperPanel(new HorizontalButtonPanel(550, 200, loadBtn, saveBtn)),
 				null, null, null);
-		JPanel display = new CenteredPanel(content);
+		display = new CenteredPanel(content);
 		JPanel toolDisp = new DockedPanel(null, display, null, null, toolBar);
 		JPanel title = new CenteredPanel(20, new VGLabel("Load or Save", 40));
 		JPanel dock = new DockedPanel(20, navigation, null, null, null, null);

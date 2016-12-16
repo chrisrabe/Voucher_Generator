@@ -49,7 +49,7 @@ public class TextLoadEventHandler extends LoadEventHandler {
 	}
 
 	private boolean parseRedeemed(String context) throws IOException {
-		String[] vars = context.split("[=]");
+		String[] vars = context.split("[:]");
 		if (vars.length != 2)
 			throw new IOException("Invalid file contents.");
 
@@ -57,11 +57,11 @@ public class TextLoadEventHandler extends LoadEventHandler {
 	}
 
 	private String parseDescription(String context) {
-		String[] vars = context.split("[=]");
+		String[] vars = context.split("[:]");
 		if (vars.length > 2) {
 			String[] tmp = new String[2];
 			tmp[0] = vars[0];
-			// Merge the contexts after the "="
+			// Merge the contexts after the ":"
 			StringBuilder sb = new StringBuilder();
 			for (int i = 1; i < vars.length; i++) {
 				sb.append(vars[i] + " ");
@@ -73,7 +73,7 @@ public class TextLoadEventHandler extends LoadEventHandler {
 	}
 
 	private String parseID(String context) throws IOException {
-		String[] vars = context.split("[=]");
+		String[] vars = context.split("[:]");
 		if (vars.length != 2)
 			throw new IOException("Invalid file contents.");
 

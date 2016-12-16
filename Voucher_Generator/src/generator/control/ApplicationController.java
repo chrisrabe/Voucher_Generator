@@ -27,7 +27,7 @@ public class ApplicationController {
 
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
-	private ApplicationWindow application;
+	private static ApplicationWindow application;
 	private Map<String, PageController> pageControllers;
 
 	// Constructor
@@ -46,6 +46,10 @@ public class ApplicationController {
 
 	public DescriptionManager getDescriptionManager() {
 		return descriptionManager;
+	}
+
+	public static ApplicationWindow getWindow() {
+		return application;
 	}
 
 	// Methods
