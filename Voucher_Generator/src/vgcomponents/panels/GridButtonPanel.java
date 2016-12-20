@@ -3,7 +3,7 @@ package vgcomponents.panels;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -15,17 +15,17 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class GridButtonPanel extends JPanel {
 
-	public GridButtonPanel(JButton... buttons) {
-		int edges = (int) Math.ceil(buttons.length / 2);
+	public GridButtonPanel(JComponent... components) {
+		int edges = (int) Math.ceil(components.length / 2);
 		this.setLayout(new GridLayout(edges == 0 ? 1 : edges, edges == 0 ? 1 : edges));
 		this.setOpaque(false);
-		for (JButton button : buttons) {
-			this.add(button);
+		for (JComponent component : components) {
+			this.add(component);
 		}
 	}
 
-	public GridButtonPanel(int width, int height, JButton... buttons) {
-		this(buttons);
+	public GridButtonPanel(int width, int height, JComponent... components) {
+		this(components);
 		this.setPreferredSize(new Dimension(width, height));
 	}
 }

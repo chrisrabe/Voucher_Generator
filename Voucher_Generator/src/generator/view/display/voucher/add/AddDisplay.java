@@ -15,6 +15,7 @@ public abstract class AddDisplay extends VoucherDisplay {
 
 	@Override
 	protected void initialiseComponents() {
+		
 	}
 
 	@Override
