@@ -1,5 +1,6 @@
 package vgcomponents.panels;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JComponent;
@@ -14,6 +15,11 @@ import javax.swing.border.EmptyBorder;
  */
 @SuppressWarnings("serial")
 public class AlignedPanel extends JPanel {
+
+	public AlignedPanel(int alignment, int width, int height, JComponent... components) {
+		this(alignment, components);
+		this.setPreferredSize(new Dimension(width, height));
+	}
 
 	/**
 	 * The alignment parameter should just the FlowLayout static variables.
@@ -30,8 +36,8 @@ public class AlignedPanel extends JPanel {
 	}
 
 	/**
-	 * Creates an aligned panel with an empty border around it. The thickness
-	 * is indicated by borderThickness.
+	 * Creates an aligned panel with an empty border around it. The thickness is
+	 * indicated by borderThickness.
 	 * 
 	 * @param alignment
 	 * @param borderThickness

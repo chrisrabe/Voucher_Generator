@@ -1,7 +1,6 @@
 package generator.view.display.voucher.edit;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
@@ -26,7 +25,7 @@ import vgcomponents.panels.WrapperPanel;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class EditDisplay extends VoucherDisplay {
+public abstract class EditDisplay extends VoucherDisplay {
 
 	protected JButton confirmBtn = new VGButton(200, 100, "Confirm");
 
@@ -38,14 +37,11 @@ public class EditDisplay extends VoucherDisplay {
 		JPanel title = new CenteredPanel(20, new VGLabel("Edit Voucher", 40));
 		JPanel button = new CenteredPanel(10, confirmBtn);
 		// Set up the grid in the middle
-		JPanel idLbl = new AlignedPanel(FlowLayout.LEFT, new VGLabel("Voucher ID", 20));
-		idLbl.setPreferredSize(new Dimension(150, 50));
-		JPanel descriptionLbl = new AlignedPanel(FlowLayout.LEFT, new VGLabel("Description", 20));
-		descriptionLbl.setPreferredSize(new Dimension(150, 50));
-		JScrollPane descScroll = new JScrollPane(descriptionField);
+		JPanel idLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Voucher ID", 20));
+		JPanel descriptionLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Description", 20));
 		JPanel fields = new GridButtonPanel(550, 330, new WrapperPanel(idLbl),
 				new AlignedPanel(FlowLayout.LEFT, idField), new WrapperPanel(descriptionLbl),
-				new AlignedPanel(FlowLayout.LEFT, descScroll));
+				new AlignedPanel(FlowLayout.LEFT, new JScrollPane(descriptionField)));
 		// set up the panel
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
