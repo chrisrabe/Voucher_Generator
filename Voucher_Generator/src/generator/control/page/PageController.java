@@ -4,7 +4,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
-import generator.control.ApplicationController;
+import generator.control.manager.navigation.INavigationManager;
 import generator.view.page.PageView;
 import vgcomponents.factories.VGMessage;
 
@@ -16,19 +16,9 @@ import vgcomponents.factories.VGMessage;
 public abstract class PageController implements IPageController {
 
 	// Need this to be able to navigate around the application.
-	protected ApplicationController main;
+	protected INavigationManager navigation;
 
 	private PageView view;
-
-	/**
-	 * Stores the navigationIcon and name fields.
-	 * 
-	 * @param navigationIcon
-	 * @param name
-	 */
-	public PageController(ApplicationController main) {
-		this.main = main;
-	}
 
 	// Abstract Methods
 
@@ -48,14 +38,24 @@ public abstract class PageController implements IPageController {
 		return view;
 	}
 
+	@Override
+	public void setNavigationController(INavigationManager navigation) {
+		this.navigation = navigation;
+	}
+
+	@Override
+	public void update() {
+		// By default, this does nothing
+	}
+
 	// Helper Methods
 
 	protected void show(String message) {
-		VGMessage.show(message);
+		VGMessage.show(navigation, message);
 	}
 
 	protected void show(String message, int type) {
-		VGMessage.show(message, type);
+		VGMessage.show(navigation, message, type);
 	}
 
 	protected JFileChooser getFileChooser() {

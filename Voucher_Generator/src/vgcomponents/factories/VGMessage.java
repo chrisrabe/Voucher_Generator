@@ -2,7 +2,7 @@ package vgcomponents.factories;
 
 import javax.swing.JOptionPane;
 
-import generator.control.ApplicationController;
+import generator.control.manager.navigation.INavigationManager;
 
 /**
  * This class is responsible for creating JDialog boxes.
@@ -11,11 +11,11 @@ import generator.control.ApplicationController;
  */
 public abstract class VGMessage {
 
-	public static void show(String message) {
-		JOptionPane.showMessageDialog(ApplicationController.getWindow(), message);
+	public static void show(INavigationManager navigation, String message) {
+		JOptionPane.showMessageDialog(navigation.getWindow(), message);
 	}
 
-	public static void show(String message, int type) {
-		JOptionPane.showMessageDialog(ApplicationController.getWindow(), message, "", type);
+	public static void show(INavigationManager navigation, String message, int type) {
+		JOptionPane.showMessageDialog(navigation.getWindow(), message, "", type);
 	}
 }

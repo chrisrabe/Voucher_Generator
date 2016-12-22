@@ -1,4 +1,4 @@
-package generator.control.helper;
+package generator.control.display;
 
 /**
  * This interface takes a special parameter in order to contruct their view. The

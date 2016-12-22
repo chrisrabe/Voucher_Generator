@@ -1,6 +1,5 @@
 package generator.control.page;
 
-import generator.control.ApplicationController;
 import generator.view.page.PageView;
 import generator.view.page.config.Config;
 
@@ -10,10 +9,12 @@ import generator.view.page.config.Config;
  * @author Chris
  */
 public class ConfigController extends PageController {
+
 	private Config configView;
 
-	public ConfigController(ApplicationController main) {
-		super(main);
+	public ConfigController() {
+		// Need a code manager
+		// Need a way to change the theme
 	}
 
 	@Override
@@ -28,18 +29,17 @@ public class ConfigController extends PageController {
 		Config tmp = new Config();
 		// Navigation
 		tmp.addHomeBtnListener(e -> {
-			main.navigateTo("home");
+			navigation.navigateTo("home");
 		});
 		tmp.addVouchBtnListener(e -> {
-			main.navigateTo("voucher");
+			navigation.navigateTo("voucher");
 		});
 		tmp.addDescBtnListener(e -> {
-			main.navigateTo("description");
+			navigation.navigateTo("description");
 		});
 		tmp.addIoBtnListener(e -> {
-			main.navigateTo("io");
+			navigation.navigateTo("io");
 		});
 		return tmp;
 	}
-
 }

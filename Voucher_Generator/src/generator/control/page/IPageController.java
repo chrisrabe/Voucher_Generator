@@ -1,5 +1,6 @@
 package generator.control.page;
 
+import generator.control.manager.navigation.INavigationManager;
 import generator.view.page.PageView;
 
 /**
@@ -15,4 +16,16 @@ public interface IPageController {
 	 * @return
 	 */
 	public PageView getView();
+
+	/**
+	 * Sets the navigation controller for this page controller.
+	 * 
+	 * @param navigation
+	 */
+	public void setNavigationController(INavigationManager navigation);
+
+	/**
+	 * Updates the display.
+	 */
+	public void update();
 }

@@ -1,6 +1,6 @@
 package generator.control.page;
 
-import generator.control.ApplicationController;
+import generator.models.description.manager.DescriptionManager;
 import generator.view.page.PageView;
 import generator.view.page.description.Description;
 
@@ -10,10 +10,12 @@ import generator.view.page.description.Description;
  * @author Chris
  */
 public class DescriptionController extends PageController {
-	private Description descriptionView;
 
-	public DescriptionController(ApplicationController main) {
-		super(main);
+	private Description descriptionView;
+	private DescriptionManager descriptionManager;
+
+	public DescriptionController(DescriptionManager descriptionManager) {
+		this.descriptionManager = descriptionManager;
 	}
 
 	@Override
@@ -28,16 +30,16 @@ public class DescriptionController extends PageController {
 		Description tmp = new Description();
 		// Add navigation listeners
 		tmp.addHomeBtnListener(e -> {
-			main.navigateTo("home");
+			navigation.navigateTo("home");
 		});
 		tmp.addVoucherBtnListener(e -> {
-			main.navigateTo("voucher");
+			navigation.navigateTo("voucher");
 		});
 		tmp.addIoBtnListener(e -> {
-			main.navigateTo("io");
+			navigation.navigateTo("io");
 		});
 		tmp.addConfigBtnListener(e -> {
-			main.navigateTo("config");
+			navigation.navigateTo("config");
 		});
 		return tmp;
 	}

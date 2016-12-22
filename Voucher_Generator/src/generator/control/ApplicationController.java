@@ -3,6 +3,8 @@ package generator.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import generator.control.manager.navigation.INavigationManager;
+import generator.control.manager.navigation.NavigationManager;
 import generator.control.page.ConfigController;
 import generator.control.page.DescriptionController;
 import generator.control.page.HomeController;
@@ -10,9 +12,7 @@ import generator.control.page.IOController;
 import generator.control.page.PageController;
 import generator.control.page.VoucherController;
 import generator.models.code.manager.CodeManager;
-import generator.models.code.manager.MapCodeManager;
 import generator.models.description.manager.DescriptionManager;
-import generator.models.description.manager.ListDescriptionManager;
 import generator.view.window.ApplicationWindow;
 
 /**
@@ -27,37 +27,13 @@ public class ApplicationController {
 
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
-	private static ApplicationWindow application;
-	private Map<String, PageController> pageControllers;
+	private INavigationManager navigation;
 
 	// Constructor
 
-	public ApplicationController() {
-		codeManager = new MapCodeManager();
-		descriptionManager = new ListDescriptionManager();
-		pageControllers = createControllers();
-	}
-
-	// Getters
-
-	/**
-	 * Updates the voucher controller's view.
-	 */
-	public void updateMainModel() {
-		VoucherController control = (VoucherController) pageControllers.get("voucher");
-		control.update();
-	}
-
-	public CodeManager getCodeManager() {
-		return codeManager;
-	}
-
-	public DescriptionManager getDescriptionManager() {
-		return descriptionManager;
-	}
-
-	public static ApplicationWindow getWindow() {
-		return application;
+	public ApplicationController(CodeManager codeManager, DescriptionManager descriptionManager) {
+		this.codeManager = codeManager;
+		this.descriptionManager = descriptionManager;
 	}
 
 	// Methods
@@ -66,18 +42,8 @@ public class ApplicationController {
 	 * Creates a new application window and starts the program.
 	 */
 	public void startApplication() {
-		application = new ApplicationWindow();
-		navigateTo("home");
-	}
-
-	/**
-	 * Changes the application content to the indicated page.
-	 * 
-	 * @param page
-	 */
-	public void navigateTo(String page) {
-		PageController controller = pageControllers.get(page);
-		application.setContent(controller.getView());
+		this.navigation = new NavigationManager(new ApplicationWindow(), createControllers());
+		this.navigation.navigateTo("home");
 	}
 
 	// Helper Methods
@@ -90,11 +56,11 @@ public class ApplicationController {
 	private Map<String, PageController> createControllers() {
 		Map<String, PageController> tmp = new HashMap<String, PageController>();
 		// Add controllers here
-		tmp.put("home", new HomeController(this));
-		tmp.put("io", new IOController(this));
-		tmp.put("voucher", new VoucherController(this));
-		tmp.put("description", new DescriptionController(this));
-		tmp.put("config", new ConfigController(this));
+		tmp.put("home", new HomeController());
+		tmp.put("io", new IOController(codeManager));
+		tmp.put("voucher", new VoucherController(codeManager));
+		tmp.put("description", new DescriptionController(descriptionManager));
+		tmp.put("config", new ConfigController());
 		return tmp;
 	}
 }

@@ -1,6 +1,5 @@
 package generator.control.page;
 
-import generator.control.ApplicationController;
 import generator.view.page.PageView;
 import generator.view.page.home.Home;
 
@@ -11,10 +10,6 @@ import generator.view.page.home.Home;
  */
 public class HomeController extends PageController {
 	private Home homeView; // This controller is binded to home view.
-
-	public HomeController(ApplicationController main) {
-		super(main);
-	}
 
 	@Override
 	protected PageView createView() {
@@ -34,16 +29,16 @@ public class HomeController extends PageController {
 	private Home createHomeView() {
 		Home tmp = new Home();
 		tmp.addIOBtnListener(e -> {
-			main.navigateTo("io");
+			navigation.navigateTo("io");
 		});
 		tmp.addVoucherBtnListener(e -> {
-			main.navigateTo("voucher");
+			navigation.navigateTo("voucher");
 		});
 		tmp.addDescriptionBtnListener(e -> {
-			main.navigateTo("description");
+			navigation.navigateTo("description");
 		});
 		tmp.addConfigBtnListener(e -> {
-			main.navigateTo("config");
+			navigation.navigateTo("config");
 		});
 		return tmp;
 	}

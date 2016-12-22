@@ -7,8 +7,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import generator.control.ApplicationController;
-import generator.control.helper.IDisplayController;
+import generator.control.display.IDisplayController;
 import generator.helper.eventhandler.load.LoadEventHandler;
 import generator.helper.eventhandler.load.TextLoadEventHandler;
 import generator.helper.eventhandler.load.XMLLoadEventHandler;
@@ -16,6 +15,7 @@ import generator.helper.eventhandler.save.SaveEventHandler;
 import generator.helper.eventhandler.save.TextSaveEventHandler;
 import generator.helper.eventhandler.save.XMLSaveEventHandler;
 import generator.helper.exception.InvalidInputException;
+import generator.models.code.manager.CodeManager;
 import generator.view.display.io.load.Load;
 import generator.view.display.io.save.Save;
 import generator.view.page.PageView;
@@ -29,13 +29,14 @@ import generator.view.page.io.IO;
  */
 public class IOController extends PageController {
 	private IO ioView;
+	private CodeManager codeManager;
 	private SaveEventHandler saveHandler;
 	private LoadEventHandler loadHandler;
 	private Map<String, IDisplayController> displayControllers;
 
-	public IOController(ApplicationController main) {
-		super(main);
+	public IOController(CodeManager codeManager) {
 		displayControllers = createControllers();
+		this.codeManager = codeManager;
 	}
 
 	@Override
@@ -50,12 +51,12 @@ public class IOController extends PageController {
 
 	protected void doTXTSave() {
 		JFileChooser fc = getFileChooser();
-		int val = fc.showSaveDialog(ApplicationController.getWindow());
+		int val = fc.showSaveDialog(navigation.getWindow());
 		if (val == JFileChooser.APPROVE_OPTION) {
 			if (!(saveHandler instanceof TextSaveEventHandler))
 				saveHandler = new TextSaveEventHandler();
 			try {
-				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), main.getCodeManager().getCodes());
+				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), codeManager.getCodes());
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
@@ -64,12 +65,12 @@ public class IOController extends PageController {
 
 	protected void doXMLSave() {
 		JFileChooser fc = getFileChooser();
-		int val = fc.showSaveDialog(ApplicationController.getWindow());
+		int val = fc.showSaveDialog(navigation.getWindow());
 		if (val == JFileChooser.APPROVE_OPTION) {
 			if (!(saveHandler instanceof XMLSaveEventHandler))
 				saveHandler = new XMLSaveEventHandler();
 			try {
-				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), main.getCodeManager().getCodes());
+				saveHandler.save(fc.getSelectedFile().getAbsolutePath(), codeManager.getCodes());
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
@@ -82,36 +83,36 @@ public class IOController extends PageController {
 
 	protected void doTXTLoad() {
 		JFileChooser fc = getFileChooser();
-		main.getCodeManager().clear();
-		int val = fc.showOpenDialog(ApplicationController.getWindow());
+		codeManager.clear();
+		int val = fc.showOpenDialog(navigation.getWindow());
 		if (val == JFileChooser.APPROVE_OPTION) {
 			if (!(loadHandler instanceof TextLoadEventHandler))
 				loadHandler = new TextLoadEventHandler();
 			try {
-				main.getCodeManager().getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
+				codeManager.getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		// Tell the voucher controller that changes have been made to its model
-		main.updateMainModel();
+		navigation.updateControllers();
 	}
 
 	protected void doXMLLoad() {
 		JFileChooser fc = getFileChooser();
-		main.getCodeManager().clear();
-		int val = fc.showOpenDialog(ApplicationController.getWindow());
+		codeManager.clear();
+		int val = fc.showOpenDialog(navigation.getWindow());
 		if (val == JFileChooser.APPROVE_OPTION) {
 			if (!(loadHandler instanceof XMLLoadEventHandler))
 				loadHandler = new XMLLoadEventHandler();
 			try {
-				main.getCodeManager().getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
+				codeManager.getStorage().setCodes(loadHandler.load(fc.getSelectedFile().getAbsolutePath()));
 			} catch (InvalidInputException e) {
 				show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		// Tell voucher controller that changes have been made to its model
-		main.updateMainModel();
+		navigation.updateControllers();
 	}
 
 	// Helper Methods
@@ -124,16 +125,16 @@ public class IOController extends PageController {
 	private IO createIOView() {
 		IO tmp = new IO();
 		tmp.addHomeBtnListener(e -> {
-			main.navigateTo("home");
+			navigation.navigateTo("home");
 		});
 		tmp.addVouchBtnListener(e -> {
-			main.navigateTo("voucher");
+			navigation.navigateTo("voucher");
 		});
 		tmp.addDescBtnListener(e -> {
-			main.navigateTo("description");
+			navigation.navigateTo("description");
 		});
 		tmp.addConfigBtnListener(e -> {
-			main.navigateTo("config");
+			navigation.navigateTo("config");
 		});
 		tmp.addLoadBtnListener(e -> {
 			ioView.setDisplayContent(displayControllers.get("load").getDisplay());
