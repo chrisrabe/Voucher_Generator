@@ -1,4 +1,4 @@
-package generator.models.code.manager.configuration;
+package generator.control.manager.code.configuration;
 
 import java.util.ArrayList;
 import java.util.List;

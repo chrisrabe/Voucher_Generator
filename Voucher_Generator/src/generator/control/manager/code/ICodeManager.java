@@ -1,4 +1,4 @@
-package generator.models.code.manager;
+package generator.control.manager.code;
 
 import java.util.Collection;
 import java.util.List;

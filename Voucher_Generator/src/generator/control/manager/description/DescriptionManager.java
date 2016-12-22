@@ -1,4 +1,4 @@
-package generator.models.description.manager;
+package generator.control.manager.description;
 
 import generator.helper.exception.InvalidInputException;
 import generator.models.description.storage.IDescriptionStorage;

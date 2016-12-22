@@ -1,13 +1,13 @@
-package generator.models.code.manager;
+package generator.control.manager.code;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import generator.control.manager.code.configuration.ManagerConfiguration;
 import generator.helper.exception.InvalidInputException;
 import generator.helper.groups.character.CharacterGroup;
 import generator.models.code.Code;
-import generator.models.code.manager.configuration.ManagerConfiguration;
 import generator.models.code.storage.ICodeStorage;
 
 /**

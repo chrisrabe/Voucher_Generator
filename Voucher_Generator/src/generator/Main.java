@@ -1,8 +1,8 @@
 package generator;
 
 import generator.control.ApplicationController;
-import generator.models.code.manager.MapCodeManager;
-import generator.models.description.manager.ListDescriptionManager;
+import generator.control.manager.code.MapCodeManager;
+import generator.control.manager.description.ListDescriptionManager;
 
 /**
  * Starts the application.

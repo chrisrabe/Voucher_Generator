@@ -3,6 +3,8 @@ package generator.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import generator.control.manager.code.CodeManager;
+import generator.control.manager.description.DescriptionManager;
 import generator.control.manager.navigation.INavigationManager;
 import generator.control.manager.navigation.NavigationManager;
 import generator.control.page.ConfigController;
@@ -11,8 +13,6 @@ import generator.control.page.HomeController;
 import generator.control.page.IOController;
 import generator.control.page.PageController;
 import generator.control.page.VoucherController;
-import generator.models.code.manager.CodeManager;
-import generator.models.description.manager.DescriptionManager;
 import generator.view.window.ApplicationWindow;
 
 /**

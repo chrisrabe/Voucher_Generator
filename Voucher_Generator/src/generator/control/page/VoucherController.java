@@ -1,11 +1,12 @@
 package generator.control.page;
 
+import javax.swing.JOptionPane;
+
+import generator.control.manager.code.CodeManager;
 import generator.helper.converter.ValueConverter;
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
 import generator.helper.exception.TimeoutException;
-import generator.models.code.Code;
-import generator.models.code.manager.CodeManager;
 import generator.view.page.PageView;
 import generator.view.page.voucher.Voucher;
 
@@ -20,16 +21,12 @@ public class VoucherController extends PageController {
 
 	// Model Interaction Methods
 
-	public void addCode(Code code) {
-
-	}
-
 	public void delCode(String id) {
 		try {
 			codeManager.getStorage().remove(id);
 			update();
 		} catch (InvalidInputException | EmptyCollectionException e) {
-			// Do nothing because null pointers already handled
+			show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -38,7 +35,7 @@ public class VoucherController extends PageController {
 			codeManager.generateCode(chars, size);
 			update();
 		} catch (InvalidInputException | TimeoutException e) {
-			// Ignore for now
+			show(e.getMessage());
 		}
 	}
 
@@ -79,9 +76,6 @@ public class VoucherController extends PageController {
 		tmp.addConfigBtnListener(e -> {
 			navigation.navigateTo("config");
 		});
-		tmp.addAddBtnListener(e -> {
-			// Add Logic Here
-		});
 		tmp.addDelBtnListener(e -> {
 			String var = voucherView.getSelectedItem();
 			if (var == " " || var == null) {
@@ -90,11 +84,14 @@ public class VoucherController extends PageController {
 				delCode(var.split(" ")[0]);
 			}
 		});
+		tmp.addAddBtnListener(e -> {
+			// Add Logic Here
+		});
 		tmp.addEdtBtnListener(e -> {
 			// Edit Logic Here
 		});
 		tmp.addGenBtnListener(e -> {
-			generate(5, 5);
+			// Generate Logic Here
 		});
 		tmp.addClrBtnListener(e -> {
 			codeManager.clear();

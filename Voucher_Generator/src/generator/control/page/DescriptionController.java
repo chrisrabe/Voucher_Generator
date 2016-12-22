@@ -1,6 +1,6 @@
 package generator.control.page;
 
-import generator.models.description.manager.DescriptionManager;
+import generator.control.manager.description.DescriptionManager;
 import generator.view.page.PageView;
 import generator.view.page.description.Description;
 

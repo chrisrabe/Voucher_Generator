@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import generator.control.display.IDisplayController;
+import generator.control.manager.code.CodeManager;
 import generator.helper.eventhandler.load.LoadEventHandler;
 import generator.helper.eventhandler.load.TextLoadEventHandler;
 import generator.helper.eventhandler.load.XMLLoadEventHandler;
@@ -15,7 +16,6 @@ import generator.helper.eventhandler.save.SaveEventHandler;
 import generator.helper.eventhandler.save.TextSaveEventHandler;
 import generator.helper.eventhandler.save.XMLSaveEventHandler;
 import generator.helper.exception.InvalidInputException;
-import generator.models.code.manager.CodeManager;
 import generator.view.display.io.load.Load;
 import generator.view.display.io.save.Save;
 import generator.view.page.PageView;
