@@ -47,6 +47,7 @@ public class VoucherController extends PageController {
 	 * controller or the description controller executes methods which changes
 	 * the vouchers, this controller needs to know in order to update its view.
 	 */
+	@Override
 	public void update() {
 		String[] data = ValueConverter.convertCodeToArray(codeManager.getCodes());
 		voucherView.setContent(data);
