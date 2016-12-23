@@ -12,11 +12,13 @@ import generator.helper.converter.ValueConverter;
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
 import generator.helper.exception.TimeoutException;
+import generator.models.code.Code;
 import generator.view.display.voucher.add.Add;
 import generator.view.display.voucher.edit.Edit;
 import generator.view.display.voucher.generate.Generate;
 import generator.view.page.PageView;
 import generator.view.page.voucher.Voucher;
+import vgcomponents.dialogs.VGDialog;
 
 public class VoucherController extends PageController {
 
@@ -49,6 +51,38 @@ public class VoucherController extends PageController {
 		} catch (InvalidInputException | TimeoutException e) {
 			show(e.getMessage());
 		}
+	}
+
+	private void editCode(String id) {
+		try {
+			// Update the edit display
+			Code code = codeManager.getStorage().get(id);
+			Edit display = (Edit) displayControllers.get("edit").getDisplay();
+			display.setIDField(code.getID());
+			display.setDescriptionField(code.getDescription());
+			// Show display
+			new VGDialog(navigation, display);
+		} catch (EmptyCollectionException e) {
+			show(e.getMessage());
+		}
+	}
+
+	private void addCode() {
+		// Reset display fields
+		Add display = (Add) displayControllers.get("add").getDisplay();
+		display.setIDField("");
+		display.setDescriptionField("");
+		// Show display
+		new VGDialog(navigation, display);
+	}
+
+	private void generate() {
+		// Reset display fields
+		Generate display = (Generate) displayControllers.get("gen").getDisplay();
+		display.setCharsField("");
+		display.setSizeField("");
+		// Show display
+		new VGDialog(navigation, display);
 	}
 
 	// PageController Methods
@@ -105,13 +139,15 @@ public class VoucherController extends PageController {
 				delCode(id);
 		});
 		tmp.addAddBtnListener(e -> {
-			// Add Logic Here
+			addCode();
 		});
 		tmp.addEdtBtnListener(e -> {
-			// Edit Logic Here
+			String id = getCodeID(voucherView.getSelectedItem());
+			if (id != null)
+				editCode(id);
 		});
 		tmp.addGenBtnListener(e -> {
-			// Generate Logic Here
+			generate();
 		});
 		tmp.addClrBtnListener(e -> {
 			codeManager.clear();
@@ -154,6 +190,7 @@ public class VoucherController extends PageController {
 					generateDisplay = new Generate();
 					generateDisplay.addGenerateBtnListener(e -> {
 						// Add generate logic here
+						update();
 					});
 				}
 				return generateDisplay;
