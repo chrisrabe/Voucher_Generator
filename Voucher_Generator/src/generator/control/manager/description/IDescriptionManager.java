@@ -1,5 +1,6 @@
 package generator.control.manager.description;
 
+import java.util.Collection;
 import java.util.List;
 
 import generator.helper.exception.EmptyCollectionException;
@@ -27,4 +28,16 @@ public interface IDescriptionManager {
 	 * @param codes
 	 */
 	public void distribute(List<Code> codes) throws EmptyCollectionException;
+
+	/**
+	 * Retrieves the descriptions inside the storage.
+	 * 
+	 * @return
+	 */
+	public Collection<String> getDescriptions();
+
+	/**
+	 * Clears the storage
+	 */
+	public void clear();
 }

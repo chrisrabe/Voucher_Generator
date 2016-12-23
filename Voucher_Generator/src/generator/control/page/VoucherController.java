@@ -14,6 +14,7 @@ public class VoucherController extends PageController {
 
 	private Voucher voucherView;
 	private CodeManager codeManager;
+	private String[] cache; // gets stored if the view is not created yet
 
 	public VoucherController(CodeManager codeManager) {
 		this.codeManager = codeManager;
@@ -42,15 +43,18 @@ public class VoucherController extends PageController {
 	// Methods
 
 	/**
-	 * This method tells this controller that some changes have been made and
-	 * the display should be updated. This method exists because if the io
-	 * controller or the description controller executes methods which changes
-	 * the vouchers, this controller needs to know in order to update its view.
+	 * Changes the data inside the JList inside the voucher view. If the view
+	 * has not been created yet, it caches the changes.
 	 */
 	@Override
 	public void update() {
 		String[] data = ValueConverter.convertCodeToArray(codeManager.getCodes());
-		voucherView.setContent(data);
+		if (voucherView != null) {
+			voucherView.setContent(data);
+		} else {
+			cache = data;
+		}
+
 	}
 
 	@Override
@@ -65,6 +69,12 @@ public class VoucherController extends PageController {
 
 	private Voucher createVoucherView() {
 		Voucher tmp = new Voucher();
+		// Check if there are cached data
+		if (cache != null) {
+			tmp.setContent(cache);
+			cache = null; // release the cached data
+		}
+		// Add navigation listeners
 		tmp.addHomeBtnListener(e -> {
 			navigation.navigateTo("home");
 		});
@@ -77,13 +87,11 @@ public class VoucherController extends PageController {
 		tmp.addConfigBtnListener(e -> {
 			navigation.navigateTo("config");
 		});
+		// Add function listeners
 		tmp.addDelBtnListener(e -> {
-			String var = voucherView.getSelectedItem();
-			if (var == " " || var == null) {
-				show("You must select an item to delete");
-			} else {
-				delCode(var.split(" ")[0]);
-			}
+			String id = getCodeID(voucherView.getSelectedItem());
+			if (id != null)
+				delCode(id);
 		});
 		tmp.addAddBtnListener(e -> {
 			// Add Logic Here
@@ -101,4 +109,17 @@ public class VoucherController extends PageController {
 		return tmp;
 	}
 
+	/**
+	 * Retrieves the code ID from the given string.
+	 * 
+	 * @param line
+	 * @return
+	 */
+	private String getCodeID(String line) {
+		if (line == " " || line == null) {
+			show("You must select an item to delete");
+			return null;
+		}
+		return line.split(" ")[0];
+	}
 }

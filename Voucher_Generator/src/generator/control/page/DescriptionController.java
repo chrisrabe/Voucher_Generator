@@ -1,6 +1,7 @@
 package generator.control.page;
 
 import generator.control.manager.description.DescriptionManager;
+import generator.helper.converter.ValueConverter;
 import generator.view.page.PageView;
 import generator.view.page.description.Description;
 
@@ -16,6 +17,15 @@ public class DescriptionController extends PageController {
 
 	public DescriptionController(DescriptionManager descriptionManager) {
 		this.descriptionManager = descriptionManager;
+	}
+
+	// Methods
+
+	@Override
+	public void update() {
+		String[] data = ValueConverter.convertDescriptionsToArray(descriptionManager.getDescriptions());
+		if (descriptionView != null)
+			descriptionView.setContent(data);
 	}
 
 	@Override
@@ -40,6 +50,10 @@ public class DescriptionController extends PageController {
 		});
 		tmp.addConfigBtnListener(e -> {
 			navigation.navigateTo("config");
+		});
+		// Add function listeners
+		tmp.addClrBtnListener(e -> {
+			descriptionManager.clear();
 		});
 		return tmp;
 	}
