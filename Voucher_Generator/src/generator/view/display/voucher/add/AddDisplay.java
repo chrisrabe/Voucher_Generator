@@ -32,6 +32,7 @@ public abstract class AddDisplay extends VoucherDisplay {
 	protected JButton confirmBtn = new VGButton(200, 100, "Confirm");
 	protected JButton generateBtn = VGButtonFactory.createVoucherButton("generate", "Generate ID", 50);
 
+	protected JTextArea lengthField = new VGTextField(1, 8);
 	protected JTextArea idField = new VGTextField(1, 8, 30, false);
 	protected JTextArea descriptionField = new VGTextField(4, 8);
 
@@ -40,11 +41,14 @@ public abstract class AddDisplay extends VoucherDisplay {
 		JPanel title = new CenteredPanel(20, new VGLabel("New Voucher", 40));
 		JPanel button = new CenteredPanel(10, confirmBtn);
 		// Set up the grid in the middle
+		JPanel lengthLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("ID Length", 20));
 		JPanel idLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Voucher ID", 20));
 		JPanel descriptionLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Description", 20));
-		JPanel fields = new GridButtonPanel(550, 330, new WrapperPanel(idLbl),
-				new AlignedPanel(FlowLayout.LEFT, idField), new WrapperPanel(descriptionLbl),
-				new AlignedPanel(FlowLayout.LEFT, new JScrollPane(descriptionField)));
+		JPanel fields = new GridButtonPanel(550, 330, new WrapperPanel(new VerticalButtonPanel(lengthLbl, idLbl)),
+				new AlignedPanel(FlowLayout.LEFT, 200, 100,
+						new AlignedPanel(FlowLayout.LEFT, new JScrollPane(lengthField)),
+						new AlignedPanel(FlowLayout.LEFT, new JScrollPane(idField))),
+				new WrapperPanel(descriptionLbl), new AlignedPanel(FlowLayout.LEFT, new JScrollPane(descriptionField)));
 		// Put generate button on the right hand side
 		JPanel genBtn = new VerticalButtonPanel(new AlignedPanel(FlowLayout.LEFT, generateBtn),
 				new GridButtonPanel(200, 50), new GridButtonPanel(200, 300), new GridButtonPanel(200, 200),

@@ -42,4 +42,12 @@ public class Add extends AddDisplay {
 	public void setDescriptionField(String text) {
 		descriptionField.setText(text);
 	}
+
+	public String getLengthField() {
+		return lengthField.getText();
+	}
+
+	public void setLengthField(String text) {
+		lengthField.setText(text);
+	}
 }
