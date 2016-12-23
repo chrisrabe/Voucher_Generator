@@ -3,6 +3,7 @@ package generator.control.page;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -27,6 +28,7 @@ public class VoucherController extends PageController {
 
 	private String[] cache;
 	private Map<String, IDisplayController> displayControllers;
+	private JDialog curDialog;
 
 	public VoucherController(CodeManager codeManager) {
 		displayControllers = createControllers();
@@ -61,7 +63,12 @@ public class VoucherController extends PageController {
 			display.setIDField(code.getID());
 			display.setDescriptionField(code.getDescription());
 			// Show display
-			new VGDialog(navigation, display);
+			if (curDialog != null) {
+				curDialog.dispose();
+				curDialog = null;
+			}
+
+			curDialog = new VGDialog(navigation, display);
 		} catch (EmptyCollectionException e) {
 			show(e.getMessage());
 		}
@@ -73,7 +80,12 @@ public class VoucherController extends PageController {
 		display.setIDField("");
 		display.setDescriptionField("");
 		// Show display
-		new VGDialog(navigation, display);
+		if (curDialog != null) {
+			curDialog.dispose();
+			curDialog = null;
+		}
+
+		curDialog = new VGDialog(navigation, display);
 	}
 
 	private void generate() {
@@ -82,7 +94,12 @@ public class VoucherController extends PageController {
 		display.setCharsField("");
 		display.setSizeField("");
 		// Show display
-		new VGDialog(navigation, display);
+		if (curDialog != null) {
+			curDialog.dispose();
+			curDialog = null;
+		}
+
+		curDialog = new VGDialog(navigation, display);
 	}
 
 	// PageController Methods

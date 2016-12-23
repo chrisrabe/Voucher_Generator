@@ -21,6 +21,7 @@ public class VGDialog extends JDialog {
 
 	public VGDialog(String title, INavigationManager navigation, JPanel display) {
 		this.setTitle(title);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.add(display);
 		this.pack();

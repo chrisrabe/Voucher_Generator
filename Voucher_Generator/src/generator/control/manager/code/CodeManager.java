@@ -70,7 +70,7 @@ public abstract class CodeManager implements ICodeManager {
 	 * @param groups
 	 * @return
 	 */
-	protected String generateCodeID(int chars, List<CharacterGroup> groups) throws InvalidInputException {
+	public String generateCodeID(int chars, List<CharacterGroup> groups) throws InvalidInputException {
 		// First grab all the active groups
 		List<CharacterGroup> activeGroups = getActiveGroups(groups);
 		if (activeGroups.isEmpty())
