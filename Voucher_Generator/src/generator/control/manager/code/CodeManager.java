@@ -63,6 +63,10 @@ public abstract class CodeManager implements ICodeManager {
 
 	// Helper Methods
 
+	public String generateCodeID(int chars) throws InvalidInputException {
+		return generateCodeID(chars, config.getCharacterGroups());
+	}
+
 	/**
 	 * Generates a code string with the length of the given chars parameter.
 	 * 
@@ -70,7 +74,7 @@ public abstract class CodeManager implements ICodeManager {
 	 * @param groups
 	 * @return
 	 */
-	public String generateCodeID(int chars, List<CharacterGroup> groups) throws InvalidInputException {
+	protected String generateCodeID(int chars, List<CharacterGroup> groups) throws InvalidInputException {
 		// First grab all the active groups
 		List<CharacterGroup> activeGroups = getActiveGroups(groups);
 		if (activeGroups.isEmpty())

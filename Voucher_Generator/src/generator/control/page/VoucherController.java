@@ -37,10 +37,18 @@ public class VoucherController extends PageController {
 
 	// Model Interaction Methods
 
+	public void editCode(String id, String newDescription) {
+		try {
+			Code code = codeManager.getStorage().get(id);
+			code.setDescription(newDescription);
+		} catch (EmptyCollectionException e) {
+			show(e.getMessage());
+		}
+	}
+
 	public void delCode(String id) {
 		try {
 			codeManager.getStorage().remove(id);
-			update();
 		} catch (InvalidInputException | EmptyCollectionException e) {
 			show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
 		}
@@ -49,7 +57,6 @@ public class VoucherController extends PageController {
 	public void generate(int chars, int size) {
 		try {
 			codeManager.generateCode(chars, size);
-			update();
 		} catch (InvalidInputException | TimeoutException e) {
 			show(e.getMessage());
 		}
@@ -152,8 +159,14 @@ public class VoucherController extends PageController {
 		// Add function listeners
 		tmp.addDelBtnListener(e -> {
 			String id = getCodeID(voucherView.getSelectedItem());
-			if (id != null)
+			if (id != null) {
 				delCode(id);
+				update();
+			}
+		});
+		tmp.addClrBtnListener(e -> {
+			codeManager.clear();
+			update();
 		});
 		tmp.addAddBtnListener(e -> {
 			addCode();
@@ -165,10 +178,6 @@ public class VoucherController extends PageController {
 		});
 		tmp.addGenBtnListener(e -> {
 			generate();
-		});
-		tmp.addClrBtnListener(e -> {
-			codeManager.clear();
-			update();
 		});
 		return tmp;
 	}
@@ -206,11 +215,25 @@ public class VoucherController extends PageController {
 				if (generateDisplay == null) {
 					generateDisplay = new Generate();
 					generateDisplay.addGenerateBtnListener(e -> {
-						// Add generate logic here
-						update();
+						String chars = generateDisplay.getCharsField().trim();
+						String size = generateDisplay.getSizeField().trim();
+						if (isNumeric(chars) && isNumeric(size)) {
+							generate(Integer.parseInt(chars), Integer.parseInt(size));
+							update();
+						} else {
+							show("Fields must be a number");
+						}
+						curDialog.dispose();
+						curDialog = null;
 					});
 				}
 				return generateDisplay;
+			}
+
+			private boolean isNumeric(String s) {
+				if (s == null)
+					return false;
+				return s.matches("[-+]?\\d*\\.?\\d+");
 			}
 		};
 	}
@@ -224,7 +247,10 @@ public class VoucherController extends PageController {
 				if (editDisplay == null) {
 					editDisplay = new Edit();
 					editDisplay.addConfirmBtnListener(e -> {
-						// Edit logic here
+						String id = editDisplay.getIDField();
+						String desc = editDisplay.getDescriptionField();
+						editCode(id, desc);
+						update();
 					});
 				}
 				return editDisplay;
@@ -241,7 +267,7 @@ public class VoucherController extends PageController {
 				if (addDisplay == null) {
 					addDisplay = new Add();
 					addDisplay.addGenerateBtnListener(e -> {
-						// generate code id here
+						// Generate code string
 					});
 					addDisplay.addConfirmBtnListener(e -> {
 						// add logic here
