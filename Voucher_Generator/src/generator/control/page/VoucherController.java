@@ -70,11 +70,7 @@ public class VoucherController extends PageController {
 			display.setIDField(code.getID());
 			display.setDescriptionField(code.getDescription());
 			// Show display
-			if (curDialog != null) {
-				curDialog.dispose();
-				curDialog = null;
-			}
-
+			disposeDialog();
 			curDialog = new VGDialog(navigation, display);
 		} catch (EmptyCollectionException e) {
 			show(e.getMessage());
@@ -87,11 +83,7 @@ public class VoucherController extends PageController {
 		display.setIDField("");
 		display.setDescriptionField("");
 		// Show display
-		if (curDialog != null) {
-			curDialog.dispose();
-			curDialog = null;
-		}
-
+		disposeDialog();
 		curDialog = new VGDialog(navigation, display);
 	}
 
@@ -101,11 +93,7 @@ public class VoucherController extends PageController {
 		display.setCharsField("");
 		display.setSizeField("");
 		// Show display
-		if (curDialog != null) {
-			curDialog.dispose();
-			curDialog = null;
-		}
-
+		disposeDialog();
 		curDialog = new VGDialog(navigation, display);
 	}
 
@@ -135,6 +123,13 @@ public class VoucherController extends PageController {
 	}
 
 	// Helper Methods
+
+	private void disposeDialog() {
+		if (curDialog != null) {
+			curDialog.dispose();
+			curDialog = null;
+		}
+	}
 
 	private Voucher createVoucherView() {
 		Voucher tmp = new Voucher();
@@ -250,6 +245,7 @@ public class VoucherController extends PageController {
 						String id = editDisplay.getIDField();
 						String desc = editDisplay.getDescriptionField();
 						editCode(id, desc);
+						disposeDialog();
 						update();
 					});
 				}
@@ -267,13 +263,36 @@ public class VoucherController extends PageController {
 				if (addDisplay == null) {
 					addDisplay = new Add();
 					addDisplay.addGenerateBtnListener(e -> {
-						// Generate code string
+						String length = addDisplay.getLengthField();
+						if (isNumeric(length)) {
+							try {
+								addDisplay.setIDField(codeManager.generateCodeID(Integer.parseInt(length)));
+							} catch (NumberFormatException | InvalidInputException e1) {
+								show(e1.getMessage());
+							}
+						} else {
+							show("Length field must be a number.");
+						}
 					});
 					addDisplay.addConfirmBtnListener(e -> {
-						// add logic here
+						String id = addDisplay.getIDField().trim();
+						String desc = addDisplay.getDescriptionField().trim();
+						if (id.equals("") || desc.equals("")) {
+							show("ID and Description fields must be filled in.");
+						} else {
+							codeManager.getStorage().add(new Code(id, desc));
+							disposeDialog();
+							update();
+						}
 					});
 				}
 				return addDisplay;
+			}
+
+			private boolean isNumeric(String s) {
+				if (s == null)
+					return false;
+				return s.matches("[-+]?\\d*\\.?\\d+");
 			}
 		};
 	}

@@ -25,6 +25,14 @@ public abstract class ValueConverter {
 	}
 
 	public static String[] convertDescriptionsToArray(Collection<String> descriptions) {
-		return (String[]) descriptions.toArray();
+		if (descriptions.isEmpty())
+			return null;
+		String[] tmp = new String[descriptions.size()];
+		int count = 0;
+		for (String s : descriptions) {
+			tmp[count] = s;
+			count++;
+		}
+		return tmp;
 	}
 }
