@@ -59,7 +59,7 @@ public class ApplicationController {
 		tmp.put("home", new HomeController());
 		tmp.put("io", new IOController(codeManager));
 		tmp.put("voucher", new VoucherController(codeManager));
-		tmp.put("description", new DescriptionController(descriptionManager));
+		tmp.put("description", new DescriptionController(descriptionManager, codeManager));
 		tmp.put("config", new ConfigController());
 		return tmp;
 	}

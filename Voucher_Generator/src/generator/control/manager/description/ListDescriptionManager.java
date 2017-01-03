@@ -1,6 +1,6 @@
 package generator.control.manager.description;
 
-import java.util.List;
+import java.util.Collection;
 
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
@@ -20,7 +20,7 @@ public class ListDescriptionManager extends DescriptionManager {
 	}
 
 	@Override
-	public void distribute(List<Code> codes) throws EmptyCollectionException {
+	public void distribute(Collection<Code> codes) throws EmptyCollectionException {
 		// First check if the given list is not empty
 		if (codes.isEmpty())
 			throw new EmptyCollectionException("Vouchers must be generated first.");

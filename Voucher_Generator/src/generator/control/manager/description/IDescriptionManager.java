@@ -1,7 +1,6 @@
 package generator.control.manager.description;
 
 import java.util.Collection;
-import java.util.List;
 
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
@@ -27,7 +26,7 @@ public interface IDescriptionManager {
 	 * 
 	 * @param codes
 	 */
-	public void distribute(List<Code> codes) throws EmptyCollectionException;
+	public void distribute(Collection<Code> codes) throws EmptyCollectionException;
 
 	/**
 	 * Retrieves the descriptions inside the storage.

@@ -1,9 +1,22 @@
 package generator.control.page;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import generator.control.display.IDisplayController;
+import generator.control.manager.code.CodeManager;
 import generator.control.manager.description.DescriptionManager;
 import generator.helper.converter.ValueConverter;
+import generator.helper.exception.EmptyCollectionException;
+import generator.helper.exception.InvalidInputException;
+import generator.view.display.description.add.Add;
 import generator.view.page.PageView;
 import generator.view.page.description.Description;
+import vgcomponents.dialogs.VGDialog;
 
 /**
  * This class implements the action listeners for the description view.
@@ -13,10 +26,16 @@ import generator.view.page.description.Description;
 public class DescriptionController extends PageController {
 
 	private Description descriptionView;
+	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
 
-	public DescriptionController(DescriptionManager descriptionManager) {
+	private Map<String, IDisplayController> displayControllers;
+	private JDialog curDialog;
+
+	public DescriptionController(DescriptionManager descriptionManager, CodeManager codeManager) {
+		displayControllers = createControllers();
 		this.descriptionManager = descriptionManager;
+		this.codeManager = codeManager;
 	}
 
 	// Methods
@@ -34,6 +53,65 @@ public class DescriptionController extends PageController {
 			descriptionView = createDescriptionView();
 
 		return descriptionView;
+	}
+
+	// Model Methods
+
+	/**
+	 * Distributes the description from the description manager into
+	 */
+	private void distribute() {
+		try {
+			if (!codeManager.getCodes().isEmpty()) {
+				descriptionManager.distribute(codeManager.getCodes());
+				navigation.updateControllers();
+				show("Distribution Successful. Check vouchers to see result.");
+			} else {
+				throw new EmptyCollectionException("You must produce codes in order to distribute descriptions.");
+			}
+		} catch (EmptyCollectionException e) {
+			show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * Removes the selected item from the list.
+	 */
+	private void delete() {
+		String line = descriptionView.getSelectedItem();
+		if (line == null || line.equals(" ")) {
+			show("You must select an item to delete");
+			return;
+		}
+		try {
+			descriptionManager.getStorage().remove(line.trim());
+			update();
+		} catch (EmptyCollectionException e) {
+			show(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	private void add() {
+		Add display = (Add) displayControllers.get("add").getDisplay();
+		display.setDescriptionField("");
+		// Show display
+		disposeDialog();
+		curDialog = new VGDialog(navigation, display);
+	}
+
+	// Helper Methods
+
+	private void disposeDialog() {
+		if (curDialog != null) {
+			curDialog.dispose();
+			curDialog = null;
+		}
+	}
+
+	private Map<String, IDisplayController> createControllers() {
+		Map<String, IDisplayController> tmp = new HashMap<String, IDisplayController>();
+		tmp.put("add", createAddController());
+		return tmp;
 	}
 
 	private Description createDescriptionView() {
@@ -54,8 +132,43 @@ public class DescriptionController extends PageController {
 		// Add function listeners
 		tmp.addClrBtnListener(e -> {
 			descriptionManager.clear();
+			update();
+		});
+		tmp.addDisBtnListener(e -> {
+			distribute();
+		});
+		tmp.addDelBtnListener(e -> {
+			delete();
+		});
+		tmp.addAddBtnListener(e -> {
+			add();
 		});
 		return tmp;
 	}
 
+	// Constructor functions
+
+	private IDisplayController createAddController() {
+		return new IDisplayController() {
+			private Add display;
+
+			@Override
+			public JPanel getDisplay() {
+				display = new Add();
+				display.addConfirmBtnListener(e -> {
+					String value = display.getDescriptionField();
+					if (value != null && !value.matches("\\s+")) {
+						try {
+							descriptionManager.addDescription(value);
+							disposeDialog();
+							update();
+						} catch (InvalidInputException e1) {
+							show(e1.getMessage(), JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				});
+				return display;
+			}
+		};
+	}
 }
