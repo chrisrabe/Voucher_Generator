@@ -27,7 +27,7 @@ public abstract class LoadDisplay extends IODisplay {
 	@Override
 	protected void initialiseComponents() {
 		JPanel title = new CenteredPanel(10, new VGLabel("Choose load operation...", 20));
-		JPanel tools = new WrapperPanel(new HorizontalButtonPanel(300, 100, xmlBtn, txtBtn));
+		JPanel tools = new WrapperPanel(new HorizontalButtonPanel(350, 100, xmlBtn, txtBtn));
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
 		this.add(tools, BorderLayout.CENTER);

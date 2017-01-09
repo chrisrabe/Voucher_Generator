@@ -23,12 +23,12 @@ public abstract class SaveDisplay extends IODisplay {
 
 	protected JButton xmlBtn = VGButtonFactory.createIOButton("xml", "Export to XML file", 100);
 	protected JButton txtBtn = VGButtonFactory.createIOButton("txt", "Export to TXT file", 100);
-	protected JButton pngBtn = VGButtonFactory.createIOButton("png", "Export to a folder as PNG", 100);
+	protected JButton pngBtn = VGButtonFactory.createIOButton("png", "Export to a folder as PNG", 100); // TODO Implement this in another patch
 
 	@Override
 	protected void initialiseComponents() {
 		JPanel title = new CenteredPanel(10, new VGLabel("Choose save operation...", 20));
-		JPanel tools = new WrapperPanel(new HorizontalButtonPanel(350, 100, xmlBtn, txtBtn, pngBtn));
+		JPanel tools = new WrapperPanel(new HorizontalButtonPanel(350, 100, xmlBtn, txtBtn));
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
 		this.add(tools, BorderLayout.CENTER);
