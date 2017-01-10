@@ -2,6 +2,7 @@ package generator.control.page;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JPanel;
@@ -82,12 +83,34 @@ public class ConfigController extends PageController {
 
 	// Helper Methods
 
+	/**
+	 * Updates the two character fields based from the selected character group.
+	 * 
+	 * @param display
+	 */
+	private void updateGroupDisplay(CharGroupDisplay display) {
+		System.out.println("Update fields");
+	}
+
+	/**
+	 * Updates the active indicator image based from the selected character
+	 * group.
+	 * 
+	 * @param display
+	 */
+	private void updateEncodeDisplay(EncodeDisplay display) {
+		System.out.println("Update image");
+	}
+
+	/**
+	 * Refreshes the encode display
+	 */
 	private void updateGroupDisplay() {
 		CharGroupDisplay display = (CharGroupDisplay) displayControllers.get("group").getDisplay();
 		display.setContent(ValueConverter.convertConfigurationToArray(codeManager.getConfigurations()));
-		display.addContentListener(new MouseAdapter() {
-
-		});
+		display.addContentListener(createMouseListener(() -> {
+			updateGroupDisplay(display);
+		}));
 	}
 
 	/**
@@ -97,12 +120,25 @@ public class ConfigController extends PageController {
 	private void updateEncodeDisplay() {
 		EncodeDisplay display = (EncodeDisplay) displayControllers.get("encode").getDisplay();
 		display.setContent(ValueConverter.convertConfigurationToArray(codeManager.getConfigurations()));
-		display.addContentListener(new MouseAdapter() {
+		display.addContentListener(createMouseListener(() -> {
+			updateEncodeDisplay(display);
+		}));
+	}
+
+	/**
+	 * Creates a mouse listener and runs the function passed whenever the mouse
+	 * is clicked
+	 * 
+	 * @param function
+	 * @return
+	 */
+	public MouseListener createMouseListener(Runnable function) {
+		return new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Update Image");
+				function.run();
 			}
-		});
+		};
 	}
 
 	// Display contructor functions
@@ -136,12 +172,9 @@ public class ConfigController extends PageController {
 					charGroupDisplay.addUpdateBtnListener(e -> {
 
 					});
-					charGroupDisplay.addContentListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							System.out.println("Update fields");
-						}
-					});
+					charGroupDisplay.addContentListener(createMouseListener(() -> {
+						updateGroupDisplay(charGroupDisplay);
+					}));
 				}
 				return charGroupDisplay;
 			}
@@ -167,12 +200,9 @@ public class ConfigController extends PageController {
 					encodeDisplay.addDisableBtnListener(e -> {
 
 					});
-					encodeDisplay.addContentListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							System.out.println("Update Image");
-						}
-					});
+					encodeDisplay.addContentListener(createMouseListener(() -> {
+						updateEncodeDisplay(encodeDisplay);
+					}));
 				}
 				return encodeDisplay;
 			}
