@@ -1,12 +1,15 @@
 package generator.view.display.config.encoding;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+
 import generator.view.display.config.ConfigDisplay;
 import vgcomponents.buttons.VGButton;
 import vgcomponents.factories.VGImagePanelFactory;
@@ -33,6 +36,7 @@ public abstract class EncodeGUI extends ConfigDisplay {
 
 	protected JButton enableBtn = new VGButton(200, 50, "Enable");
 	protected JButton disableBtn = new VGButton(200, 50, "Disable");
+	protected JButton checkBtn = new VGButton(200, 50, "Activated?");
 
 	// Image
 
@@ -48,13 +52,15 @@ public abstract class EncodeGUI extends ConfigDisplay {
 	protected void initialiseComponents() {
 		JPanel rightTop = new DockedPanel(new CenteredPanel(20, new VGLabel("Activated", 20)), null, null, null,
 				indicator);
-		JPanel buttons = new VerticalPanel(220, 220, new WrapperPanel(enableBtn), new WrapperPanel(disableBtn));
+		JPanel buttons = new VerticalPanel(220, 220, new WrapperPanel(checkBtn), new WrapperPanel(enableBtn),
+				new WrapperPanel(disableBtn));
 		JPanel right = new VerticalPanel(220, 520, rightTop, new WrapperPanel(buttons));
 		JPanel title = new CenteredPanel(10, new VGLabel("Character Groups", 20));
 		JPanel left = new DockedPanel(title, null, null, null, new WrapperPanel(display));
 		JPanel body = new HorizontalPanel(new WrapperPanel(10, left), new WrapperPanel(right));
 		// set up panel
 		this.setLayout(new BorderLayout());
+		this.setBorder(new LineBorder(Color.WHITE));
 		this.add(body, BorderLayout.CENTER);
 	}
 

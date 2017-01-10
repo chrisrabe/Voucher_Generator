@@ -33,7 +33,7 @@ public class VoucherController extends PageController {
 	private JDialog curDialog;
 
 	public VoucherController(CodeManager codeManager, IThemeManager themeManager) {
-		displayControllers = createControllers();
+		this.displayControllers = createControllers();
 		this.codeManager = codeManager;
 		this.themeManager = themeManager;
 	}

@@ -2,6 +2,8 @@ package generator.helper.converter;
 
 import java.util.Collection;
 
+import generator.control.manager.code.configuration.ManagerConfiguration;
+import generator.helper.groups.character.CharacterGroup;
 import generator.models.code.Code;
 
 /**
@@ -29,6 +31,17 @@ public abstract class ValueConverter {
 		int count = 0;
 		for (String s : descriptions) {
 			tmp[count] = s;
+			count++;
+		}
+		return tmp;
+	}
+
+	public static String[] convertConfigurationToArray(ManagerConfiguration config) {
+		Collection<CharacterGroup> charGroups = config.getCharacterGroups();
+		String[] tmp = new String[charGroups.size()];
+		int count = 0;
+		for (CharacterGroup group : charGroups) {
+			tmp[count] = group.getName();
 			count++;
 		}
 		return tmp;

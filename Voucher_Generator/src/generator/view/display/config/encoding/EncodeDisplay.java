@@ -1,7 +1,6 @@
 package generator.view.display.config.encoding;
 
 import java.awt.event.ActionListener;
-
 import javax.swing.ListCellRenderer;
 
 import vgcomponents.factories.VGImagePanelFactory;
@@ -28,6 +27,10 @@ public class EncodeDisplay extends EncodeGUI {
 
 	public void addDisableBtnListener(ActionListener listener) {
 		disableBtn.addActionListener(listener);
+	}
+
+	public void addCheckBtnListener(ActionListener listener) {
+		checkBtn.addActionListener(listener);
 	}
 
 	// Image Replacement
