@@ -8,7 +8,7 @@ import java.awt.Color;
  * 
  * @author Chris
  */
-public class TecTheme implements IVGTheme {
+public class DarkTheme implements IVGTheme {
 
 	@Override
 	public Color getForegroundColour() {

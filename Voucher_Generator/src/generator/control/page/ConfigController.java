@@ -14,7 +14,7 @@ public class ConfigController extends PageController {
 
 	public ConfigController() {
 		// Need a code manager
-		// Need a way to change the theme
+		// Need theme manager
 	}
 
 	@Override

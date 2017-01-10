@@ -2,6 +2,8 @@ package generator.view.page.description;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.ListCellRenderer;
+
 import vgcomponents.lists.VGList;
 
 /**
@@ -54,6 +56,11 @@ public class Description extends DescriptionView {
 	}
 
 	// Content Getters and Setters
+
+	public void setCellRenderer(ListCellRenderer<String> renderer) {
+		content.setCellRenderer(renderer);
+		content.repaint();
+	}
 
 	public String getSelectedItem() {
 		return content.getSelectedValue();

@@ -53,6 +53,10 @@ public class ManagerConfiguration {
 		return characterGroups.get(index);
 	}
 
+	public void addCharacterGroup(CharacterGroup group) {
+		characterGroups.add(group);
+	}
+
 	public void removeCharacterGroup(int index) {
 		characterGroups.remove(index);
 	}

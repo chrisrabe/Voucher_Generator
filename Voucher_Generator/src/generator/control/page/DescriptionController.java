@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import generator.control.display.IDisplayController;
 import generator.control.manager.code.CodeManager;
 import generator.control.manager.description.DescriptionManager;
+import generator.control.manager.theme.IThemeManager;
 import generator.helper.converter.ValueConverter;
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
@@ -28,14 +29,17 @@ public class DescriptionController extends PageController {
 	private Description descriptionView;
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
+	private IThemeManager themeManager;
 
 	private Map<String, IDisplayController> displayControllers;
 	private JDialog curDialog;
 
-	public DescriptionController(DescriptionManager descriptionManager, CodeManager codeManager) {
+	public DescriptionController(DescriptionManager descriptionManager, CodeManager codeManager,
+			IThemeManager themeManager) {
 		displayControllers = createControllers();
 		this.descriptionManager = descriptionManager;
 		this.codeManager = codeManager;
+		this.themeManager = themeManager;
 	}
 
 	// Methods
@@ -45,6 +49,9 @@ public class DescriptionController extends PageController {
 		String[] data = ValueConverter.convertDescriptionsToArray(descriptionManager.getDescriptions());
 		if (descriptionView != null)
 			descriptionView.setContent(data);
+		if (themeManager.themeChanged()) {
+			descriptionView.setCellRenderer(themeManager.getCellRenderer());
+		}
 	}
 
 	@Override
@@ -116,6 +123,7 @@ public class DescriptionController extends PageController {
 
 	private Description createDescriptionView() {
 		Description tmp = new Description();
+		tmp.setCellRenderer(themeManager.getCellRenderer());
 		// Add navigation listeners
 		tmp.addHomeBtnListener(e -> {
 			navigation.navigateTo("home");

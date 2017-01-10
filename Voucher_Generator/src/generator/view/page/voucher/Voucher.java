@@ -2,6 +2,8 @@ package generator.view.page.voucher;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.ListCellRenderer;
+
 import vgcomponents.lists.VGList;
 
 /**
@@ -58,6 +60,11 @@ public class Voucher extends VoucherView {
 	}
 
 	// Content Getters and Setters
+
+	public void setCellRenderer(ListCellRenderer<String> renderer) {
+		content.setCellRenderer(renderer);
+		content.repaint();
+	}
 
 	public String getSelectedItem() {
 		return content.getSelectedValue();

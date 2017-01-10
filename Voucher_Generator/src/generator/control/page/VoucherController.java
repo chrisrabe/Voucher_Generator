@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import generator.control.display.IDisplayController;
 import generator.control.manager.code.CodeManager;
+import generator.control.manager.theme.IThemeManager;
 import generator.helper.converter.ValueConverter;
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
@@ -25,14 +26,16 @@ public class VoucherController extends PageController {
 
 	private Voucher voucherView;
 	private CodeManager codeManager;
+	private IThemeManager themeManager;
 
 	private String[] cache;
 	private Map<String, IDisplayController> displayControllers;
 	private JDialog curDialog;
 
-	public VoucherController(CodeManager codeManager) {
+	public VoucherController(CodeManager codeManager, IThemeManager themeManager) {
 		displayControllers = createControllers();
 		this.codeManager = codeManager;
+		this.themeManager = themeManager;
 	}
 
 	// Model Interaction Methods
@@ -111,7 +114,9 @@ public class VoucherController extends PageController {
 		} else {
 			cache = data;
 		}
-
+		if (themeManager.themeChanged()) {
+			voucherView.setCellRenderer(themeManager.getCellRenderer());
+		}
 	}
 
 	@Override
@@ -133,6 +138,8 @@ public class VoucherController extends PageController {
 
 	private Voucher createVoucherView() {
 		Voucher tmp = new Voucher();
+		// Set the theme
+		tmp.setCellRenderer(themeManager.getCellRenderer());
 		// Check if there are cached data
 		if (cache != null) {
 			tmp.setContent(cache);

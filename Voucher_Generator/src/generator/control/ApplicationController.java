@@ -7,6 +7,7 @@ import generator.control.manager.code.CodeManager;
 import generator.control.manager.description.DescriptionManager;
 import generator.control.manager.navigation.INavigationManager;
 import generator.control.manager.navigation.NavigationManager;
+import generator.control.manager.theme.IThemeManager;
 import generator.control.page.ConfigController;
 import generator.control.page.DescriptionController;
 import generator.control.page.HomeController;
@@ -27,13 +28,16 @@ public class ApplicationController {
 
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
-	private INavigationManager navigation;
+	private INavigationManager navigationManager;
+	private IThemeManager themeManager;
 
 	// Constructor
 
-	public ApplicationController(CodeManager codeManager, DescriptionManager descriptionManager) {
+	public ApplicationController(CodeManager codeManager, DescriptionManager descriptionManager,
+			IThemeManager themeManager) {
 		this.codeManager = codeManager;
 		this.descriptionManager = descriptionManager;
+		this.themeManager = themeManager;
 	}
 
 	// Methods
@@ -42,8 +46,8 @@ public class ApplicationController {
 	 * Creates a new application window and starts the program.
 	 */
 	public void startApplication() {
-		this.navigation = new NavigationManager(new ApplicationWindow(), createControllers());
-		this.navigation.navigateTo("home");
+		this.navigationManager = new NavigationManager(new ApplicationWindow(), createControllers());
+		this.navigationManager.navigateTo("home");
 	}
 
 	// Helper Methods
@@ -58,8 +62,8 @@ public class ApplicationController {
 		// Add controllers here
 		tmp.put("home", new HomeController());
 		tmp.put("io", new IOController(codeManager));
-		tmp.put("voucher", new VoucherController(codeManager));
-		tmp.put("description", new DescriptionController(descriptionManager, codeManager));
+		tmp.put("voucher", new VoucherController(codeManager, themeManager));
+		tmp.put("description", new DescriptionController(descriptionManager, codeManager, themeManager));
 		tmp.put("config", new ConfigController());
 		return tmp;
 	}
