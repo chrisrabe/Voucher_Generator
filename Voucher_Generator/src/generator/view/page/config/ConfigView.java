@@ -55,8 +55,8 @@ public class ConfigView extends ConfigGUI {
 
 	public void setContent(JPanel newContent) {
 		body.remove(content);
-		content = newContent;
-		body.add(new WrapperPanel(content), BorderLayout.CENTER);
+		content = new WrapperPanel(newContent);
+		body.add(content, BorderLayout.CENTER);
 		this.revalidate();
 		this.repaint();
 	}

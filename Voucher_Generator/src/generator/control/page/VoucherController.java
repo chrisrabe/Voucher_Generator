@@ -111,6 +111,7 @@ public class VoucherController extends PageController {
 		String[] data = ValueConverter.convertCodeToArray(codeManager.getCodes());
 		if (voucherView != null) {
 			voucherView.setContent(data);
+			voucherView.setCellRenderer(themeManager.getCellRenderer());
 		} else {
 			cache = data;
 		}

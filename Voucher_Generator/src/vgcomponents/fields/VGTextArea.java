@@ -6,7 +6,7 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 
 /**
- * This class is a custom text field for the voucher generator.
+ * This class is a custom text area for the voucher generator.
  * 
  * @author Chris
  */
@@ -14,8 +14,8 @@ import javax.swing.JTextArea;
 public class VGTextArea extends JTextArea {
 
 	/**
-	 * Creates a VGTextField which contains a custom width, height and has a
-	 * font size of 20 by default.
+	 * Creates a VGTextArea which contains a custom row and column and has a
+	 * font size of 30 by default.
 	 * 
 	 * @param rows
 	 * @param columns
@@ -25,8 +25,8 @@ public class VGTextArea extends JTextArea {
 	}
 
 	/**
-	 * Creates a VGTextField which is always focusable and has a custom width,
-	 * height and font size.
+	 * Creates a VGTextArea which is always focusable and has a custom row,
+	 * column and font size.
 	 * 
 	 * @param rows
 	 * @param columns
@@ -37,8 +37,8 @@ public class VGTextArea extends JTextArea {
 	}
 
 	/**
-	 * Creates a VGTextField which can or cannot be focusable and has a custom
-	 * width and height and font size.
+	 * Creates a VGTextArea which can or cannot be focusable and has a custom
+	 * row and column and font size.
 	 * 
 	 * @param rows
 	 * @param columns

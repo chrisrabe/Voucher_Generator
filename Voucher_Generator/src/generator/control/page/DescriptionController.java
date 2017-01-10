@@ -47,11 +47,12 @@ public class DescriptionController extends PageController {
 	@Override
 	public void update() {
 		String[] data = ValueConverter.convertDescriptionsToArray(descriptionManager.getDescriptions());
-		if (descriptionView != null)
+		if (descriptionView != null) {
 			descriptionView.setContent(data);
-		if (themeManager.themeChanged()) {
 			descriptionView.setCellRenderer(themeManager.getCellRenderer());
 		}
+		if (themeManager.themeChanged())
+			descriptionView.setCellRenderer(themeManager.getCellRenderer());
 	}
 
 	@Override
