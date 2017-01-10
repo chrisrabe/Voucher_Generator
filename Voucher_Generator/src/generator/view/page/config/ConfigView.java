@@ -1,63 +1,63 @@
 package generator.view.page.config;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
+import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import generator.view.display.config.DefaultDisplay;
-import generator.view.page.PageView;
-import vgcomponents.factories.VGButtonFactory;
-import vgcomponents.labels.VGLabel;
-import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.DockedPanel;
-import vgcomponents.panels.GridPanel;
-import vgcomponents.panels.VerticalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
- * This class contains all the view set up. It adds components to the view.
+ * Provides methods which adds action listeners to the buttons.
  * 
  * @author Chris
  */
 @SuppressWarnings("serial")
-public abstract class ConfigView extends PageView {
-	// Navigation Buttons
+public class ConfigView extends ConfigGUI {
 
-	protected JButton homeBtn = VGButtonFactory.createNavigationButton("home", 50);
-	protected JButton ioBtn = VGButtonFactory.createNavigationButton("io", 50);
-	protected JButton descBtn = VGButtonFactory.createNavigationButton("descriptions", 50);
-	protected JButton vouchBtn = VGButtonFactory.createNavigationButton("vouchers", 50);
-
-	// Tool Bar Buttons
-
-	protected JButton encodBtn = VGButtonFactory.createConfigButton("encoding", "Toggle character groups", 100);
-	protected JButton groupBtn = VGButtonFactory.createConfigButton("chargroups", "Edit character groups", 100);
-	protected JButton themeBtn = VGButtonFactory.createConfigButton("themes", "Change Theme", 100);
-
-	// Content Panel
-
-	protected JPanel content = new WrapperPanel(new DefaultDisplay());
-	protected JPanel body = null;
-
-	@Override
-	protected void initialiseComponents() {
-		JPanel navigation = new CenteredPanel(20, new GridPanel(110, 110, homeBtn, ioBtn, descBtn, vouchBtn));
-		JPanel toolBar = new VerticalPanel(100, 330, encodBtn, groupBtn, themeBtn);
-		JPanel title = new CenteredPanel(20, new VGLabel("Settings", 40));
-		JPanel dock = new DockedPanel(20, navigation, null, null, null, new WrapperPanel(toolBar));
-		body = new DockedPanel(title, null, null, null, content);
-		// Set up the panel
-		this.setLayout(new BorderLayout());
-		this.add(dock, BorderLayout.WEST);
-		this.add(body, BorderLayout.CENTER);
+	public ConfigView() {
+		this.initialiseComponents();
 	}
 
-	@Override
-	protected void drawBackground(Graphics g) {
-		g.setColor(BG_COLOUR);
-		g.fillRect(0, 0, getSize().width, getSize().height);
+	// Navigation Action Listeners
+
+	public void addHomeBtnListener(ActionListener listener) {
+		homeBtn.addActionListener(listener);
 	}
 
+	public void addIoBtnListener(ActionListener listener) {
+		ioBtn.addActionListener(listener);
+	}
+
+	public void addDescBtnListener(ActionListener listener) {
+		descBtn.addActionListener(listener);
+	}
+
+	public void addVouchBtnListener(ActionListener listener) {
+		vouchBtn.addActionListener(listener);
+	}
+
+	// Tool Bar Action Listeners
+
+	public void addEncodBtnListener(ActionListener listener) {
+		encodBtn.addActionListener(listener);
+	}
+
+	public void addGroupBtnListener(ActionListener listener) {
+		groupBtn.addActionListener(listener);
+	}
+
+	public void addThemeBtnListener(ActionListener listener) {
+		themeBtn.addActionListener(listener);
+	}
+
+	// Content Navigation
+
+	public void setContent(JPanel newContent) {
+		body.remove(content);
+		content = newContent;
+		body.add(new WrapperPanel(content), BorderLayout.CENTER);
+		this.revalidate();
+		this.repaint();
+	}
 }

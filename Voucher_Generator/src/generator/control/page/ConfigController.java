@@ -3,7 +3,7 @@ package generator.control.page;
 import generator.control.manager.code.CodeManager;
 import generator.control.manager.theme.IThemeManager;
 import generator.view.page.PageView;
-import generator.view.page.config.Config;
+import generator.view.page.config.ConfigView;
 
 /**
  * This class is responsible for implementing the listeners to the config view.
@@ -12,7 +12,7 @@ import generator.view.page.config.Config;
  */
 public class ConfigController extends PageController {
 
-	private Config configView;
+	private ConfigView configView;
 	private CodeManager codeManager;
 	private IThemeManager themeManager;
 
@@ -29,8 +29,8 @@ public class ConfigController extends PageController {
 		return configView;
 	}
 
-	private Config createConfigView() {
-		Config tmp = new Config();
+	private ConfigView createConfigView() {
+		ConfigView tmp = new ConfigView();
 		// Navigation
 		tmp.addHomeBtnListener(e -> {
 			navigation.navigateTo("home");

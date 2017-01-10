@@ -14,9 +14,9 @@ import generator.control.manager.theme.IThemeManager;
 import generator.helper.converter.ValueConverter;
 import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
-import generator.view.display.description.add.Add;
+import generator.view.display.description.add.AddDisplay;
 import generator.view.page.PageView;
-import generator.view.page.description.Description;
+import generator.view.page.description.DescriptionView;
 import vgcomponents.dialogs.VGDialog;
 
 /**
@@ -26,7 +26,7 @@ import vgcomponents.dialogs.VGDialog;
  */
 public class DescriptionController extends PageController {
 
-	private Description descriptionView;
+	private DescriptionView descriptionView;
 	private CodeManager codeManager;
 	private DescriptionManager descriptionManager;
 	private IThemeManager themeManager;
@@ -99,7 +99,7 @@ public class DescriptionController extends PageController {
 	}
 
 	private void add() {
-		Add display = (Add) displayControllers.get("add").getDisplay();
+		AddDisplay display = (AddDisplay) displayControllers.get("add").getDisplay();
 		display.setDescriptionField("");
 		// Show display
 		disposeDialog();
@@ -121,8 +121,8 @@ public class DescriptionController extends PageController {
 		return tmp;
 	}
 
-	private Description createDescriptionView() {
-		Description tmp = new Description();
+	private DescriptionView createDescriptionView() {
+		DescriptionView tmp = new DescriptionView();
 		tmp.setCellRenderer(themeManager.getCellRenderer());
 		// Add navigation listeners
 		tmp.addHomeBtnListener(e -> {
@@ -158,11 +158,11 @@ public class DescriptionController extends PageController {
 
 	private IDisplayController createAddController() {
 		return new IDisplayController() {
-			private Add display;
+			private AddDisplay display;
 
 			@Override
 			public JPanel getDisplay() {
-				display = new Add();
+				display = new AddDisplay();
 				display.addConfirmBtnListener(e -> {
 					String value = display.getDescriptionField();
 					if (value != null && !value.matches("\\s+")) {

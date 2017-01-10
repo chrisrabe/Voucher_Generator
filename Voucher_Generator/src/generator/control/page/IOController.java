@@ -16,10 +16,10 @@ import generator.helper.eventhandler.save.SaveEventHandler;
 import generator.helper.eventhandler.save.TextSaveEventHandler;
 import generator.helper.eventhandler.save.XMLSaveEventHandler;
 import generator.helper.exception.InvalidInputException;
-import generator.view.display.io.load.Load;
-import generator.view.display.io.save.Save;
+import generator.view.display.io.load.LoadDisplay;
+import generator.view.display.io.save.SaveDisplay;
 import generator.view.page.PageView;
-import generator.view.page.io.IO;
+import generator.view.page.io.IOView;
 
 /**
  * This class is responsible for implementing the action listeners for the IO
@@ -28,7 +28,7 @@ import generator.view.page.io.IO;
  * @author Chris
  */
 public class IOController extends PageController {
-	private IO ioView;
+	private IOView ioView;
 	private CodeManager codeManager;
 	private SaveEventHandler saveHandler;
 	private LoadEventHandler loadHandler;
@@ -122,8 +122,8 @@ public class IOController extends PageController {
 	 * 
 	 * @return
 	 */
-	private IO createIOView() {
-		IO tmp = new IO();
+	private IOView createIOView() {
+		IOView tmp = new IOView();
 		tmp.addHomeBtnListener(e -> {
 			navigation.navigateTo("home");
 		});
@@ -156,12 +156,12 @@ public class IOController extends PageController {
 
 	private IDisplayController createSaveController() {
 		return new IDisplayController() {
-			private Save saveDisplay;
+			private SaveDisplay saveDisplay;
 
 			@Override
 			public JPanel getDisplay() {
 				if (saveDisplay == null) {
-					saveDisplay = new Save();
+					saveDisplay = new SaveDisplay();
 					saveDisplay.addXmlBtnListener(e -> {
 						doXMLSave();
 					});
@@ -179,12 +179,12 @@ public class IOController extends PageController {
 
 	private IDisplayController createLoadController() {
 		return new IDisplayController() {
-			private Load loadDisplay;
+			private LoadDisplay loadDisplay;
 
 			@Override
 			public JPanel getDisplay() {
 				if (loadDisplay == null) {
-					loadDisplay = new Load();
+					loadDisplay = new LoadDisplay();
 					loadDisplay.addXmlBtnListener(e -> {
 						doXMLLoad();
 					});

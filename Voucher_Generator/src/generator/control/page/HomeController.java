@@ -1,7 +1,7 @@
 package generator.control.page;
 
 import generator.view.page.PageView;
-import generator.view.page.home.Home;
+import generator.view.page.home.HomeView;
 
 /**
  * This class is responsible for adding action listeners to the home view.
@@ -9,7 +9,7 @@ import generator.view.page.home.Home;
  * @author Chris
  */
 public class HomeController extends PageController {
-	private Home homeView; // This controller is binded to home view.
+	private HomeView homeView; // This controller is binded to home view.
 
 	@Override
 	protected PageView createView() {
@@ -26,8 +26,8 @@ public class HomeController extends PageController {
 	 * 
 	 * @return
 	 */
-	private Home createHomeView() {
-		Home tmp = new Home();
+	private HomeView createHomeView() {
+		HomeView tmp = new HomeView();
 		tmp.addIOBtnListener(e -> {
 			navigation.navigateTo("io");
 		});

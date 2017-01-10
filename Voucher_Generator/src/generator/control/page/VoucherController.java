@@ -15,16 +15,16 @@ import generator.helper.exception.EmptyCollectionException;
 import generator.helper.exception.InvalidInputException;
 import generator.helper.exception.TimeoutException;
 import generator.models.code.Code;
-import generator.view.display.voucher.add.Add;
-import generator.view.display.voucher.edit.Edit;
-import generator.view.display.voucher.generate.Generate;
+import generator.view.display.voucher.add.AddDisplay;
+import generator.view.display.voucher.edit.EditDisplay;
+import generator.view.display.voucher.generate.GenerateDisplay;
 import generator.view.page.PageView;
-import generator.view.page.voucher.Voucher;
+import generator.view.page.voucher.VoucherView;
 import vgcomponents.dialogs.VGDialog;
 
 public class VoucherController extends PageController {
 
-	private Voucher voucherView;
+	private VoucherView voucherView;
 	private CodeManager codeManager;
 	private IThemeManager themeManager;
 
@@ -69,7 +69,7 @@ public class VoucherController extends PageController {
 		try {
 			// Update the edit display
 			Code code = codeManager.getStorage().get(id);
-			Edit display = (Edit) displayControllers.get("edit").getDisplay();
+			EditDisplay display = (EditDisplay) displayControllers.get("edit").getDisplay();
 			display.setIDField(code.getID());
 			display.setDescriptionField(code.getDescription());
 			// Show display
@@ -82,7 +82,7 @@ public class VoucherController extends PageController {
 
 	private void addCode() {
 		// Reset display fields
-		Add display = (Add) displayControllers.get("add").getDisplay();
+		AddDisplay display = (AddDisplay) displayControllers.get("add").getDisplay();
 		display.setIDField("");
 		display.setDescriptionField("");
 		// Show display
@@ -92,7 +92,7 @@ public class VoucherController extends PageController {
 
 	private void generate() {
 		// Reset display fields
-		Generate display = (Generate) displayControllers.get("gen").getDisplay();
+		GenerateDisplay display = (GenerateDisplay) displayControllers.get("gen").getDisplay();
 		display.setCharsField("");
 		display.setSizeField("");
 		// Show display
@@ -136,8 +136,8 @@ public class VoucherController extends PageController {
 		}
 	}
 
-	private Voucher createVoucherView() {
-		Voucher tmp = new Voucher();
+	private VoucherView createVoucherView() {
+		VoucherView tmp = new VoucherView();
 		// Set the theme
 		tmp.setCellRenderer(themeManager.getCellRenderer());
 		// Check if there are cached data
@@ -210,12 +210,12 @@ public class VoucherController extends PageController {
 
 	private IDisplayController createGenerateController() {
 		return new IDisplayController() {
-			private Generate generateDisplay;
+			private GenerateDisplay generateDisplay;
 
 			@Override
 			public JPanel getDisplay() {
 				if (generateDisplay == null) {
-					generateDisplay = new Generate();
+					generateDisplay = new GenerateDisplay();
 					generateDisplay.addGenerateBtnListener(e -> {
 						String chars = generateDisplay.getCharsField().trim();
 						String size = generateDisplay.getSizeField().trim();
@@ -242,12 +242,12 @@ public class VoucherController extends PageController {
 
 	private IDisplayController createEditController() {
 		return new IDisplayController() {
-			private Edit editDisplay;
+			private EditDisplay editDisplay;
 
 			@Override
 			public JPanel getDisplay() {
 				if (editDisplay == null) {
-					editDisplay = new Edit();
+					editDisplay = new EditDisplay();
 					editDisplay.addConfirmBtnListener(e -> {
 						String id = editDisplay.getIDField();
 						String desc = editDisplay.getDescriptionField();
@@ -263,12 +263,12 @@ public class VoucherController extends PageController {
 
 	private IDisplayController createAddController() {
 		return new IDisplayController() {
-			private Add addDisplay;
+			private AddDisplay addDisplay;
 
 			@Override
 			public JPanel getDisplay() {
 				if (addDisplay == null) {
-					addDisplay = new Add();
+					addDisplay = new AddDisplay();
 					addDisplay.addGenerateBtnListener(e -> {
 						String length = addDisplay.getLengthField();
 						if (isNumeric(length)) {
