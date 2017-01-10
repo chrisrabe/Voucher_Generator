@@ -16,8 +16,8 @@ import vgcomponents.fields.VGTextField;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.AlignedPanel;
 import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.GridButtonPanel;
-import vgcomponents.panels.VerticalButtonPanel;
+import vgcomponents.panels.GridPanel;
+import vgcomponents.panels.VerticalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -44,15 +44,15 @@ public abstract class AddDisplay extends VoucherDisplay {
 		JPanel lengthLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("ID Length", 20));
 		JPanel idLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Voucher ID", 20));
 		JPanel descriptionLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Description", 20));
-		JPanel fields = new GridButtonPanel(550, 330, new WrapperPanel(new VerticalButtonPanel(lengthLbl, idLbl)),
+		JPanel fields = new GridPanel(550, 330, new WrapperPanel(new VerticalPanel(lengthLbl, idLbl)),
 				new AlignedPanel(FlowLayout.LEFT, 200, 100,
 						new AlignedPanel(FlowLayout.LEFT, new JScrollPane(lengthField)),
 						new AlignedPanel(FlowLayout.LEFT, new JScrollPane(idField))),
 				new WrapperPanel(descriptionLbl), new AlignedPanel(FlowLayout.LEFT, new JScrollPane(descriptionField)));
 		// Put generate button on the right hand side
-		JPanel genBtn = new VerticalButtonPanel(new AlignedPanel(FlowLayout.LEFT, generateBtn),
-				new GridButtonPanel(200, 50), new GridButtonPanel(200, 300), new GridButtonPanel(200, 200),
-				new GridButtonPanel(200, 200));
+		JPanel genBtn = new VerticalPanel(new AlignedPanel(FlowLayout.LEFT, generateBtn),
+				new GridPanel(200, 50), new GridPanel(200, 300), new GridPanel(200, 200),
+				new GridPanel(200, 200));
 		// set up the panel
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);

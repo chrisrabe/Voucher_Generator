@@ -14,9 +14,9 @@ import vgcomponents.labels.VGLabel;
 import vgcomponents.lists.VGList;
 import vgcomponents.panels.CenteredPanel;
 import vgcomponents.panels.DockedPanel;
-import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.GridPanel;
 import vgcomponents.panels.VGScrollList;
-import vgcomponents.panels.VerticalButtonPanel;
+import vgcomponents.panels.VerticalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -49,8 +49,8 @@ public abstract class VoucherView extends PageView {
 
 	@Override
 	protected void initialiseComponents() {
-		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, ioBtn, configBtn, descBtn));
-		JPanel toolBar = new VerticalButtonPanel(100, 550, addBtn, delBtn, edtBtn, genBtn, clrBtn);
+		JPanel navigation = new CenteredPanel(20, new GridPanel(110, 110, homeBtn, ioBtn, configBtn, descBtn));
+		JPanel toolBar = new VerticalPanel(100, 550, addBtn, delBtn, edtBtn, genBtn, clrBtn);
 		JPanel title = new CenteredPanel(20, new VGLabel("Vouchers", 40));
 		JPanel dock = new DockedPanel(20, navigation, null, null, null, new WrapperPanel(toolBar));
 		JPanel body = new DockedPanel(title, null, null, null, new WrapperPanel(20, display));

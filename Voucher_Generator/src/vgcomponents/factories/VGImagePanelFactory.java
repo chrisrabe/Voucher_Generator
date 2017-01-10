@@ -8,7 +8,7 @@ import vgcomponents.image.ImagePanel;
  * 
  * @author Chris
  */
-public class VGImagePanelFactory {
+public abstract class VGImagePanelFactory {
 
 	/**
 	 * creates an image panel containing a config image icon.

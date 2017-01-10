@@ -14,9 +14,9 @@ import vgcomponents.labels.VGLabel;
 import vgcomponents.lists.VGList;
 import vgcomponents.panels.CenteredPanel;
 import vgcomponents.panels.DockedPanel;
-import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.GridPanel;
 import vgcomponents.panels.VGScrollList;
-import vgcomponents.panels.VerticalButtonPanel;
+import vgcomponents.panels.VerticalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -48,8 +48,8 @@ public abstract class DescriptionView extends PageView {
 
 	@Override
 	protected void initialiseComponents() {
-		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, ioBtn, configBtn, voucherBtn));
-		JPanel toolBar = new VerticalButtonPanel(100, 440, addBtn, delBtn, clrBtn, disBtn);
+		JPanel navigation = new CenteredPanel(20, new GridPanel(110, 110, homeBtn, ioBtn, configBtn, voucherBtn));
+		JPanel toolBar = new VerticalPanel(100, 440, addBtn, delBtn, clrBtn, disBtn);
 		JPanel title = new CenteredPanel(20, new VGLabel("Voucher Descriptions", 40));
 		JPanel dock = new DockedPanel(20, navigation, null, null, null, new WrapperPanel(toolBar));
 		JPanel body = new DockedPanel(title, null, null, null, new WrapperPanel(display));

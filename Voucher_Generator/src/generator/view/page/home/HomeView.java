@@ -10,7 +10,7 @@ import generator.view.page.PageView;
 import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.GridPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -31,7 +31,7 @@ public abstract class HomeView extends PageView {
 		// Create the label
 		JPanel title = new CenteredPanel(50, new VGLabel("Voucher Generator", 40));
 		// Create the grid panel
-		JPanel buttons = new WrapperPanel(new GridButtonPanel(500, 500, voucherBtn, ioBtn, descBtn, configBtn));
+		JPanel buttons = new WrapperPanel(new GridPanel(500, 500, voucherBtn, ioBtn, descBtn, configBtn));
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
 		this.add(buttons, BorderLayout.CENTER);

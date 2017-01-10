@@ -7,24 +7,24 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
- * This creates a JPanel which aligns the buttons vertically. All rows are equal
- * sized.
+ * Creates a horizontally aligned panel. It ensures that all components are the
+ * same size.
  * 
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class VerticalButtonPanel extends JPanel {
+public class HorizontalPanel extends JPanel {
 
-	public VerticalButtonPanel(JComponent... components) {
-		int rows = components.length;
-		this.setLayout(new GridLayout(rows, 0));
+	public HorizontalPanel(JComponent... components) {
+		int columns = components.length;
+		this.setLayout(new GridLayout(0, columns));
 		this.setOpaque(false);
 		for (JComponent component : components) {
 			this.add(component);
 		}
 	}
 
-	public VerticalButtonPanel(int width, int height, JComponent... components) {
+	public HorizontalPanel(int width, int height, JComponent... components) {
 		this(components);
 		this.setPreferredSize(new Dimension(width, height));
 	}

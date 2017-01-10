@@ -15,7 +15,7 @@ import vgcomponents.fields.VGTextField;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.AlignedPanel;
 import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.GridPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -39,7 +39,7 @@ public class GenerateDisplay extends VoucherDisplay {
 		// set up the grid in the middle
 		JPanel charsLbl = new AlignedPanel(FlowLayout.LEFT, 200, 50, new VGLabel("ID Length", 20));
 		JPanel sizeLbl = new AlignedPanel(FlowLayout.LEFT, 200, 50, new VGLabel("Amount Generated", 20));
-		JPanel fields = new GridButtonPanel(700, 330, new WrapperPanel(charsLbl),
+		JPanel fields = new GridPanel(700, 330, new WrapperPanel(charsLbl),
 				new AlignedPanel(FlowLayout.LEFT, new JScrollPane(charsField)), new WrapperPanel(sizeLbl),
 				new AlignedPanel(FlowLayout.LEFT, new JScrollPane(sizeField)));
 		// set up the panel

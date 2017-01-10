@@ -30,10 +30,13 @@ public class ImagePanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image, 0, 0, this);
+		if (image != null)
+			g.drawImage(image, 0, 0, this);
 	}
 
 	private static BufferedImage getScaledImage(BufferedImage source, int size) {
+		if (source == null)
+			return null;
 		Image scaled = source.getScaledInstance(-1, size, Image.SCALE_SMOOTH);
 		BufferedImage bufferedScaled = new BufferedImage(scaled.getWidth(null), scaled.getHeight(null),
 				BufferedImage.TYPE_INT_RGB);

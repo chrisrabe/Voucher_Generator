@@ -10,7 +10,7 @@ import generator.view.display.io.IODisplay;
 import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.HorizontalButtonPanel;
+import vgcomponents.panels.HorizontalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -27,7 +27,7 @@ public abstract class LoadDisplay extends IODisplay {
 	@Override
 	protected void initialiseComponents() {
 		JPanel title = new CenteredPanel(10, new VGLabel("Choose load operation...", 20));
-		JPanel tools = new WrapperPanel(new HorizontalButtonPanel(350, 100, xmlBtn, txtBtn));
+		JPanel tools = new WrapperPanel(new HorizontalPanel(350, 100, xmlBtn, txtBtn));
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
 		this.add(tools, BorderLayout.CENTER);

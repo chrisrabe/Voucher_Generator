@@ -12,8 +12,8 @@ import vgcomponents.factories.VGButtonFactory;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.CenteredPanel;
 import vgcomponents.panels.DockedPanel;
-import vgcomponents.panels.GridButtonPanel;
-import vgcomponents.panels.HorizontalButtonPanel;
+import vgcomponents.panels.GridPanel;
+import vgcomponents.panels.HorizontalPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -43,8 +43,8 @@ public abstract class IOView extends PageView {
 	@Override
 	protected void initialiseComponents() {
 		// Initialise components
-		JPanel navigation = new CenteredPanel(20, new GridButtonPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
-		JPanel toolBar = new DockedPanel(null, new WrapperPanel(new HorizontalButtonPanel(550, 200, loadBtn, saveBtn)),
+		JPanel navigation = new CenteredPanel(20, new GridPanel(110, 110, homeBtn, configBtn, descBtn, vouchBtn));
+		JPanel toolBar = new DockedPanel(null, new WrapperPanel(new HorizontalPanel(550, 200, loadBtn, saveBtn)),
 				null, null, null);
 		display = new CenteredPanel(content);
 		JPanel toolDisp = new DockedPanel(null, display, null, null, toolBar);

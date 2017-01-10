@@ -15,7 +15,7 @@ import vgcomponents.fields.VGTextField;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.AlignedPanel;
 import vgcomponents.panels.CenteredPanel;
-import vgcomponents.panels.GridButtonPanel;
+import vgcomponents.panels.GridPanel;
 import vgcomponents.panels.WrapperPanel;
 
 /**
@@ -39,7 +39,7 @@ public abstract class EditDisplay extends VoucherDisplay {
 		// Set up the grid in the middle
 		JPanel idLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Voucher ID", 20));
 		JPanel descriptionLbl = new AlignedPanel(FlowLayout.LEFT, 150, 50, new VGLabel("Description", 20));
-		JPanel fields = new GridButtonPanel(550, 330, new WrapperPanel(idLbl),
+		JPanel fields = new GridPanel(550, 330, new WrapperPanel(idLbl),
 				new AlignedPanel(FlowLayout.LEFT, idField), new WrapperPanel(descriptionLbl),
 				new AlignedPanel(FlowLayout.LEFT, new JScrollPane(descriptionField)));
 		// set up the panel
