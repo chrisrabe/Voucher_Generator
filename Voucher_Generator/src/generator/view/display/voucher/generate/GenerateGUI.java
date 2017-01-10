@@ -25,7 +25,7 @@ import vgcomponents.panels.WrapperPanel;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class GenerateGUI extends VoucherDisplay {
+public abstract class GenerateGUI extends VoucherDisplay {
 
 	protected JButton generateBtn = new VGButton(200, 100, "Generate");
 

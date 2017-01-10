@@ -21,7 +21,7 @@ import vgcomponents.panels.CenteredPanel;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class AddGUI extends DescriptionDisplay {
+public abstract class AddGUI extends DescriptionDisplay {
 
 	protected JButton confirmBtn = new VGButton(200, 50, "Confirm");
 

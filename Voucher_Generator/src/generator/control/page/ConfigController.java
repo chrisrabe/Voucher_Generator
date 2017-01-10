@@ -26,6 +26,7 @@ public class ConfigController extends PageController {
 	private CodeManager codeManager;
 	private IThemeManager themeManager;
 
+	private boolean updatedManager;
 	private Map<String, IDisplayController> displayControllers;
 
 	public ConfigController(CodeManager codeManager, IThemeManager themeManager) {
@@ -42,6 +43,13 @@ public class ConfigController extends PageController {
 			configView = createConfigView();
 
 		return configView;
+	}
+
+	@Override
+	public void update() {
+		if (updatedManager) {
+			updateEncodeDisplay();
+		}
 	}
 
 	private ConfigView createConfigView() {
@@ -69,6 +77,23 @@ public class ConfigController extends PageController {
 
 		});
 		return tmp;
+	}
+
+	// Helper Methods
+
+	/**
+	 * Refreshes the content JList of the encode display and then adds the mouse
+	 * listener to the new content.
+	 */
+	private void updateEncodeDisplay() {
+		EncodeDisplay display = (EncodeDisplay) displayControllers.get("encode").getDisplay();
+		display.setContent(ValueConverter.convertConfigurationToArray(codeManager.getConfigurations()));
+		display.addContentListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Update Image");
+			}
+		});
 	}
 
 	// Display contructor functions
