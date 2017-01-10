@@ -1,5 +1,7 @@
 package generator.control.page;
 
+import generator.control.manager.code.CodeManager;
+import generator.control.manager.theme.IThemeManager;
 import generator.view.page.PageView;
 import generator.view.page.config.Config;
 
@@ -11,10 +13,12 @@ import generator.view.page.config.Config;
 public class ConfigController extends PageController {
 
 	private Config configView;
+	private CodeManager codeManager;
+	private IThemeManager themeManager;
 
-	public ConfigController() {
-		// Need a code manager
-		// Need theme manager
+	public ConfigController(CodeManager codeManager, IThemeManager themeManager) {
+		this.codeManager = codeManager;
+		this.themeManager = themeManager;
 	}
 
 	@Override

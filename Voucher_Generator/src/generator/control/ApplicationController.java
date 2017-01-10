@@ -26,10 +26,10 @@ public class ApplicationController {
 
 	// Fields
 
-	private CodeManager codeManager;
-	private DescriptionManager descriptionManager;
+	private final CodeManager codeManager;
+	private final DescriptionManager descriptionManager;
+	private final IThemeManager themeManager;
 	private INavigationManager navigationManager;
-	private IThemeManager themeManager;
 
 	// Constructor
 
@@ -64,7 +64,7 @@ public class ApplicationController {
 		tmp.put("io", new IOController(codeManager));
 		tmp.put("voucher", new VoucherController(codeManager, themeManager));
 		tmp.put("description", new DescriptionController(descriptionManager, codeManager, themeManager));
-		tmp.put("config", new ConfigController());
+		tmp.put("config", new ConfigController(codeManager, themeManager));
 		return tmp;
 	}
 }
