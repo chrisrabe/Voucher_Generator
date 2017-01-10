@@ -1,6 +1,8 @@
 package generator.view.display.config.encoding;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
 import javax.swing.ListCellRenderer;
 
 import vgcomponents.factories.VGImagePanelFactory;
@@ -29,10 +31,6 @@ public class EncodeDisplay extends EncodeGUI {
 		disableBtn.addActionListener(listener);
 	}
 
-	public void addCheckBtnListener(ActionListener listener) {
-		checkBtn.addActionListener(listener);
-	}
-
 	// Image Replacement
 
 	public void setImage(String imageName) {
@@ -45,9 +43,17 @@ public class EncodeDisplay extends EncodeGUI {
 
 	// Content Getters and Setters
 
+	public void addContentListener(MouseListener listener) {
+		content.addMouseListener(listener);
+	}
+
 	public void setCellRenderer(ListCellRenderer<String> renderer) {
 		content.setCellRenderer(renderer);
 		content.repaint();
+	}
+
+	public int getSelectedIndex() {
+		return content.getSelectedIndex();
 	}
 
 	public String getSelectedItem() {

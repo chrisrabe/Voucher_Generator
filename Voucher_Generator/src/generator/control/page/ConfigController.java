@@ -1,5 +1,7 @@
 package generator.control.page;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,8 +98,11 @@ public class ConfigController extends PageController {
 					encodeDisplay.addDisableBtnListener(e -> {
 
 					});
-					encodeDisplay.addCheckBtnListener(e -> {
-
+					encodeDisplay.addContentListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							System.out.println("Update Image");
+						}
 					});
 				}
 				return encodeDisplay;

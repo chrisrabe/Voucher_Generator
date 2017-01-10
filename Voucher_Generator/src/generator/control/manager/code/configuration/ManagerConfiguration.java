@@ -57,7 +57,20 @@ public class ManagerConfiguration {
 		characterGroups.add(group);
 	}
 
-	public void removeCharacterGroup(int index) {
-		characterGroups.remove(index);
+	/**
+	 * Removes all the character groups with the given name. If two or more
+	 * character groups have the same name, then those groups are deleted as
+	 * well.
+	 * 
+	 * @param name
+	 */
+	public void removeCharacterGroup(String name) {
+		int index = 0;
+		for (CharacterGroup group : characterGroups) {
+			if (group.getName().equals(name)) {
+				characterGroups.remove(index);
+			}
+			index++;
+		}
 	}
 }
