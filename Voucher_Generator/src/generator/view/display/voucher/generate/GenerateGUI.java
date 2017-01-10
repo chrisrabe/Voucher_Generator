@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 import generator.view.display.voucher.VoucherDisplay;
 import vgcomponents.buttons.VGButton;
-import vgcomponents.fields.VGTextField;
+import vgcomponents.fields.VGTextArea;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.AlignedPanel;
 import vgcomponents.panels.CenteredPanel;
@@ -29,8 +29,8 @@ public abstract class GenerateGUI extends VoucherDisplay {
 
 	protected JButton generateBtn = new VGButton(200, 100, "Generate");
 
-	protected JTextArea charsField = new VGTextField(1, 8);
-	protected JTextArea sizeField = new VGTextField(1, 8);
+	protected JTextArea charsField = new VGTextArea(1, 8);
+	protected JTextArea sizeField = new VGTextArea(1, 8);
 
 	@Override
 	protected void initialiseComponents() {

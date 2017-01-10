@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
 
 import generator.view.display.description.DescriptionDisplay;
 import vgcomponents.buttons.VGButton;
-import vgcomponents.fields.VGTextField;
+import vgcomponents.fields.VGTextArea;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.CenteredPanel;
 
@@ -25,7 +25,7 @@ public abstract class AddGUI extends DescriptionDisplay {
 
 	protected JButton confirmBtn = new VGButton(200, 50, "Confirm");
 
-	protected JTextArea descriptionField = new VGTextField(10, 10);
+	protected JTextArea descriptionField = new VGTextArea(10, 10);
 
 	@Override
 	protected void initialiseComponents() {

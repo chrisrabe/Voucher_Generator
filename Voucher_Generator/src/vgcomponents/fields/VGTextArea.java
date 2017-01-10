@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
  * @author Chris
  */
 @SuppressWarnings("serial")
-public class VGTextField extends JTextArea {
+public class VGTextArea extends JTextArea {
 
 	/**
 	 * Creates a VGTextField which contains a custom width, height and has a
@@ -20,7 +20,7 @@ public class VGTextField extends JTextArea {
 	 * @param rows
 	 * @param columns
 	 */
-	public VGTextField(int rows, int columns) {
+	public VGTextArea(int rows, int columns) {
 		this(rows, columns, 30);
 	}
 
@@ -32,7 +32,7 @@ public class VGTextField extends JTextArea {
 	 * @param columns
 	 * @param fontSize
 	 */
-	public VGTextField(int rows, int columns, int fontSize) {
+	public VGTextArea(int rows, int columns, int fontSize) {
 		this(rows, columns, fontSize, true);
 	}
 
@@ -45,7 +45,7 @@ public class VGTextField extends JTextArea {
 	 * @param fontSize
 	 * @param focusable
 	 */
-	public VGTextField(int rows, int columns, int fontSize, boolean focusable) {
+	public VGTextArea(int rows, int columns, int fontSize, boolean focusable) {
 		super(rows, columns);
 		if (!focusable)
 			this.setBackground(new Color(224, 224, 224));

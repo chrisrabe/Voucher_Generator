@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 import generator.view.display.voucher.VoucherDisplay;
 import vgcomponents.buttons.VGButton;
-import vgcomponents.fields.VGTextField;
+import vgcomponents.fields.VGTextArea;
 import vgcomponents.labels.VGLabel;
 import vgcomponents.panels.AlignedPanel;
 import vgcomponents.panels.CenteredPanel;
@@ -29,8 +29,8 @@ public abstract class EditGUI extends VoucherDisplay {
 
 	protected JButton confirmBtn = new VGButton(200, 100, "Confirm");
 
-	protected JTextArea idField = new VGTextField(1, 8, 30, false);
-	protected JTextArea descriptionField = new VGTextField(4, 8);
+	protected JTextArea idField = new VGTextArea(1, 8, 30, false);
+	protected JTextArea descriptionField = new VGTextArea(4, 8);
 
 	@Override
 	protected void initialiseComponents() {
