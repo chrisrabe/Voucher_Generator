@@ -19,4 +19,6 @@ The latest versions usually have a .bat file included inside the distributed .zi
 
 To run a .jar file, you open up the command prompt (windowsKey + r, then type "cmd" to open the shell). Navigate to where you have the .jar file, then type ``` java -jar Voucher_Generator_vN``` in the command prompt, where 'N' is the version number of the jar file.
 
-Note: The easiest way to navigate to the folder with the .jar is to run 'cmd' via folder explorer, assuming that you are currently in the directory of the .jar file.
+Note: The easiest way to navigate to the folder with the .jar is to run 'cmd' via folder explorer, assuming that you are currently in the directory of the .jar file. 
+
+For more information, please visit the wiki page.
