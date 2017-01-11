@@ -13,6 +13,7 @@ import generator.control.manager.theme.IThemeManager;
 import generator.helper.converter.ValueConverter;
 import generator.view.display.config.chargroup.CharGroupDisplay;
 import generator.view.display.config.encoding.EncodeDisplay;
+import generator.view.display.config.themes.ThemesDisplay;
 import generator.view.page.PageView;
 import generator.view.page.config.ConfigView;
 
@@ -76,7 +77,7 @@ public class ConfigController extends PageController {
 			configView.setContent(displayControllers.get("group").getDisplay());
 		});
 		tmp.addThemeBtnListener(e -> {
-
+			configView.setContent(displayControllers.get("themes").getDisplay());
 		});
 		return tmp;
 	}
@@ -147,7 +148,24 @@ public class ConfigController extends PageController {
 		Map<String, IDisplayController> tmp = new HashMap<String, IDisplayController>();
 		tmp.put("encode", createEncodeController());
 		tmp.put("group", createCharGroupController());
+		tmp.put("themes", createThemesController());
 		return tmp;
+	}
+
+	private IDisplayController createThemesController() {
+		return new IDisplayController() {
+			private ThemesDisplay themesDisplay;
+
+			@Override
+			public JPanel getDisplay() {
+				if (themesDisplay == null) {
+					themesDisplay = new ThemesDisplay();
+					// Set up the display
+					// Action Listeners
+				}
+				return themesDisplay;
+			}
+		};
 	}
 
 	private IDisplayController createCharGroupController() {
