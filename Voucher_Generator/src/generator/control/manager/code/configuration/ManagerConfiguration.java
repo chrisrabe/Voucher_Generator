@@ -3,6 +3,7 @@ package generator.control.manager.code.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import generator.helper.exception.InvalidInputException;
 import generator.helper.groups.character.CharacterGroup;
 
 /**
@@ -12,7 +13,8 @@ import generator.helper.groups.character.CharacterGroup;
  */
 public class ManagerConfiguration {
 
-	private List<CharacterGroup> characterGroups = new ArrayList<CharacterGroup>();;
+	private List<CharacterGroup> characterGroups = new ArrayList<CharacterGroup>();
+	private List<String> groupNames = new ArrayList<String>();
 
 	// Constructors
 
@@ -33,6 +35,7 @@ public class ManagerConfiguration {
 	 */
 	public ManagerConfiguration(CharacterGroup... characterGroups) {
 		for (CharacterGroup group : characterGroups) {
+			groupNames.add(group.getName());
 			this.characterGroups.add(group);
 		}
 	}
@@ -53,14 +56,26 @@ public class ManagerConfiguration {
 		return characterGroups.get(index);
 	}
 
-	public void addCharacterGroup(CharacterGroup group) {
-		characterGroups.add(group);
+	public CharacterGroup getCharacterGroup(String name) {
+		for (CharacterGroup group : characterGroups) {
+			if (group.getName().equals(name)) {
+				return group;
+			}
+		}
+		return null;
+	}
+
+	public void addCharacterGroup(CharacterGroup group) throws InvalidInputException {
+		if (!groupNames.contains(group.getName())) {
+			groupNames.add(group.getName());
+			characterGroups.add(group);
+		} else {
+			throw new InvalidInputException("The name must be unique!");
+		}
 	}
 
 	/**
-	 * Removes all the character groups with the given name. If two or more
-	 * character groups have the same name, then those groups are deleted as
-	 * well.
+	 * Removes the character group with the given name.
 	 * 
 	 * @param name
 	 */

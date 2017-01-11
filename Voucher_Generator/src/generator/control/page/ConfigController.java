@@ -11,6 +11,7 @@ import generator.control.display.IDisplayController;
 import generator.control.manager.code.CodeManager;
 import generator.control.manager.theme.IThemeManager;
 import generator.helper.converter.ValueConverter;
+import generator.helper.groups.character.CharacterGroup;
 import generator.view.display.config.chargroup.CharGroupDisplay;
 import generator.view.display.config.encoding.EncodeDisplay;
 import generator.view.display.config.themes.ThemesDisplay;
@@ -104,7 +105,9 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateEncodeDisplay(EncodeDisplay display) {
-		System.out.println("Update image"); // TODO update this
+		CharacterGroup group = getSelectedGroup(display.getSelectedItem());
+		if (group != null)
+			display.setImage(group.isActive() ? "active_icon" : "inactive_icon");
 	}
 
 	/**
@@ -161,6 +164,12 @@ public class ConfigController extends PageController {
 				function.run();
 			}
 		};
+	}
+
+	private CharacterGroup getSelectedGroup(String selected) {
+		if (selected == null || selected.matches("\\s+"))
+			return null;
+		return codeManager.getConfigurations().getCharacterGroup(selected);
 	}
 
 	// Display contructor functions
@@ -242,16 +251,22 @@ public class ConfigController extends PageController {
 					encodeDisplay.setCellRenderer(themeManager.getCellRenderer());
 					// Action Listeners
 					encodeDisplay.addEnableBtnListener(e -> {
-
+						toggleGroup(encodeDisplay, true);
 					});
 					encodeDisplay.addDisableBtnListener(e -> {
-
+						toggleGroup(encodeDisplay, false);
 					});
 					encodeDisplay.addContentListener(createMouseListener(() -> {
 						updateEncodeDisplay(encodeDisplay);
 					}));
 				}
 				return encodeDisplay;
+			}
+
+			private void toggleGroup(EncodeDisplay display, boolean state) {
+				CharacterGroup group = getSelectedGroup(display.getSelectedItem());
+				group.setActive(state);
+				updateEncodeDisplay(display);
 			}
 		};
 	}
