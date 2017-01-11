@@ -17,4 +17,6 @@ Download the latest release either from the [releases page](https://github.com/c
 
 The latest versions usually have a .bat file included inside the distributed .zip folder. However, if you are interested in running the older versions, you have to use the command line to execute it because some versions does not have a corresponding .bat file.
 
-To run a .jar file, you open up the command prompt (windowsKey + r, then type "cmd" to open the shell). Then type ``` java -jar Voucher_Generator_vN```, where 'N' is the version number of the jar file.
+To run a .jar file, you open up the command prompt (windowsKey + r, then type "cmd" to open the shell). Navigate to where you have the .jar file, then type ``` java -jar Voucher_Generator_vN``` in the command prompt, where 'N' is the version number of the jar file.
+
+Note: The easiest way to navigate to the folder with the .jar is to run 'cmd' via folder explorer, assuming that you are currently in the directory of the .jar file.
