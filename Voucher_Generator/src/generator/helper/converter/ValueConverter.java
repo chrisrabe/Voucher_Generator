@@ -3,8 +3,10 @@ package generator.helper.converter;
 import java.util.Collection;
 
 import generator.control.manager.code.configuration.ManagerConfiguration;
+import generator.control.manager.theme.IThemeManager;
 import generator.helper.groups.character.CharacterGroup;
 import generator.models.code.Code;
+import vgcomponents.themes.IVGTheme;
 
 /**
  * Provides methods which transforms any item into a string array.
@@ -42,6 +44,17 @@ public abstract class ValueConverter {
 		int count = 0;
 		for (CharacterGroup group : charGroups) {
 			tmp[count] = group.getName();
+			count++;
+		}
+		return tmp;
+	}
+
+	public static String[] convertThemesToArray(IThemeManager themeManager) {
+		Collection<IVGTheme> themes = themeManager.getThemes();
+		String[] tmp = new String[themes.size()];
+		int count = 0;
+		for (IVGTheme theme : themes) {
+			tmp[count] = theme.getThemeName();
 			count++;
 		}
 		return tmp;

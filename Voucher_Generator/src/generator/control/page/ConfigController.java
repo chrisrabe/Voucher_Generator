@@ -117,7 +117,11 @@ public class ConfigController extends PageController {
 	}
 
 	private void updateThemesDisplay() {
-		
+		ThemesDisplay display = (ThemesDisplay) displayControllers.get("themes").getDisplay();
+		display.setContent(ValueConverter.convertThemesToArray(themeManager));
+		display.addContentListener(createMouseListener(() -> {
+			updateThemesDisplay(display);
+		}));
 	}
 
 	/**
@@ -176,8 +180,10 @@ public class ConfigController extends PageController {
 			@Override
 			public JPanel getDisplay() {
 				if (themesDisplay == null) {
-					themesDisplay = new ThemesDisplay();
 					// Set up the display
+					themesDisplay = new ThemesDisplay();
+					themesDisplay.setContent(ValueConverter.convertThemesToArray(themeManager));
+					themesDisplay.setCellRenderer(themeManager.getCellRenderer());
 					// Action Listeners
 					themesDisplay.addConfirmBtnListener(e -> {
 
