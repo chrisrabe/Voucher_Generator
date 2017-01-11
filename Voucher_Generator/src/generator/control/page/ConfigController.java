@@ -94,7 +94,7 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateGroupDisplay(CharGroupDisplay display) {
-		System.out.println("Update fields");
+		System.out.println("Update fields"); // TODO update this
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateEncodeDisplay(EncodeDisplay display) {
-		System.out.println("Update image");
+		System.out.println("Update image"); // TODO update this
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateThemesDisplay(ThemesDisplay display) {
-		System.out.println("Update content");
+		System.out.println("Update content"); // TODO update this
 	}
 
 	private void updateThemesDisplay() {
