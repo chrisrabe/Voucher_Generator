@@ -43,4 +43,9 @@ public class VGTheme implements IVGTheme {
 	public Color getBorderColour() {
 		return new Color(255, 255, 255);
 	}
+
+	@Override
+	public String getThemeName() {
+		return "Default";
+	}
 }

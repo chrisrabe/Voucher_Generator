@@ -11,6 +11,13 @@ import java.awt.Color;
 public interface IVGTheme {
 
 	/**
+	 * Returns the name of the theme.
+	 * 
+	 * @return
+	 */
+	public String getThemeName();
+
+	/**
 	 * Returns the colour of the text of a list cell.
 	 * 
 	 * @return

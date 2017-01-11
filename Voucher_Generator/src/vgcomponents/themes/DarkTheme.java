@@ -45,4 +45,9 @@ public class DarkTheme implements IVGTheme {
 		return new Color(253, 253, 253);
 	}
 
+	@Override
+	public String getThemeName() {
+		return "Dark";
+	}
+
 }

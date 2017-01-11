@@ -1,5 +1,8 @@
 package generator.control.manager.theme;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.swing.ListCellRenderer;
 
 import vgcomponents.themes.IVGTheme;
@@ -10,13 +13,17 @@ import vgcomponents.themes.renderer.VGThemeRenderer;
  * 
  * @author Chris
  */
-public class ThemeManager implements IThemeManager {
+public abstract class ThemeManager implements IThemeManager {
 
-	private IVGTheme theme;
+	protected IVGTheme theme;
+	protected Collection<IVGTheme> themes;
 	private boolean themeChanged;
 
-	public ThemeManager(IVGTheme theme) {
-		this.theme = theme;
+	public ThemeManager(Collection<IVGTheme> themes) {
+		if (themes.isEmpty())
+			throw new RuntimeException("No themes detected");
+		this.themes = themes;
+		this.theme = new ArrayList<IVGTheme>(themes).get(0);
 	}
 
 	@Override
@@ -36,6 +43,11 @@ public class ThemeManager implements IThemeManager {
 	@Override
 	public boolean themeChanged() {
 		return themeChanged;
+	}
+
+	@Override
+	public Collection<IVGTheme> getThemes() {
+		return themes;
 	}
 
 }

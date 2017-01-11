@@ -1,5 +1,7 @@
 package generator.control.manager.theme;
 
+import java.util.Collection;
+
 import javax.swing.ListCellRenderer;
 
 import vgcomponents.themes.IVGTheme;
@@ -15,6 +17,13 @@ public interface IThemeManager {
 	 * @return
 	 */
 	public ListCellRenderer<String> getCellRenderer();
+
+	/**
+	 * Returns a collection of themes
+	 * 
+	 * @return
+	 */
+	public Collection<IVGTheme> getThemes();
 
 	/**
 	 * Returns true if the theme has been recently changed.

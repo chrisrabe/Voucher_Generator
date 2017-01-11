@@ -49,9 +49,13 @@ public class ConfigController extends PageController {
 
 	@Override
 	public void update() {
-		if (updatedManager) {
+		if (themeManager.themeChanged() || updatedManager) {
 			updateEncodeDisplay();
 			updateGroupDisplay();
+			if (themeManager.themeChanged()) {
+				updateThemesDisplay();
+				navigation.updateControllers();
+			}
 		}
 	}
 
@@ -101,6 +105,19 @@ public class ConfigController extends PageController {
 	 */
 	private void updateEncodeDisplay(EncodeDisplay display) {
 		System.out.println("Update image");
+	}
+
+	/**
+	 * Updates the theme view's content to the selected theme.
+	 * 
+	 * @param display
+	 */
+	private void updateThemesDisplay(ThemesDisplay display) {
+		System.out.println("Update content");
+	}
+
+	private void updateThemesDisplay() {
+		
 	}
 
 	/**
@@ -162,6 +179,12 @@ public class ConfigController extends PageController {
 					themesDisplay = new ThemesDisplay();
 					// Set up the display
 					// Action Listeners
+					themesDisplay.addConfirmBtnListener(e -> {
+
+					});
+					themesDisplay.addContentListener(createMouseListener(() -> {
+						updateThemesDisplay(themesDisplay);
+					}));
 				}
 				return themesDisplay;
 			}
