@@ -64,7 +64,7 @@ public abstract class CharGroupGUI extends ConfigDisplay {
 		// Put everything together
 		JPanel left = new DockedPanel(leftTitle, leftButtons, null, null, new WrapperPanel(display));
 		JPanel right = new VerticalPanel(padding, characters, name, rightButton);
-		JPanel body = new HorizontalPanel(new WrapperPanel(5, left), new WrapperPanel(right));
+		JPanel body = new HorizontalPanel(new WrapperPanel(10, left), new WrapperPanel(right));
 		// Add it to the pane
 		this.setLayout(new BorderLayout());
 		this.setBorder(new LineBorder(Color.WHITE));
