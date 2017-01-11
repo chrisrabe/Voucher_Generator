@@ -41,6 +41,9 @@ public abstract class ThemeManager implements IThemeManager {
 
 	@Override
 	public IVGTheme getTheme(int index) {
+		if (index < 0 || index >= themes.size())
+			return null;
+
 		return new ArrayList<IVGTheme>(themes).get(index);
 	}
 

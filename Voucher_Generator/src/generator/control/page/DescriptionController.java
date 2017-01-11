@@ -51,7 +51,7 @@ public class DescriptionController extends PageController {
 			descriptionView.setContent(data);
 			descriptionView.setCellRenderer(themeManager.getCellRenderer());
 		}
-		if (themeManager.themeChanged())
+		if (descriptionView != null && themeManager.themeChanged())
 			descriptionView.setCellRenderer(themeManager.getCellRenderer());
 	}
 

@@ -115,7 +115,7 @@ public class VoucherController extends PageController {
 		} else {
 			cache = data;
 		}
-		if (themeManager.themeChanged()) {
+		if (voucherView != null && themeManager.themeChanged()) {
 			voucherView.setCellRenderer(themeManager.getCellRenderer());
 		}
 	}
@@ -144,6 +144,7 @@ public class VoucherController extends PageController {
 		// Check if there are cached data
 		if (cache != null) {
 			tmp.setContent(cache);
+			tmp.setCellRenderer(themeManager.getCellRenderer());
 			cache = null; // release the cached data
 		}
 		// Add navigation listeners

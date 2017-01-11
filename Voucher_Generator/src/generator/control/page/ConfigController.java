@@ -18,6 +18,8 @@ import generator.view.display.config.themes.ThemesDisplay;
 import generator.helper.exception.InvalidInputException;
 import generator.view.page.PageView;
 import generator.view.page.config.ConfigView;
+import vgcomponents.themes.IVGTheme;
+import vgcomponents.themes.renderer.VGThemeRenderer;
 
 /**
  * This class is responsible for implementing the listeners to the config view.
@@ -31,6 +33,7 @@ public class ConfigController extends PageController {
 	private IThemeManager themeManager;
 
 	private boolean updatedManager;
+	private boolean updatingControllers;
 	private Map<String, IDisplayController> displayControllers;
 
 	public ConfigController(CodeManager codeManager, IThemeManager themeManager) {
@@ -58,7 +61,11 @@ public class ConfigController extends PageController {
 		}
 		if (themeManager.themeChanged()) {
 			updateThemesDisplay();
-			navigation.updateControllers();
+			if(!updatingControllers){
+				updatingControllers = true;
+				navigation.updateControllers();
+			}
+			updatingControllers = false;
 		}
 	}
 
@@ -122,12 +129,15 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateThemesDisplay(ThemesDisplay display) {
-		System.out.println("Update content"); // TODO update this
+		IVGTheme theme = themeManager.getTheme(display.getSelectedIndex());
+		if (theme != null)
+			display.setCellRenderer(new VGThemeRenderer(theme));
 	}
 
 	private void updateThemesDisplay() {
 		ThemesDisplay display = (ThemesDisplay) displayControllers.get("themes").getDisplay();
 		display.setContent(ValueConverter.convertThemesToArray(themeManager));
+		display.setCellRenderer(themeManager.getCellRenderer());
 		display.addContentListener(createMouseListener(() -> {
 			updateThemesDisplay(display);
 		}));
@@ -203,7 +213,11 @@ public class ConfigController extends PageController {
 					themesDisplay.setCellRenderer(themeManager.getCellRenderer());
 					// Action Listeners
 					themesDisplay.addConfirmBtnListener(e -> {
-
+						IVGTheme theme = themeManager.getTheme(themesDisplay.getSelectedIndex());
+						if (theme != null) {
+							themeManager.setTheme(theme);
+							update();
+						}
 					});
 					themesDisplay.addContentListener(createMouseListener(() -> {
 						updateThemesDisplay(themesDisplay);
