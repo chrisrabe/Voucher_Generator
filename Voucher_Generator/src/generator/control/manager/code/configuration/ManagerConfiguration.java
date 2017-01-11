@@ -78,14 +78,18 @@ public class ManagerConfiguration {
 	 * Removes the character group with the given name.
 	 * 
 	 * @param name
+	 * @throws InvalidInputException
 	 */
-	public void removeCharacterGroup(String name) {
+	public void removeCharacterGroup(String name) throws InvalidInputException {
 		int index = 0;
 		for (CharacterGroup group : characterGroups) {
 			if (group.getName().equals(name)) {
 				characterGroups.remove(index);
+				groupNames.remove(index);
+				return;
 			}
 			index++;
 		}
+		throw new InvalidInputException("Given name is not found");
 	}
 }

@@ -38,4 +38,8 @@ public interface IThemeManager {
 	 * @param theme
 	 */
 	public void setTheme(IVGTheme theme);
+	
+	public IVGTheme getTheme(int index);
+
+	public void setChanged(boolean state);
 }

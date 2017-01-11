@@ -15,6 +15,7 @@ import generator.helper.groups.character.CharacterGroup;
 import generator.view.display.config.chargroup.CharGroupDisplay;
 import generator.view.display.config.encoding.EncodeDisplay;
 import generator.view.display.config.themes.ThemesDisplay;
+import generator.helper.exception.InvalidInputException;
 import generator.view.page.PageView;
 import generator.view.page.config.ConfigView;
 
@@ -53,10 +54,11 @@ public class ConfigController extends PageController {
 		if (themeManager.themeChanged() || updatedManager) {
 			updateEncodeDisplay();
 			updateGroupDisplay();
-			if (themeManager.themeChanged()) {
-				updateThemesDisplay();
-				navigation.updateControllers();
-			}
+			updatedManager = false;
+		}
+		if (themeManager.themeChanged()) {
+			updateThemesDisplay();
+			navigation.updateControllers();
 		}
 	}
 
@@ -95,7 +97,11 @@ public class ConfigController extends PageController {
 	 * @param display
 	 */
 	private void updateGroupDisplay(CharGroupDisplay display) {
-		System.out.println("Update fields"); // TODO update this
+		CharacterGroup group = getSelectedGroup(display.getSelectedItem());
+		if (group != null) {
+			display.setCharactersField(new String(group.getCharacters()));
+			display.setNameField(group.getName());
+		}
 	}
 
 	/**
@@ -132,6 +138,7 @@ public class ConfigController extends PageController {
 	 */
 	private void updateGroupDisplay() {
 		CharGroupDisplay display = (CharGroupDisplay) displayControllers.get("group").getDisplay();
+		display.setCellRenderer(themeManager.getCellRenderer());
 		display.setContent(ValueConverter.convertConfigurationToArray(codeManager.getConfigurations()));
 		display.addContentListener(createMouseListener(() -> {
 			updateGroupDisplay(display);
@@ -144,6 +151,7 @@ public class ConfigController extends PageController {
 	 */
 	private void updateEncodeDisplay() {
 		EncodeDisplay display = (EncodeDisplay) displayControllers.get("encode").getDisplay();
+		display.setCellRenderer(themeManager.getCellRenderer());
 		display.setContent(ValueConverter.convertConfigurationToArray(codeManager.getConfigurations()));
 		display.addContentListener(createMouseListener(() -> {
 			updateEncodeDisplay(display);
@@ -160,7 +168,7 @@ public class ConfigController extends PageController {
 	public MouseListener createMouseListener(Runnable function) {
 		return new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				function.run();
 			}
 		};
@@ -220,13 +228,41 @@ public class ConfigController extends PageController {
 					charGroupDisplay.setCellRenderer(themeManager.getCellRenderer());
 					// Action Listeners
 					charGroupDisplay.addAddBtnListener(e -> {
-
+						String name = charGroupDisplay.getNameField();
+						String characters = charGroupDisplay.getCharactersField();
+						if (name.matches("\\s+") || characters.matches("\\s+")) {
+							show("Both fields must be filled in");
+						} else {
+							CharacterGroup group = new CharacterGroup(name, characters.toCharArray());
+							try {
+								codeManager.getConfigurations().addCharacterGroup(group);
+								updatedManager = true;
+								update();
+							} catch (InvalidInputException e1) {
+								show(e1.getMessage());
+							}
+						}
 					});
 					charGroupDisplay.addRemoveBtnListener(e -> {
-
+						CharacterGroup group = getSelectedGroup(charGroupDisplay.getSelectedItem());
+						if (group != null) {
+							try {
+								codeManager.getConfigurations().removeCharacterGroup(group.getName());
+								updatedManager = true;
+								update();
+							} catch (InvalidInputException e1) {
+								show(e1.getMessage());
+							}
+						}
 					});
 					charGroupDisplay.addUpdateBtnListener(e -> {
-
+						CharacterGroup group = getSelectedGroup(charGroupDisplay.getSelectedItem());
+						if (group != null) {
+							updatedManager = true;
+							group.setName(charGroupDisplay.getNameField());
+							group.setCharacters(charGroupDisplay.getCharactersField().toCharArray());
+							update();
+						}
 					});
 					charGroupDisplay.addContentListener(createMouseListener(() -> {
 						updateGroupDisplay(charGroupDisplay);

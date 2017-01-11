@@ -28,7 +28,6 @@ public abstract class ThemeManager implements IThemeManager {
 
 	@Override
 	public ListCellRenderer<String> getCellRenderer() {
-		themeChanged = false; // recently retrieved, so set it to false
 		return new VGThemeRenderer(theme);
 	}
 
@@ -41,8 +40,18 @@ public abstract class ThemeManager implements IThemeManager {
 	}
 
 	@Override
+	public IVGTheme getTheme(int index) {
+		return new ArrayList<IVGTheme>(themes).get(index);
+	}
+
+	@Override
 	public boolean themeChanged() {
 		return themeChanged;
+	}
+
+	@Override
+	public void setChanged(boolean state) {
+		this.themeChanged = state;
 	}
 
 	@Override

@@ -46,7 +46,7 @@ public class ApplicationController {
 	 * Creates a new application window and starts the program.
 	 */
 	public void startApplication() {
-		this.navigationManager = new NavigationManager(new ApplicationWindow(), createControllers());
+		this.navigationManager = new NavigationManager(new ApplicationWindow(), createControllers(), themeManager);
 		this.navigationManager.navigateTo("home");
 	}
 
