@@ -15,6 +15,5 @@ I've also provided executable jar files if you just want to use the tool.
 
 Download the latest release either from the [releases page](https://github.com/chrisrabe/Voucher_Generator/releases) or the [executables page](https://github.com/chrisrabe/Voucher_Generator/tree/master/executables/generator).
 
-The latest versions usually have a .bat file included inside the distributed .zip folder. However, if you are interested in running the older versions, you have to use the command line to execute it because some versions does not have a .bat file related to it.
-
+The latest versions usually have a .bat file included inside the distributed .zip folder. However, if you are interested in running the older versions, you have to use the command line to execute it because some versions does not have a corresponding .bat file.
 To run a .jar file, you open up the command prompt (windowsKey + r, then type "cmd" to open the shell). Then type ``` java -jar Voucher_Generator_vN```, where 'N' is the version number of the jar file.
