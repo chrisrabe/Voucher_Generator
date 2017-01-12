@@ -27,3 +27,5 @@ rather than having one 'overlord' generator class that handles everything. In ot
 a new operation is needed. It allows me to add new functionalities to the system without changing other classes.
 - codes and descriptions are now stored in their own custom storages. There is an interface for them, so if a more efficient
 storage could be made, it's a lot easier to change.
+- all the main classes (managers, storages, etc...) have their own interfaces and can be extended to create more efficient 
+versions of those classes.
