@@ -13,6 +13,8 @@ I've also provided executable jar files if you just want to use the tool.
 
 ### Getting Started
 
+Ensure that you have a java runtime environment installed. It is recommended that you [download jre-8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) or later.
+
 Download the latest release either from the [releases page](https://github.com/chrisrabe/Voucher_Generator/releases) or the [executables page](https://github.com/chrisrabe/Voucher_Generator/tree/master/executables/generator).
 
 The latest versions usually have a .bat file included inside the distributed .zip folder. However, if you are interested in running the older versions, you have to use the command line to execute it because some versions does not have a corresponding .bat file.
