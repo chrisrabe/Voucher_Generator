@@ -21,4 +21,4 @@ To run a .jar file, you open up the command prompt (windowsKey + r, then type "c
 
 Note: The easiest way to navigate to the folder with the .jar is to run 'cmd' via folder explorer, assuming that you are currently in the directory of the .jar file. 
 
-For more information, please visit the wiki page.
+For more information, please visit the [wiki page](https://github.com/chrisrabe/Voucher_Generator/wiki).
