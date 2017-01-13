@@ -6,7 +6,7 @@ import generator.control.manager.description.ListDescriptionManager;
 import generator.control.manager.theme.VGThemeManager;
 
 /**
- * Starts the application.  
+ * Starts the application.    
  * 
  * @author Chris
  */
