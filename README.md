@@ -13,7 +13,7 @@ I've also provided executable jar files if you just want to use the tool.
 
 ### Getting Started
 
-Ensure that you have a java runtime environment installed. It is recommended that you [download jre-8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) or later.
+Ensure that you have a [java runtime environment installed](https://github.com/chrisrabe/Wiki-Pages/wiki/How-to-install-JDK-on-Windows).
 
 Download the latest release either from the [releases page](https://github.com/chrisrabe/Voucher_Generator/releases) or the [executables page](https://github.com/chrisrabe/Voucher_Generator/tree/master/executables/generator).
 
